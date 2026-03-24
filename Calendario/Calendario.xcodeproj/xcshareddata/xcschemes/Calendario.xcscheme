@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "E1BFB2A03B920589991C0EAF"
+               BlueprintIdentifier = "556A156F78AF513A03214F91"
                BuildableName = "Calendario.app"
                BlueprintName = "Calendario"
                ReferencedContainer = "container:Calendario.xcodeproj">
@@ -32,7 +32,7 @@
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "8960AB0B42FF5D080CF388BD"
+               BlueprintIdentifier = "A1431B97A797D5F4D9C4ACE3"
                BuildableName = "CalendarioTests.xctest"
                BlueprintName = "CalendarioTests"
                ReferencedContainer = "container:Calendario.xcodeproj">
