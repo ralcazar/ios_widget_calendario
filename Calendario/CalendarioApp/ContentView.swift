@@ -2,14 +2,9 @@ import SwiftUI
 
 struct ContentView: View {
     var body: some View {
-        VStack {
-            Image(systemName: "calendar")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Calendario")
+        NavigationStack {
+            ConfigListView()
         }
-        .padding()
-        .accessibilityIdentifier("contentView")
     }
 }
 
