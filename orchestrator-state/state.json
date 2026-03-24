@@ -1,10 +1,10 @@
 {
   "status": "busy",
-  "current_bead": "CAL-sue.1",
+  "current_bead": "CAL-sue.4",
   "current_stage": "verification",
-  "completed": [],
+  "completed": ["CAL-sue.1", "CAL-sue.3"],
   "failed": [],
-  "last_update": "2026-03-24T00:00:00",
+  "last_update": "2026-03-25T00:00:00",
   "last_ui_test_run": null,
   "last_ui_test_result": null,
   "last_ui_test_summary": null

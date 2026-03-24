@@ -1,0 +1,22 @@
+{
+  "bead_id": "CAL-sue.4",
+  "status": "success",
+  "files_created": [
+    "Calendario/CalendarioWidget/WidgetConfigEntity.swift",
+    "Calendario/CalendarioWidget/ConfigurationAppIntent.swift",
+    "CalendarioTests/CALsue4ScenarioTests.swift"
+  ],
+  "files_modified": [
+    "Calendario/CalendarioWidget/CalendarioWidget.swift",
+    "Calendario/Calendario.xcodeproj/project.pbxproj"
+  ],
+  "tests_added": [
+    "test_CALsue4_given_twoConfigsInAppGroup_when_queryingEntities_then_returnsTwoEntities",
+    "test_CALsue4_given_noConfigsInAppGroup_when_queryingEntities_then_returnsEmptyArray",
+    "test_CALsue4_given_savedConfig_when_loadingById_then_returnsMatchingConfig"
+  ],
+  "tests_passed": 3,
+  "tests_failed": 0,
+  "commit_hash": "f2c84cb",
+  "error": null
+}

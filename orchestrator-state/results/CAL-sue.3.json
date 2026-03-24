@@ -1,0 +1,22 @@
+{
+  "bead_id": "CAL-sue.3",
+  "status": "success",
+  "files_created": [
+    "Calendario/Shared/Models.swift",
+    "Calendario/Shared/WidgetConfigStore.swift",
+    "CalendarioTests/CALsue3ScenarioTests.swift"
+  ],
+  "files_modified": [
+    "Calendario/Calendario.xcodeproj/project.pbxproj"
+  ],
+  "tests_added": [
+    "test_CALsue3_given_widgetConfig_when_serializing_then_roundtripProducesIdenticalValues",
+    "test_CALsue3_given_widgetConfigArray_when_savingAndLoading_then_arrayIsIdentical",
+    "test_CALsue3_given_colorPair_when_usingSystemDefault_then_hexStringsAreEmpty",
+    "test_CALsue3_given_newWidgetConfig_when_checkingDefaults_then_defaultValuesAreCorrect"
+  ],
+  "tests_passed": 4,
+  "tests_failed": 0,
+  "commit_hash": "53aa2ff68b5aa10315cdba077781512641946d77",
+  "error": null
+}

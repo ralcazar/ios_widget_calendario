@@ -4,49 +4,104 @@ You are implementing a BDD scenario for this iOS widget/calendar project. Projec
 
 ## Your Bead
 
-- **ID**: CAL-sue.1
-- **Title**: Crear proyecto Xcode con targets + configurar App Group
+- **ID**: CAL-sue.3
+- **Title**: Definir modelo WidgetConfig compartido
 - **Scenario**:
 
-◐ CAL-sue.1 · Crear proyecto Xcode con targets + configurar App Group   [● P0 · IN_PROGRESS]
+◐ CAL-sue.3 · Definir modelo WidgetConfig compartido   [● P0 · IN_PROGRESS]
 Owner: Roberto Alcázar · Assignee: Roberto Alcázar · Type: task
 Created: 2026-03-24 · Updated: 2026-03-24
 
 DESCRIPTION
-Crear el proyecto Xcode con dos targets (app companion + widget extension) y configurar el App Group capability en ambos targets para compartir datos via UserDefaults(suiteName:).
+Definir los tipos de datos compartidos entre app y widget en un archivo Swift accesible por ambos targets.
 
-## Especificaciones del proyecto
-- **Nombre de la app**: Calendario
-- **Bundle ID app**: com.ralcazar.calendario
-- **Bundle ID widget**: com.ralcazar.calendario.widget
-- **App Group ID**: group.com.ralcazar.calendario
-- **Deployment target**: iOS 17.0 (mínimo para widgets interactivos)
-- **Lenguaje**: Swift, SwiftUI
-- **Scheme**: Calendario
+## Archivo: Shared/Models.swift (target membership: app + widget)
 
-## Pasos
-1. Crear proyecto Xcode: File → New → Project → App, nombre 'Calendario', bundle ID com.ralcazar.calendario, SwiftUI, Swift
-2. Añadir Widget Extension target: File → New → Target → Widget Extension, nombre 'CalendarioWidget', bundle ID com.ralcazar.calendario.widget. Desmarcar 'Include Live Activity' y 'Include Configuration App Intent' (se añade manualmente más adelante)
-3. Activar App Groups en ambos targets: Signing & Capabilities → + Capability → App Groups → añadir 'group.com.ralcazar.calendario'
-4. Crear SharedConstants.swift accesible por ambos targets con:
-   ```swift
-   enum AppGroup {
-       static let identifier = "group.com.ralcazar.calendario"
-       static var defaults: UserDefaults { UserDefaults(suiteName: identifier)! }
-   }
-   ```
-5. Verificar que ambos targets tienen el mismo App Group identifier
+```swift
+import Foundation
+
+struct ColorPair: Codable, Equatable {
+    var lightHex: String   // '#RRGGBB'. Vacío = usar color semántico del sistema
+    var darkHex: String    // '#RRGGBB'. Vacío = usar color semántico del sistema
+    static let system = ColorPair(lightHex: "", darkHex: "")
+}
+
+struct FilterRule: Codable, Identifiable, Equatable {
+    let id: UUID
+    var pattern: String    // texto literal o expresión regular
+    var isRegex: Bool      // false = coincidencia de subcadena, case-insensitive
+    var colorHex: String   // hex del color de resaltado, e.g. "#FF3B30"
+    var priority: Int      // 0 = mayor prioridad; orden de evaluación
+    var isEnabled: Bool
+}
+
+struct WidgetConfig: Codable, Identifiable, Equatable {
+    let id: UUID
+    var name: String                      // nombre visible para el usuario
+    var calendarIdentifier: String        // EKCalendar.calendarIdentifier
+    var colorSchemeLight: ColorPair       // color de fondo para modo claro
+    var colorSchemeDark: ColorPair        // color de fondo para modo oscuro
+    var rules: [FilterRule]               // vacío en Fase 1
+    var showCancelled: Bool               // false por defecto
+    var workStartOffset: TimeInterval     // segundos desde medianoche. -1 = sin filtro
+    var workEndOffset: TimeInterval       // segundos desde medianoche. -1 = sin filtro
+}
+```
+
+## Valores por defecto
+
+```swift
+extension WidgetConfig {
+    static func new(name: String, calendarIdentifier: String) -> WidgetConfig {
+        WidgetConfig(
+            id: UUID(),
+            name: name,
+            calendarIdentifier: calendarIdentifier,
+            colorSchemeLight: .system,
+            colorSchemeDark: .system,
+            rules: [],
+            showCancelled: false,
+            workStartOffset: -1,
+            workEndOffset: -1
+        )
+    }
+}
+```
+
+## Persistencia en App Group (Shared/WidgetConfigStore.swift)
+
+```swift
+enum WidgetConfigStore {
+    static let key = "widgetConfigs"
+
+    static func loadAll() -> [WidgetConfig] {
+        guard let data = AppGroup.defaults.data(forKey: key),
+              let configs = try? JSONDecoder().decode([WidgetConfig].self, from: data)
+        else { return [] }
+        return configs
+    }
+
+    static func saveAll(_ configs: [WidgetConfig]) {
+        guard let data = try? JSONEncoder().encode(configs) else { return }
+        AppGroup.defaults.set(data, forKey: key)
+    }
+}
+```
 
 ## Criterios de aceptación
-- El proyecto compila sin errores en simulador iPhone
-- Ambos targets (app + widget) tienen App Groups activado con 'group.com.ralcazar.calendario'
-- Se puede escribir y leer un valor de prueba: AppGroup.defaults.set('test', forKey: 'ping') desde app, leer desde widget
+- Serializar y deserializar un WidgetConfig con todos los campos produce valores idénticos
+- Guardar [WidgetConfig] desde la app y leer desde el widget extension devuelve el mismo array
+- Compilación sin errores en ambos targets
 
 PARENT
   ↑ ○ CAL-sue: (EPIC) Fase 0: Infraestructura ● P0
 
+DEPENDS ON
+  → ✓ CAL-sue.2: Configurar App Group compartido ● P0
+
 BLOCKS
-  ← ✓ CAL-sue.2: Configurar App Group compartido ● P0
+  ← ○ CAL-0q3.1: App companion: lista de configuraciones y CRUD básico ● P0
+  ← ○ CAL-sue.4: Implementar AppEntity y EntityQuery para el picker del widget ● P0
 
 
 
@@ -54,7 +109,7 @@ BLOCKS
 
 ### 0. Claim
 ```bash
-bd update CAL-sue.1 --claim
+bd update CAL-sue.3 --claim
 ```
 
 ### 1. Parse the Scenario
@@ -78,7 +133,7 @@ One XCTest per Then/And clause, mirroring the scenario:
 
 ```swift
 final class <Feature>ScenarioTests: XCTestCase {
-    // MARK: - CAL-sue.1: Crear proyecto Xcode con targets + configurar App Group
+    // MARK: - CAL-sue.3: Definir modelo WidgetConfig compartido
 
     func test_{beadId}_given_<setup>_when_<action>_then_<outcome>() {
         // Given — setup matching scenario preconditions
@@ -98,7 +153,7 @@ Run unit tests (see CLAUDE.md for command). Fix and re-run if needed (max 3 atte
 ```bash
 git add <specific files>
 git commit -m "$(cat <<'EOF'
-impl(CAL-sue.1): Crear proyecto Xcode con targets + configurar App Group
+impl(CAL-sue.3): Definir modelo WidgetConfig compartido
 
 Scenario: Given/When/Then covered
 Tests: N passed
@@ -111,11 +166,11 @@ EOF
 Do NOT push. The verifier pushes after approval.
 
 ### 7. Write Result
-Write to `orchestrator-state/results/CAL-sue.1.json`:
+Write to `orchestrator-state/results/CAL-sue.3.json`:
 
 ```json
 {
-  "bead_id": "CAL-sue.1",
+  "bead_id": "CAL-sue.3",
   "status": "success|failed",
   "files_created": [],
   "files_modified": [],
@@ -131,5 +186,5 @@ Write to `orchestrator-state/results/CAL-sue.1.json`:
 
 1. Write result with `"status": "failed"` and `"error": "<explanation>"`
 2. Clean up: `git checkout .`
-3. `bd update CAL-sue.1 --notes="Impl failed: <error>"`
+3. `bd update CAL-sue.3 --notes="Impl failed: <error>"`
 4. Exit
