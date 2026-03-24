@@ -1,0 +1,23 @@
+{
+  "bead_id": "CAL-0q3.2",
+  "status": "success",
+  "files_created": [
+    "Calendario/CalendarioApp/CalendarPermissionManager.swift",
+    "CalendarioTests/CAL0q32ScenarioTests.swift"
+  ],
+  "files_modified": [
+    "Calendario/CalendarioApp/CalendarioApp.swift",
+    "Calendario/CalendarioWidget/CalendarioWidget.swift",
+    "Calendario/Calendario.xcodeproj/project.pbxproj"
+  ],
+  "tests_added": [
+    "test_CAL0q32_given_permissionManager_when_initialized_then_statusReflectsCurrentAuth",
+    "test_CAL0q32_given_deniedStatus_when_checkingIsDenied_then_returnsTrue",
+    "test_CAL0q32_given_notDeterminedStatus_when_checkingIsAuthorized_then_returnsFalse",
+    "test_CAL0q32_given_fullAccessStatus_when_checkingIsAuthorized_then_returnsTrue"
+  ],
+  "tests_passed": 23,
+  "tests_failed": 0,
+  "commit_hash": "2ae48459defbcb51245eb02458161f106c553649",
+  "error": null
+}

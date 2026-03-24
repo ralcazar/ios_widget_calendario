@@ -1,0 +1,20 @@
+{
+  "bead_id": "CAL-0q3.5",
+  "status": "success",
+  "files_created": [
+    "CalendarioTests/CAL0q35ScenarioTests.swift"
+  ],
+  "files_modified": [
+    "Calendario/CalendarioWidget/CalendarioWidget.swift",
+    "Calendario/Calendario.xcodeproj/project.pbxproj"
+  ],
+  "tests_added": [
+    "test_CAL0q35_given_noConfigSelected_when_loadingStore_then_storeIsEmpty",
+    "test_CAL0q35_given_savedConfig_when_loadingStore_then_configAvailable",
+    "test_CAL0q35_given_widgetConfig_when_editingNameInApp_then_updatedConfigReflectsChanges"
+  ],
+  "tests_passed": 19,
+  "tests_failed": 0,
+  "commit_hash": "bacba7b",
+  "error": null
+}

@@ -1,0 +1,16 @@
+{
+  "beadId": "CAL-0q3.3",
+  "status": "success",
+  "title": "1.1 Lectura básica de eventos del calendario",
+  "commit": "0504459",
+  "filesChanged": [
+    "Calendario/CalendarioWidget/EventFetcher.swift",
+    "Calendario/CalendarioWidget/CalendarEntry.swift",
+    "Calendario/CalendarioWidget/CalendarioWidget.swift",
+    "CalendarioTests/CAL0q33ScenarioTests.swift",
+    "Calendario/Calendario.xcodeproj/project.pbxproj"
+  ],
+  "testsAdded": 4,
+  "testsTotal": 27,
+  "notes": "EventFetcher filters declined events via attendee participantStatus (not EKEventStatus.declined which doesn't exist). CalendarEntry replaces SimpleEntry. Timeline generates entries at now, event start/end transitions, and midnight."
+}
