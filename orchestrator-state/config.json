@@ -1,0 +1,11 @@
+{
+  "mode": "bdd",
+  "subagent_command": "claude -p",
+  "subagent_flags": "--dangerously-skip-permissions",
+  "implementation_timeout_seconds": 600,
+  "verification_timeout_seconds": 300,
+  "auto_advance": true,
+  "tmux_session": "bdd",
+  "log_dir": "orchestrator-state",
+  "ui_test_stale_days": 3
+}

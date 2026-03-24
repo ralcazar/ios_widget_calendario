@@ -52,18 +52,45 @@ bd close <id>         # Complete work
 
 ## Build & Test
 
-_Add your build and test commands here_
+_Fill in once the Xcode project is created. Commands will follow this pattern:_
 
 ```bash
-# Example:
-# npm install
-# npm test
+# Unit tests only (per bead):
+# xcodebuild test -project <App>.xcodeproj -scheme <AppTests> \
+#   -destination 'platform=iOS Simulator,name=iPhone 16'
+
+# UI tests (at epic close):
+# xcodebuild test -project <App>.xcodeproj -scheme <App> \
+#   -destination 'platform=iOS Simulator,name=iPhone 16'
 ```
 
 ## Architecture Overview
 
-_Add a brief overview of your project architecture_
+iOS widget + companion app for calendar filtering and visualization.
+
+- **Tech stack**: Swift, SwiftUI, WidgetKit, EventKit
+- **iOS target**: iOS 17+
+- **Key frameworks**: WidgetKit (widget extension), EventKit (calendar access), AppIntents (widget config)
+- **Data flow**: Companion app manages configurations → shared via App Group → widget reads and renders
+
+## BDD Orchestration
+
+This project uses a multi-agent BDD workflow for implementation:
+
+- `/orchestrate` — loop through all ready beads (implementer + verifier per bead)
+- `/orchestrateOne` — process a single bead with confirmation
+
+Agents are defined in `.claude/agents/`. State is tracked in `orchestrator-state/`.
+
+**Rules**:
+- Unit tests ONLY during per-bead work (NEVER UI tests during `xcodebuild test -scheme <AppTests>`)
+- UI tests created after bead close, run at epic close
+- Verifier pushes — implementer never pushes
 
 ## Conventions & Patterns
 
-_Add your project-specific conventions here_
+- Swift idioms: `@Observable`, `async/await`, `guard`, value types, `@AppStorage`
+- No force unwraps in production code
+- `accessibilityIdentifier` required for all interactive UI elements
+- Localization: all user-facing strings via `String(localized:)`
+- Test naming: `test_{beadId}_given_<setup>_when_<action>_then_<outcome>()`

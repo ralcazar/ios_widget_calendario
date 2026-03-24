@@ -1,0 +1,11 @@
+{
+  "status": "idle",
+  "current_bead": null,
+  "current_stage": "waiting",
+  "completed": [],
+  "failed": [],
+  "last_update": "2026-03-24T00:00:00",
+  "last_ui_test_run": null,
+  "last_ui_test_result": null,
+  "last_ui_test_summary": null
+}
