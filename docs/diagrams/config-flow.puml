@@ -1,0 +1,87 @@
+@startuml config-flow
+title Flujo de Configuración (App → Widget)
+
+skinparam shadowing false
+skinparam defaultFontSize 11
+skinparam sequenceMessageAlign center
+
+actor Usuario as user
+participant "App\nCompanion" as app
+database "App Group\n(UserDefaults)" as ag
+participant "WidgetCenter" as wc
+participant "Widget\nExtension" as widget
+participant "EventKit\nStore" as ek
+participant "Calendar.app" as cal
+
+== Primera vez: permisos ==
+
+user -> app : Abre la app
+app -> ek : requestAccess(for: .event)
+ek --> app : autorizado / denegado
+
+note right of ek
+  Solo la app puede
+  solicitar permisos
+end note
+
+== Crear configuración ==
+
+user -> app : Crea configuración\n(nombre, calendario, colores)
+app -> ag : Guarda WidgetConfig\n(Codable → JSON)
+app -> wc : reloadAllTimelines()
+
+note right of wc #FFF3E0
+  Presupuesto diario
+  ~40-70 reloads.
+  Cambios de config
+  son infrecuentes.
+end note
+
+== Widget se recarga ==
+
+wc -> widget : getTimeline(for: context)
+widget -> ag : EntityQuery.entities()\n→ lee [WidgetConfig]
+ag --> widget : WidgetConfig seleccionada
+widget -> ek : events(matching: predicado)
+
+note right of ek
+  Predicado:
+  • calendario = config.calendarIdentifier
+  • fecha = hoy (00:00 → 23:59)
+  • excluye participantStatus == .declined
+end note
+
+ek --> widget : [EKEvent]
+widget -> widget : Aplica reglas de filtrado\nsi existen (Fase 2)
+widget -> widget : Detecta solapamientos\nsi habilitado (Fase 3)
+widget -> widget : Genera timeline entries\n(una por transición de evento\n+ entrada a medianoche)
+widget --> wc : Timeline(entries, policy: .atEnd)
+
+== Transición de evento ==
+
+note over widget
+  El sistema renderiza la entry
+  correspondiente al momento actual.
+  Al agotarse las entries,
+  WidgetKit solicita un nuevo timeline.
+end note
+
+== Usuario interactúa con el widget ==
+
+user -> widget : Tap en evento
+widget -> cal : calshow:<timestamp>
+
+== Editar configuración ==
+
+user -> app : Modifica configuración existente
+app -> ag : Actualiza WidgetConfig
+app -> wc : reloadAllTimelines()
+wc -> widget : getTimeline(for: context)
+
+note over widget
+  Mismo flujo que arriba:
+  lee config actualizada,
+  genera nuevo timeline
+end note
+
+@enduml

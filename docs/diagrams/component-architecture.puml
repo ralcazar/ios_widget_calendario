@@ -1,0 +1,82 @@
+@startuml component-architecture
+title Arquitectura del Sistema
+
+skinparam componentStyle rectangle
+skinparam packageStyle frame
+skinparam shadowing false
+skinparam defaultFontSize 11
+
+package "Dispositivo iOS" {
+
+  package "App Companion (proceso app)" as app_process {
+    component "SwiftUI\nViews" as views
+    component "Config\nManager" as configMgr
+    component "Permisos\nEventKit" as ekPerms
+  }
+
+  package "Widget Extension (proceso independiente)" as widget_process {
+    component "Timeline\nProvider" as timeline
+    component "AppIntent\nEntityQuery" as entityQuery
+    component "EventKit\nReader" as ekReader
+    component "SwiftUI\nWidget Views" as widgetViews
+  }
+
+  database "App Group\nUserDefaults(suiteName:)" as appGroup {
+    storage "[WidgetConfig]" as configs
+    storage "[DismissedEvents]" as dismissed
+  }
+}
+
+package "Frameworks iOS" as frameworks {
+  component "WidgetKit" as widgetKit
+  component "EventKit\nStore" as ekStore
+}
+
+component "Calendar.app" as calApp
+
+cloud "Fuentes de calendario" as calSources {
+  component "iCloud"
+  component "Exchange"
+  component "Google\nCalDAV"
+}
+
+' === App companion ===
+views --> configMgr : crea / edita\nconfiguración
+configMgr --> configs : escribe\nWidgetConfig[]
+configMgr --> widgetKit : reloadAll\nTimelines()
+ekPerms --> ekStore : requestAccess\n(for: .event)
+
+' === Widget extension ===
+widgetKit --> timeline : getTimeline\n(for: config)
+timeline --> entityQuery
+entityQuery --> configs : lee config\nseleccionada
+timeline --> ekReader : eventos del día
+ekReader --> ekStore : events\n(matching:)
+timeline --> widgetViews : genera\ntimeline entries
+widgetViews ..> calApp : calshow:\n<timestamp>
+
+' === Externos ===
+ekStore <-- calSources : sincroniza
+
+' === Notas ===
+note bottom of appGroup
+  Frontera de proceso:
+  App y Widget acceden al
+  mismo contenedor pero
+  ejecutan en procesos
+  separados.
+end note
+
+note right of widgetKit
+  Presupuesto diario:
+  ~40-70 reloads
+end note
+
+note bottom of ekPerms
+  Solo la app puede
+  solicitar permisos.
+  El widget solo lee
+  el estado actual.
+end note
+
+@enduml

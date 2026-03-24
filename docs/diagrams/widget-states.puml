@@ -1,0 +1,71 @@
+@startuml widget-states
+title Estados del Widget
+
+skinparam shadowing false
+skinparam defaultFontSize 11
+skinparam state {
+  BackgroundColor<<error>> #FFE0E0
+  BackgroundColor<<empty>> #FFF3E0
+  BackgroundColor<<ok>> #E0F2E0
+}
+
+[*] --> ComprobandoPermisos : timeline\nse recarga
+
+state ComprobandoPermisos as "Comprobando\npermisos" {
+}
+
+state SinPermisos <<error>> : Mensaje:\n"Abra la app para\nconceder acceso"
+
+state PermisosDenegados <<error>> : Mensaje:\n"Sin acceso al calendario"\n+ enlace a Ajustes
+
+state ComprobandoConfig as "Comprobando\nconfiguración" {
+}
+
+state SinConfig <<empty>> : Mensaje:\n"Seleccione una\nconfiguración"
+
+state CargandoEventos as "Cargando\neventos" {
+}
+
+state SinEventos <<empty>> : Mensaje:\n"Sin eventos hoy"
+
+state MostrandoEventos <<ok>> : Lista de eventos\nfiltrada y coloreada\nsegún configuración
+
+' === Transiciones principales ===
+
+ComprobandoPermisos --> SinPermisos : nunca\nsolicitados
+ComprobandoPermisos --> PermisosDenegados : denegados
+ComprobandoPermisos --> ComprobandoConfig : concedidos
+
+ComprobandoConfig --> SinConfig : ninguna config\nseleccionada
+ComprobandoConfig --> CargandoEventos : config\nseleccionada
+
+CargandoEventos --> SinEventos : calendario\nvacío hoy
+CargandoEventos --> MostrandoEventos : hay eventos
+
+' === Transiciones de recuperación ===
+
+SinPermisos -[dashed]-> ComprobandoPermisos : usuario concede\npermisos en la app\n→ timeline reload
+PermisosDenegados -[dashed]-> ComprobandoPermisos : usuario cambia\npermisos en Ajustes\n→ timeline reload
+SinConfig -[dashed]-> ComprobandoConfig : usuario selecciona\nconfig en widget\n→ timeline reload
+
+' === Re-evaluación ===
+
+MostrandoEventos -[dashed]-> CargandoEventos : timeline reload\n(medianoche, cambio\nde config, transición\nde evento)
+SinEventos -[dashed]-> CargandoEventos : timeline reload
+
+' === Notas ===
+
+note right of MostrandoEventos
+  Tap en evento →
+  abre Calendar.app
+  (calshow:<timestamp>)
+end note
+
+note left of CargandoEventos
+  Aplica filtros:
+  - Rechazados excluidos (P0)
+  - Reglas de filtrado (P1)
+  - Horario laboral (P3)
+end note
+
+@enduml

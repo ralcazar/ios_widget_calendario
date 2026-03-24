@@ -58,6 +58,19 @@ A continuación se da una *especificación* con **historias en formato Behaviour
 
 ---
 
+## **Diagramas**
+
+Los diagramas PlantUML se encuentran en `docs/diagrams/`:
+
+| Diagrama | Archivo | Qué muestra |
+|---|---|---|
+| Arquitectura de componentes | [`component-architecture.puml`](docs/diagrams/component-architecture.puml) | App companion, widget extension, App Group, EventKit y fronteras de proceso |
+| Estados del widget | [`widget-states.puml`](docs/diagrams/widget-states.puml) | Máquina de estados: sin permisos → sin config → sin eventos → mostrando eventos |
+| Flujo de configuración | [`config-flow.puml`](docs/diagrams/config-flow.puml) | Secuencia: crear config en app → App Group → reload → widget renderiza |
+| Casos de uso | [`use-cases.puml`](docs/diagrams/use-cases.puml) | Casos de uso con relaciones include/extend/precondition, coloreados por fase |
+
+---
+
 ## **Decisiones técnicas**
 
 | Decisión | Valor | Justificación |

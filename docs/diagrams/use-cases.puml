@@ -1,0 +1,101 @@
+@startuml use-cases
+title Casos de Uso
+
+skinparam shadowing false
+skinparam defaultFontSize 11
+skinparam usecase {
+  BackgroundColor<<fase1>> #E0F0FF
+  BackgroundColor<<fase2>> #E8F5E9
+  BackgroundColor<<fase3>> #FFF3E0
+  BackgroundColor<<fase4>> #F3E5F5
+}
+
+left to right direction
+
+actor "Usuario" as user
+
+rectangle "App Companion" {
+
+  usecase "Conceder permisos\nde calendario" as UC_perms <<fase1>>
+  usecase "Completar\nonboarding" as UC_onboard <<fase3>>
+
+  package "Gestión de configuraciones" {
+    usecase "Crear\nconfiguración" as UC_create <<fase1>>
+    usecase "Editar\nconfiguración" as UC_edit <<fase1>>
+    usecase "Eliminar\nconfiguración" as UC_delete <<fase1>>
+    usecase "Seleccionar\ncalendario" as UC_cal <<fase1>>
+    usecase "Personalizar\ncolores" as UC_colors <<fase1>>
+  }
+
+  package "Motor de reglas" {
+    usecase "Crear reglas\nde filtrado" as UC_rules <<fase2>>
+    usecase "Asignar colores\npor prioridad" as UC_ruleColors <<fase2>>
+    usecase "Previsualizar\nreglas en vivo" as UC_preview <<fase2>>
+  }
+
+  package "Opciones avanzadas" {
+    usecase "Gestionar eventos\ncancelados/rechazados" as UC_cancelled <<fase3>>
+    usecase "Configurar\nhorario laboral" as UC_hours <<fase4>>
+    usecase "Actualizar\nwidgets manualmente" as UC_refresh <<fase4>>
+  }
+}
+
+rectangle "Widget" {
+  usecase "Ver eventos\ndel día" as UC_view <<fase1>>
+  usecase "Seleccionar\nconfiguración" as UC_select <<fase1>>
+  usecase "Abrir evento\nen Calendar.app" as UC_open <<fase1>>
+  usecase "Identificar\nconflictos de horario" as UC_conflicts <<fase3>>
+  usecase "Descartar\nevento" as UC_dismiss <<fase4>>
+}
+
+' === Usuario → casos de uso directos ===
+
+user --> UC_perms
+user --> UC_onboard
+user --> UC_create
+user --> UC_edit
+user --> UC_delete
+user --> UC_rules
+user --> UC_cancelled
+user --> UC_hours
+user --> UC_refresh
+user --> UC_view
+user --> UC_select
+user --> UC_open
+user --> UC_dismiss
+
+' === Relaciones include (siempre ocurren) ===
+
+UC_create ..> UC_cal : <<include>>
+UC_create ..> UC_colors : <<include>>
+UC_onboard ..> UC_perms : <<include>>
+UC_onboard ..> UC_create : <<include>>
+UC_rules ..> UC_ruleColors : <<include>>
+
+' === Relaciones extend (opcionales) ===
+
+UC_rules ..> UC_create : <<extend>>
+UC_preview ..> UC_rules : <<extend>>
+UC_cancelled ..> UC_edit : <<extend>>
+UC_hours ..> UC_edit : <<extend>>
+
+' === Precondiciones ===
+
+UC_select ..> UC_create : <<precondition>>\nrequiere al menos\nuna configuración
+UC_view ..> UC_perms : <<precondition>>\nrequiere permisos\nconcedidos
+UC_view ..> UC_select : <<precondition>>\nrequiere config\nseleccionada
+UC_open ..> UC_view : <<precondition>>\nrequiere eventos\nvisibles
+UC_conflicts ..> UC_view : <<precondition>>
+UC_dismiss ..> UC_view : <<precondition>>
+
+' === Leyenda ===
+
+legend right
+  |= Color |= Fase |
+  | <#E0F0FF> | Fase 1 — MVP |
+  | <#E8F5E9> | Fase 2 — Motor de reglas |
+  | <#FFF3E0> | Fase 3 — App Store |
+  | <#F3E5F5> | Fase 4 — Extras |
+end legend
+
+@enduml
