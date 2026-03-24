@@ -25,15 +25,22 @@ struct ExtraLargeWidgetView: View {
                     .foregroundColor(.secondary)
             }
             Divider()
-            LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible())], spacing: 4) {
-                ForEach(visibleEvents, id: \.eventIdentifier) { event in
-                    EventRowView(event: event, now: now, showColorDot: true)
-                }
-            }
-            if extraCount > 0 {
-                Text(String(localized: "+ \(extraCount) más"))
-                    .font(.caption2)
+            if visibleEvents.isEmpty {
+                Text(String(localized: "Sin eventos hoy"))
+                    .font(.caption)
                     .foregroundColor(.secondary)
+                    .accessibilityIdentifier("noEventsExtraLarge")
+            } else {
+                LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible())], spacing: 4) {
+                    ForEach(visibleEvents, id: \.eventIdentifier) { event in
+                        EventRowView(event: event, now: now, showColorDot: true)
+                    }
+                }
+                if extraCount > 0 {
+                    Text(String(localized: "+ \(extraCount) más"))
+                        .font(.caption2)
+                        .foregroundColor(.secondary)
+                }
             }
             Spacer(minLength: 0)
         }
