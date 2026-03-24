@@ -3,25 +3,30 @@ import SwiftUI
 import EventKit
 
 struct Provider: AppIntentTimelineProvider {
-    func placeholder(in context: Context) -> SimpleEntry {
-        SimpleEntry(date: Date(), configuration: ConfigurationAppIntent(), authorizationStatus: .notDetermined)
+    func placeholder(in context: Context) -> CalendarEntry {
+        CalendarEntry(date: Date(), events: [], configuration: ConfigurationAppIntent(), widgetConfig: WidgetConfig.new(name: "Placeholder", calendarIdentifier: ""))
     }
 
-    func snapshot(for configuration: ConfigurationAppIntent, in context: Context) async -> SimpleEntry {
-        SimpleEntry(date: Date(), configuration: configuration, authorizationStatus: EKEventStore.authorizationStatus(for: .event))
+    func snapshot(for configuration: ConfigurationAppIntent, in context: Context) async -> CalendarEntry {
+        let widgetConfig = resolveConfig(from: configuration)
+        let events = EventFetcher.fetchEvents(for: widgetConfig)
+        return CalendarEntry(date: Date(), events: events, configuration: configuration, widgetConfig: widgetConfig)
     }
 
-    func timeline(for configuration: ConfigurationAppIntent, in context: Context) async -> Timeline<SimpleEntry> {
-        let status = EKEventStore.authorizationStatus(for: .event)
-        let entry = SimpleEntry(date: Date(), configuration: configuration, authorizationStatus: status)
-        return Timeline(entries: [entry], policy: .atEnd)
+    func timeline(for configuration: ConfigurationAppIntent, in context: Context) async -> Timeline<CalendarEntry> {
+        let widgetConfig = resolveConfig(from: configuration)
+        let events = EventFetcher.fetchEvents(for: widgetConfig)
+        let entries = EventFetcher.buildTimelineEntries(events: events, configuration: configuration, config: widgetConfig)
+        return Timeline(entries: entries, policy: .atEnd)
     }
-}
 
-struct SimpleEntry: TimelineEntry {
-    let date: Date
-    let configuration: ConfigurationAppIntent
-    let authorizationStatus: EKAuthorizationStatus
+    private func resolveConfig(from intent: ConfigurationAppIntent) -> WidgetConfig {
+        guard let entityId = intent.configuration?.id,
+              let config = WidgetConfigStore.loadAll().first(where: { $0.id == entityId }) else {
+            return WidgetConfigStore.loadAll().first ?? WidgetConfig.new(name: "", calendarIdentifier: "")
+        }
+        return config
+    }
 }
 
 struct CalendarioWidgetEntryView: View {
@@ -35,15 +40,36 @@ struct CalendarioWidgetEntryView: View {
             case .notDetermined:
                 notDeterminedView
             default:
-                if let configEntity = entry.configuration.configuration {
-                    configView(configEntity)
-                } else {
+                if entry.configuration.configuration == nil {
                     noConfigView
+                } else {
+                    configView
                 }
             }
         }
         .containerBackground(.fill.tertiary, for: .widget)
         .accessibilityIdentifier("widgetEntryView")
+    }
+
+    private var configView: some View {
+        VStack(alignment: .leading, spacing: 4) {
+            Text(entry.widgetConfig.name)
+                .font(.caption)
+                .foregroundColor(.secondary)
+            if entry.events.isEmpty {
+                Text(String(localized: "Sin eventos hoy"))
+                    .font(.caption2)
+                    .foregroundColor(.secondary)
+                    .accessibilityIdentifier("noEventsLabel")
+            } else {
+                ForEach(entry.events.prefix(3), id: \.eventIdentifier) { event in
+                    Text(event.title ?? "")
+                        .font(.caption2)
+                        .lineLimit(1)
+                }
+            }
+        }
+        .accessibilityIdentifier("configView")
     }
 
     private var deniedView: some View {
@@ -52,9 +78,11 @@ struct CalendarioWidgetEntryView: View {
             Text(String(localized: "Sin permisos de calendario"))
                 .font(.caption)
                 .multilineTextAlignment(.center)
-            Link(String(localized: "Abrir Ajustes"), destination: URL(string: "app-settings:")!)
-                .font(.caption2)
-                .accessibilityIdentifier("openSettingsLink")
+            if let url = URL(string: "app-settings:") {
+                Link(String(localized: "Abrir Ajustes"), destination: url)
+                    .font(.caption2)
+                    .accessibilityIdentifier("openSettingsLink")
+            }
         }
         .accessibilityIdentifier("deniedView")
     }
@@ -77,15 +105,6 @@ struct CalendarioWidgetEntryView: View {
                 .multilineTextAlignment(.center)
         }
         .accessibilityIdentifier("noConfigView")
-    }
-
-    private func configView(_ entity: WidgetConfigEntity) -> some View {
-        VStack {
-            Image(systemName: "calendar")
-            Text(entity.name)
-                .font(.headline)
-        }
-        .accessibilityIdentifier("configView")
     }
 }
 

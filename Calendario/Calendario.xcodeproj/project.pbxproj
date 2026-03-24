@@ -35,6 +35,9 @@
 		B91B2C3D4E5F6A7B8C9D0E1F /* CAL0q35ScenarioTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A91B2C3D4E5F6A7B8C9D0E1F /* CAL0q35ScenarioTests.swift */; };
 		BC1B2C3D4E5F6A7B8C9D0E1F /* CalendarPermissionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC1B2C3D4E5F6A7B8C9D0E1F /* CalendarPermissionManager.swift */; };
 		AD1B2C3D4E5F6A7B8C9D0E1F /* CAL0q32ScenarioTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE1B2C3D4E5F6A7B8C9D0E1F /* CAL0q32ScenarioTests.swift */; };
+		BD1B2C3D4E5F6A7B8C9D0E1F /* EventFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE2B3C4D5E6F7A8B9C0D1E2F /* EventFetcher.swift */; };
+		ED1B2C3D4E5F6A7B8C9D0E1F /* CalendarEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD1B2C3D4E5F6A7B8C9D0E1F /* CalendarEntry.swift */; };
+		FD1B2C3D4E5F6A7B8C9D0E1F /* CAL0q33ScenarioTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E2F3A4B5C6D7E8F9A0B1C2D /* CAL0q33ScenarioTests.swift */; };
 	/* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -87,6 +90,9 @@
 		A91B2C3D4E5F6A7B8C9D0E1F /* CAL0q35ScenarioTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = CAL0q35ScenarioTests.swift; sourceTree = "<group>"; };
 		AC1B2C3D4E5F6A7B8C9D0E1F /* CalendarPermissionManager.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = CalendarPermissionManager.swift; sourceTree = "<group>"; };
 		AE1B2C3D4E5F6A7B8C9D0E1F /* CAL0q32ScenarioTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = CAL0q32ScenarioTests.swift; sourceTree = "<group>"; };
+		AE2B3C4D5E6F7A8B9C0D1E2F /* EventFetcher.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = EventFetcher.swift; sourceTree = "<group>"; };
+		CD1B2C3D4E5F6A7B8C9D0E1F /* CalendarEntry.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = CalendarEntry.swift; sourceTree = "<group>"; };
+		1E2F3A4B5C6D7E8F9A0B1C2D /* CAL0q33ScenarioTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = CAL0q33ScenarioTests.swift; sourceTree = "<group>"; };
 	/* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -136,6 +142,7 @@
 				F6A7B8C9D0E1F2A3B4C5D6E7 /* CAL0q31ScenarioTests.swift */,
 				A91B2C3D4E5F6A7B8C9D0E1F /* CAL0q35ScenarioTests.swift */,
 				AE1B2C3D4E5F6A7B8C9D0E1F /* CAL0q32ScenarioTests.swift */,
+				1E2F3A4B5C6D7E8F9A0B1C2D /* CAL0q33ScenarioTests.swift */,
 			);
 			name = CalendarioTests;
 			path = ../CalendarioTests;
@@ -198,6 +205,8 @@
 				A833F7ED49112F4C0D14B7CE /* CalendarioWidget.swift */,
 			AA1B2C3D4E5F6A7B8C9D0E1F /* WidgetConfigEntity.swift */,
 			BB1B2C3D4E5F6A7B8C9D0E1F /* ConfigurationAppIntent.swift */,
+				AE2B3C4D5E6F7A8B9C0D1E2F /* EventFetcher.swift */,
+				CD1B2C3D4E5F6A7B8C9D0E1F /* CalendarEntry.swift */,
 				8FCC5C9656F6DA0D3F495E27 /* CalendarioWidgetBundle.swift */,
 				810B3796140E31165F4C22A3 /* Info.plist */,
 				2C0DD4B4C9CE111FAFC680C9 /* CalendarioWidget.entitlements */,
@@ -359,6 +368,7 @@
 				E5F6A7B8C9D0E1F2A3B4C5D6 /* CAL0q31ScenarioTests.swift in Sources */,
 				B91B2C3D4E5F6A7B8C9D0E1F /* CAL0q35ScenarioTests.swift in Sources */,
 				AD1B2C3D4E5F6A7B8C9D0E1F /* CAL0q32ScenarioTests.swift in Sources */,
+				FD1B2C3D4E5F6A7B8C9D0E1F /* CAL0q33ScenarioTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -373,6 +383,8 @@
 				05B3D7656450415EB27078C0 /* WidgetConfigStore.swift in Sources */,
 				DD1B2C3D4E5F6A7B8C9D0E1F /* WidgetConfigEntity.swift in Sources */,
 				EE1B2C3D4E5F6A7B8C9D0E1F /* ConfigurationAppIntent.swift in Sources */,
+				BD1B2C3D4E5F6A7B8C9D0E1F /* EventFetcher.swift in Sources */,
+				ED1B2C3D4E5F6A7B8C9D0E1F /* CalendarEntry.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
