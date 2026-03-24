@@ -25,10 +25,23 @@ struct CalendarioWidgetEntryView: View {
     var entry: Provider.Entry
 
     var body: some View {
-        VStack {
-            Image(systemName: "calendar")
-            Text(entry.configuration.configuration?.name ?? "Calendario")
+        Group {
+            if let configEntity = entry.configuration.configuration {
+                VStack {
+                    Image(systemName: "calendar")
+                    Text(configEntity.name)
+                        .font(.headline)
+                }
+            } else {
+                VStack {
+                    Image(systemName: "calendar.badge.exclamationmark")
+                    Text(String(localized: "Selecciona una configuración"))
+                        .font(.caption)
+                        .multilineTextAlignment(.center)
+                }
+            }
         }
+        .containerBackground(.fill.tertiary, for: .widget)
         .accessibilityIdentifier("widgetEntryView")
     }
 }
@@ -43,7 +56,6 @@ struct CalendarioWidget: Widget {
             provider: Provider()
         ) { entry in
             CalendarioWidgetEntryView(entry: entry)
-                .containerBackground(.fill.tertiary, for: .widget)
         }
         .configurationDisplayName("Calendario")
         .description(String(localized: "Visualiza tus próximos eventos."))
