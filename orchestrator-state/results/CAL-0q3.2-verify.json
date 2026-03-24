@@ -1,0 +1,17 @@
+{
+  "bead_id": "CAL-0q3.2",
+  "decision": "approve",
+  "scenario_compliance": {
+    "given_covered": true,
+    "when_implemented": true,
+    "then_tested": true,
+    "and_tested": true
+  },
+  "tests_passed": 23,
+  "tests_failed": 0,
+  "quality_issues": [
+    "URL(string: \"app-settings:\")! uses force unwrap, but is acceptable as a hardcoded static string guaranteed to produce a non-nil URL"
+  ],
+  "pushed": true,
+  "rejection_reasons": []
+}
