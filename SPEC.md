@@ -12,19 +12,19 @@
 | | **Épica 3 — Interacción y personalización** | | |
 | 3.1 | Abrir evento | P0 | Pulsar evento abre Calendar.app en la fecha del evento |
 | 3.2 | Selección de configuración en el widget | P0 | El widget solo permite elegir qué configuración (creada en la app) usar |
-| 3.4 | Widgets interactivos (iOS 17+) | P3 | Descartar eventos desde el widget |
+| 3.3 | Widgets interactivos (iOS 17+) | P3 | Descartar eventos desde el widget |
 | | **Épica 4 — Filtrado y resaltado** | | |
-| 4.1 | Reglas de filtrado | P2 | Filtrar eventos por texto o regex |
-| 4.2 | Colores por prioridad de regla | P2 | Color según prioridad de la regla que coincide |
-| 4.3 | Vista previa en vivo de reglas | P2 | Probar reglas contra los últimos 50 eventos |
+| 4.1 | Reglas de filtrado | P1 | Filtrar eventos por texto o regex |
+| 4.2 | Colores por prioridad de regla | P1 | Color según prioridad de la regla que coincide |
+| 4.3 | Vista previa en vivo de reglas | P1 | Probar reglas contra los últimos 50 eventos |
 | | **Épica 5 — Optimización y actualizaciones** | | |
 | 5.1 | Horario laboral | P3 | Mostrar solo eventos dentro del horario definido |
 | 5.2 | Actualización manual | P3 | Forzar refresh desde la app companion |
-| 5.3 | Eventos solapados | P1 | Visualizar conflictos de horario |
-| 5.4 | Eventos cancelados y rechazados | P1 | Ocultar o mostrar tachados |
+| 5.3 | Eventos solapados | P2 | Visualizar conflictos de horario |
+| 5.4 | Eventos cancelados y rechazados | P0/P2 | Filtrar rechazados por defecto (P0); toggle y cancelados tachados (P2) |
 | | **Épica 6 — App companion** | | |
 | 6.1 | App companion | P0 | App donde se crea y gestiona toda la configuración de cada widget (calendario, colores, reglas) |
-| 6.2 | Onboarding | P1 | Guía inicial y primer widget |
+| 6.2 | Onboarding | P2 | Guía inicial y primer widget |
 
 ---
 
@@ -74,13 +74,140 @@ A continuación se da una *especificación* con **historias en formato Behaviour
 
 ---
 
+## **Roadmap**
+
+### Grafo de dependencias
+
+```
+                    ┌──────────────────────────────┐
+                    │  Fase 0: Infraestructura     │
+                    │  Xcode project, App Group,   │
+                    │  modelo WidgetConfig,         │
+                    │  AppEntity skeleton           │
+                    └──────────┬───────────────────┘
+                               │
+              ┌────────────────┼────────────────┐
+              ▼                ▼                ▼
+        ┌──────────┐    ┌──────────┐    ┌──────────┐
+        │ 6.1 App  │    │ 1.1 Leer │    │ 2.1 Per- │
+        │ companion│    │ eventos  │    │ misos    │
+        │ (MVP)    │    │          │    │ (en app) │
+        └────┬─────┘    └────┬─────┘    └──────────┘
+             │               │
+             │          ┌────┴─────┐
+             │          │ 1.2 Ren- │
+             │          │ derizado │
+             │          └────┬─────┘
+             │               │
+             ▼               ▼
+        ┌──────────┐    ┌──────────┐    ┌──────────┐
+        │ 3.2 Pick-│    │ 3.1 Abrir│    │ 2.2 Sin  │
+        │ er config│    │ evento   │    │ eventos  │
+        └──────────┘    └──────────┘    └──────────┘
+                                              │
+             ┌────────────────────────────────┘
+             ▼
+     ════════════════════════
+      MVP usable (Fase 1)
+     ════════════════════════
+             │
+     ┌───────┼───────┐
+     ▼       ▼       ▼
+  ┌──────┐┌──────┐┌──────┐
+  │ 4.1  ││ 4.2  ││ 4.3  │
+  │Reglas││Color ││Prevw.│
+  └──────┘└──┬───┘└──┬───┘
+             │       │
+             ▼       ▼
+     ════════════════════════
+      Motor de reglas (Fase 2)
+     ════════════════════════
+             │
+     ┌───────┼───────┬───────────┐
+     ▼       ▼       ▼           ▼
+  ┌──────┐┌──────┐┌──────┐ ┌────────┐
+  │ 5.4  ││ 5.3  ││ 6.2  │ │ 2.3    │
+  │Cancel││Solap.││Onbrd.│ │Clr/Osc │
+  │toggle││      ││      │ │custom  │
+  └──────┘└──────┘└──────┘ └────────┘
+     │
+     ▼
+     ════════════════════════
+      App Store v1 (Fase 3)
+     ════════════════════════
+             │
+     ┌───────┼───────┐
+     ▼       ▼       ▼
+  ┌──────┐┌──────┐┌──────┐
+  │ 3.3  ││ 5.1  ││ 5.2  │
+  │Inter.││Horar.││Refr. │
+  └──────┘└──────┘└──────┘
+             │
+             ▼
+     ════════════════════════
+      Extras (Fase 4)
+     ════════════════════════
+```
+
+### Fases detalladas
+
+**Fase 0 — Infraestructura** *(sin historias de usuario — prerequisito técnico)*
+
+Crear el proyecto Xcode con dos targets (app + widget extension), configurar App Group compartido, definir el modelo `WidgetConfig` (Codable), y el skeleton de `AppEntity` + `EntityQuery` para el picker del widget. Sin esta base, nada es implementable.
+
+**Fase 1 — MVP vertical** *(primera versión usable end-to-end)*
+
+| Orden | Historia | Justificación del orden |
+|---|---|---|
+| 1 | 6.1 App companion (versión mínima) | Crea configuraciones que el widget consumirá. Sin app no hay configuraciones. |
+| 2 | 2.1 Permisos | La app solicita acceso al calendario; sin esto no hay eventos que leer. |
+| 3 | 1.1 Lectura de eventos | EventKit lee el calendario seleccionado en la config. |
+| 4 | 1.2 Renderizado (Medium primero) | Mostrar eventos en el widget. Empezar por Medium (el más útil); luego Small, Large, XL. |
+| 5 | 3.2 Picker de configuración | El widget expone el picker para elegir qué config usar. |
+| 6 | 3.1 Abrir evento (calshow:) | Tap en evento abre Calendar.app. |
+| 7 | 2.2 Estado sin eventos | Mensaje cuando no hay eventos — estado edge imprescindible. |
+| 8 | 5.4 Cancelados/rechazados (solo filtrado por defecto) | Filtrar eventos rechazados en el predicado de EventKit. Sin esto, el widget muestra ruido desde el día uno. No requiere UI, es una línea en el query. |
+
+> **Resultado**: un usuario puede instalar la app, conceder permisos, crear una configuración, añadir un widget, y ver sus eventos de hoy filtrados (sin rechazados) en la Home Screen.
+
+**Fase 2 — Motor de reglas** *(core del valor de negocio)*
+
+| Orden | Historia | Justificación |
+|---|---|---|
+| 1 | 4.1 Reglas de filtrado | UI en app companion para crear reglas texto/regex. Funcionalidad diferencial de la app. |
+| 2 | 4.2 Colores por prioridad | Depende de 4.1. Completa la propuesta de valor visual. |
+| 3 | 4.3 Vista previa en vivo | Depende de 4.1. Permite al usuario ajustar reglas antes de aplicarlas. |
+
+> **Resultado**: la funcionalidad diferencial de la app — filtrar y resaltar eventos por reglas. Con esto, la app ya se diferencia del widget de Calendario nativo. Beta testable via TestFlight.
+
+**Fase 3 — Pulido para App Store**
+
+| Historia | Justificación |
+|---|---|
+| 2.3 Modo claro/oscuro (colores custom) | El soporte básico es gratis (SwiftUI), pero los colores custom de la config necesitan par claro+oscuro. |
+| 5.4 Cancelados/rechazados (toggle + tachado) | La UI en la app companion para el toggle, y el estilo visual de eventos cancelados. |
+| 5.3 Eventos solapados | Visualización de conflictos — el core del problema declarado. |
+| 6.2 Onboarding | Guía para la primera apertura. Necesaria para App Store review. |
+
+> **Resultado**: app publicable en App Store con experiencia completa.
+
+**Fase 4 — Extras**
+
+| Historia | Justificación |
+|---|---|
+| 3.3 Widgets interactivos | Descartar eventos desde el widget. |
+| 5.1 Horario laboral | Filtro por horario en la config. |
+| 5.2 Actualización manual | Botón en app companion. Valor limitado si el timeline está bien diseñado. |
+
+---
+
 ## **Historias Gherkin por épica**
 
 ### **Épica 1: Lectura y visualización básica de eventos**
 
-**Historia 1.1 – Lectura básica de eventos** *(P0)*
+**Historia 1.1 – Lectura básica de eventos** *(P0 — Fase 1)*
 
-*Depende de: EventKit*
+*Depende de: EventKit, 2.1 (permisos concedidos)*
 
 ```gherkin
 Feature: Lectura básica de eventos
@@ -94,9 +221,9 @@ Feature: Lectura básica de eventos
     Then debe mostrar la lista de eventos del día actual
 ```
 
-**Historia 1.2 – Renderizado del widget en distintos tamaños** *(P0)*
+**Historia 1.2 – Renderizado del widget en distintos tamaños** *(P0 — Fase 1)*
 
-*Depende de: Lectura básica de eventos*
+*Depende de: 1.1*
 
 ```gherkin
 Feature: Renderizado de widget
@@ -123,9 +250,9 @@ Feature: Renderizado de widget
 
 ### **Épica 2: Gestión de permisos y estados del widget**
 
-**Historia 2.1 – Manejo de permisos** *(P0)*
+**Historia 2.1 – Manejo de permisos** *(P0 — Fase 1)*
 
-*Depende de: EventKit, App companion (6.1)*
+*Depende de: EventKit, 6.1 (app companion)*
 
 ```gherkin
 Feature: Manejo de permisos
@@ -152,9 +279,9 @@ Feature: Manejo de permisos
 
 > **Nota técnica**: Las widget extensions **no pueden mostrar el diálogo de permisos del sistema** (`EKEventStore.requestAccess`). Solo el proceso de la app companion puede solicitarlos. El widget solo puede consultar `EKEventStore.authorizationStatus(for:)` y mostrar un estado informativo.
 
-**Historia 2.2 – Estado sin eventos** *(P0)*
+**Historia 2.2 – Estado sin eventos** *(P0 — Fase 1)*
 
-*Depende de: Renderizado del widget*
+*Depende de: 1.2*
 
 ```gherkin
 Feature: Estado sin eventos
@@ -168,9 +295,9 @@ Feature: Estado sin eventos
     Then debo ver un mensaje indicando que no hay eventos
 ```
 
-**Historia 2.3 – Adaptación a modo claro y oscuro** *(P0)*
+**Historia 2.3 – Adaptación a modo claro y oscuro** *(P0/P2 — Fase 1 base, Fase 3 colores custom)*
 
-*Depende de: Renderizado del widget*
+*Depende de: 1.2*
 
 ```gherkin
 Feature: Modo claro y oscuro
@@ -189,15 +316,15 @@ Feature: Modo claro y oscuro
     Then los colores de fondo, texto y acentos deben usar la paleta de modo claro
 ```
 
-> **Nota técnica**: SwiftUI en WidgetKit maneja el cambio claro/oscuro automáticamente via `@Environment(\.colorScheme)` — no requiere lógica de actualización explícita. Sin embargo, si la configuración permite colores personalizados para fondo/acento, el usuario podría elegir combinaciones ilegibles en uno de los modos (ej: fondo negro en dark mode). La app companion debe ofrecer **un par de colores (claro + oscuro) por configuración**, o bien restringir los colores a una paleta predefinida que funcione en ambos modos.
+> **Nota técnica**: SwiftUI en WidgetKit maneja el cambio claro/oscuro automáticamente via `@Environment(\.colorScheme)` — no requiere lógica de actualización explícita. El soporte básico (colores semánticos del sistema) es gratis y entra en Fase 1. La gestión de colores custom (par claro+oscuro por configuración) entra en Fase 3 junto con la UI de personalización en la app companion.
 
 ---
 
 ### **Épica 3: Interacción y personalización básica del widget**
 
-**Historia 3.1 – Interacción básica: abrir evento** *(P0)*
+**Historia 3.1 – Interacción básica: abrir evento** *(P0 — Fase 1)*
 
-*Depende de: Renderizado del widget*
+*Depende de: 1.2*
 
 ```gherkin
 Feature: Apertura de evento desde el widget
@@ -213,9 +340,9 @@ Feature: Apertura de evento desde el widget
 
 > **Nota técnica**: No existe URL scheme pública para abrir un evento específico en Calendar.app. `calshow:<unix_timestamp>` abre Calendar.app en la fecha indicada, que es lo máximo posible. Cada evento en el widget usa un `Link` con URL `calshow:<timestamp_del_evento>`. En widget Small, que solo soporta un `widgetURL` global, se usa el timestamp del próximo evento.
 
-**Historia 3.2 – Selección de configuración en el widget** *(P0)*
+**Historia 3.2 – Selección de configuración en el widget** *(P0 — Fase 1)*
 
-*Depende de: App companion (6.1)*
+*Depende de: 6.1 (app companion)*
 
 ```gherkin
 Feature: Selección de configuración en el widget
@@ -242,9 +369,9 @@ Feature: Selección de configuración en el widget
 
 > **Nota técnica**: Implementado con `AppIntentConfiguration`. Las configuraciones se modelan como `AppEntity` con un `EntityQuery` que lee del App Group (`UserDefaults(suiteName:)`). Cuando la app guarda un cambio, llama a `WidgetCenter.shared.reloadAllTimelines()` para que el widget recoja la configuración actualizada. El `EntityQuery` se ejecuta en el proceso del widget, no en el de la app.
 
-**Historia 3.4 – Widgets interactivos (iOS 17+)** *(P3)*
+**Historia 3.3 – Widgets interactivos (iOS 17+)** *(P3 — Fase 4)*
 
-*Depende de: Renderizado del widget*
+*Depende de: 1.2*
 
 ```gherkin
 Feature: Widgets interactivos
@@ -264,7 +391,9 @@ Feature: Widgets interactivos
 
 ### **Épica 4: Filtrado y resaltado de eventos mediante reglas**
 
-**Historia 4.1 – Creación de reglas de filtrado** *(P2)*
+**Historia 4.1 – Creación de reglas de filtrado** *(P1 — Fase 2)*
+
+*Depende de: 6.1 (app companion para UI de reglas), 1.1 (eventos que filtrar)*
 
 ```gherkin
 Feature: Reglas de filtrado
@@ -280,7 +409,9 @@ Feature: Reglas de filtrado
 
 > **Nota técnica**: La validación del regex se hace en la app companion en tiempo de edición (feedback inmediato si el patrón es inválido). En el widget extension, los regex ya compilados se aplican sobre los eventos del día. La widget extension tiene un **límite de 30 MB de RAM** — con un calendario denso (~50-100 eventos/día) y regex simples, esto no es problema, pero regex con backtracking excesivo podrían causar un crash. Mitigación: usar `Swift Regex` con timeout implícito y limitar la complejidad del patrón en la UI de la app.
 
-**Historia 4.2 – Aplicar colores según prioridad de regla** *(P2)*
+**Historia 4.2 – Aplicar colores según prioridad de regla** *(P1 — Fase 2)*
+
+*Depende de: 4.1*
 
 ```gherkin
 Feature: Colores por prioridad de regla
@@ -294,7 +425,9 @@ Feature: Colores por prioridad de regla
     Then el evento debe aparecer con el color asignado a la prioridad
 ```
 
-**Historia 4.3 – Vista previa en vivo de reglas** *(P2)*
+**Historia 4.3 – Vista previa en vivo de reglas** *(P1 — Fase 2)*
+
+*Depende de: 4.1, 6.1 (app companion para la pantalla de vista previa)*
 
 ```gherkin
 Feature: Vista previa en vivo de reglas
@@ -314,7 +447,9 @@ Feature: Vista previa en vivo de reglas
 
 ### **Épica 5: Optimización de visualización y actualizaciones avanzadas**
 
-**Historia 5.1 – Configuración de horario laboral** *(P3)*
+**Historia 5.1 – Configuración de horario laboral** *(P3 — Fase 4)*
+
+*Depende de: 6.1 (app companion para UI de horario)*
 
 ```gherkin
 Feature: Horario laboral en widget
@@ -328,7 +463,9 @@ Feature: Horario laboral en widget
     Then solo deben mostrarse eventos dentro de ese horario
 ```
 
-**Historia 5.2 – Actualización manual del widget** *(P3)*
+**Historia 5.2 – Actualización manual del widget** *(P3 — Fase 4)*
+
+*Depende de: 6.1 (app companion para el botón)*
 
 ```gherkin
 Feature: Actualización manual del widget
@@ -344,9 +481,9 @@ Feature: Actualización manual del widget
 
 > **Nota técnica**: La actualización se dispara desde la app companion via `WidgetCenter.shared.reloadAllTimelines()`, no desde un botón en el widget. El sistema impone un **presupuesto diario de ~40-70 reloads**; si se agota, el sistema ignora las solicitudes silenciosamente. Con la estrategia de timeline basada en transiciones de eventos, la necesidad de reloads manuales debería ser mínima.
 
-**Historia 5.3 – Visualización de eventos solapados** *(P1)*
+**Historia 5.3 – Visualización de eventos solapados** *(P2 — Fase 3)*
 
-*Depende de: Renderizado del widget*
+*Depende de: 1.2*
 
 ```gherkin
 Feature: Eventos solapados
@@ -376,9 +513,9 @@ Feature: Eventos solapados
 
 > **Nota técnica**: La detección de solapamiento es un algoritmo de intervalos (ordenar por start, comparar con end del anterior). La dificultad está en la **visualización en espacio limitado**: en Medium/Large se pueden mostrar eventos apilados con indentación; en Small solo cabe un resumen colapsado. El widget no puede hacer scroll, así que el layout debe decidir estáticamente cuántos eventos mostrar y cuándo colapsar.
 
-**Historia 5.4 – Eventos cancelados y rechazados** *(P1)*
+**Historia 5.4 – Eventos cancelados y rechazados** *(P0 filtrado / P2 toggle+UI — Fase 1 + Fase 3)*
 
-*Depende de: Lectura básica de eventos*
+*Depende de: 1.1; para toggle y UI: 6.1 (app companion)*
 
 ```gherkin
 Feature: Eventos cancelados y rechazados
@@ -404,13 +541,15 @@ Feature: Eventos cancelados y rechazados
     Then el evento cancelado no debe aparecer en la lista
 ```
 
-> **Nota técnica**: EventKit expone `EKParticipant.participantStatus` (`.declined`, `.accepted`, etc.) y `EKEvent.status` (`.canceled`). Para eventos rechazados, se filtra por `participantStatus == .declined` del participante que corresponde al usuario actual (`EKEventStore.sources`). Esto funciona para calendarios con soporte de invitaciones (Exchange, Google via CalDAV); en calendarios locales sin invitaciones, estos campos no aplican.
+> **Nota técnica**: El primer escenario (filtrar rechazados por defecto) es una línea en el predicado de EventKit y entra en Fase 1 sin necesidad de UI. Los escenarios de cancelados (toggle + estilo tachado) requieren UI en la app companion y entran en Fase 3.
+>
+> EventKit expone `EKParticipant.participantStatus` (`.declined`, `.accepted`, etc.) y `EKEvent.status` (`.canceled`). Para eventos rechazados, se filtra por `participantStatus == .declined` del participante que corresponde al usuario actual (`EKEventStore.sources`). Esto funciona para calendarios con soporte de invitaciones (Exchange, Google via CalDAV); en calendarios locales sin invitaciones, estos campos no aplican.
 
 ---
 
 ### **Épica 6: App companion y onboarding**
 
-**Historia 6.1 – App companion para configuración** *(P0)*
+**Historia 6.1 – App companion para configuración** *(P0 — Fase 1)*
 
 *Depende de: App Groups para compartir datos entre app y widget*
 
@@ -442,9 +581,9 @@ Feature: App companion
     Then los widgets que la usaban muestran un mensaje invitando a seleccionar otra
 ```
 
-**Historia 6.2 – Onboarding** *(P1)*
+**Historia 6.2 – Onboarding** *(P2 — Fase 3)*
 
-*Depende de: App companion, Manejo de permisos*
+*Depende de: 6.1, 2.1*
 
 ```gherkin
 Feature: Onboarding
@@ -516,13 +655,7 @@ Feature: Onboarding
       }
       ```
     - El widget lee el array `[WidgetConfig]` del App Group y filtra por el `id` seleccionado en el `AppIntent`.
-5. **Camino crítico del MVP**
-    - Es un documento de planificación, no un comportamiento observable. El orden sugerido es:
-      1. P0: Épicas 1 (1.1, 1.2), 2 (2.1, 2.2, 2.3), 3 (3.1, 3.2) y 6 (6.1).
-      2. P1: Épicas 5 (5.3, 5.4) y 6 (6.2).
-      3. P2: Épica 4.
-      4. P3: Historias 3.4, 5.1, 5.2.
-6. **Requisitos de App Store**
+5. **Requisitos de App Store**
     - La app companion debe tener funcionalidad mínima propia (no puede ser solo un lanzador de widget).
     - Política de privacidad requerida (acceso a datos de calendario).
     - Descripción de uso de calendario requerida en `Info.plist` (`NSCalendarsUsageDescription`).
