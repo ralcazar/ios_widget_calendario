@@ -32,7 +32,11 @@ enum EventFetcher {
         }
 
         let calendar = Calendar.current
-        let tomorrow = calendar.date(byAdding: .day, value: 1, to: calendar.startOfDay(for: now))!
+        guard let tomorrow = calendar.date(byAdding: .day, value: 1, to: calendar.startOfDay(for: now)) else {
+            return transitionDates.sorted().map {
+                CalendarEntry(date: $0, events: events, configuration: configuration, widgetConfig: config)
+            }
+        }
         transitionDates.append(tomorrow)
 
         return transitionDates.sorted().map {
