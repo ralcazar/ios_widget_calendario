@@ -1,0 +1,41 @@
+import SwiftUI
+import EventKit
+
+struct EventRowView: View {
+    let event: EKEvent
+    let now: Date
+    let showColorDot: Bool
+
+    private var isAllDay: Bool { event.isAllDay }
+    private var isInProgress: Bool { event.startDate <= now && now < event.endDate }
+
+    private var timeText: String {
+        if isAllDay { return String(localized: "Todo el día") }
+        let formatter = DateFormatter()
+        formatter.timeStyle = .short
+        formatter.dateStyle = .none
+        return "\(formatter.string(from: event.startDate)) – \(formatter.string(from: event.endDate))"
+    }
+
+    var body: some View {
+        HStack(spacing: 6) {
+            if showColorDot {
+                Circle()
+                    .fill(Color(cgColor: event.calendar.cgColor))
+                    .frame(width: 6, height: 6)
+            }
+            VStack(alignment: .leading, spacing: 2) {
+                Text(timeText)
+                    .font(.caption2)
+                    .foregroundColor(.secondary)
+                    .fontWeight(isInProgress ? .bold : .regular)
+                Text(event.title ?? "")
+                    .font(.subheadline)
+                    .fontWeight(.medium)
+                    .lineLimit(1)
+            }
+        }
+        .frame(height: 32, alignment: .leading)
+        .accessibilityIdentifier("eventRow_\(event.eventIdentifier ?? "")")
+    }
+}

@@ -31,6 +31,7 @@ struct Provider: AppIntentTimelineProvider {
 
 struct CalendarioWidgetEntryView: View {
     var entry: Provider.Entry
+    @Environment(\.widgetFamily) var widgetFamily
 
     var body: some View {
         Group {
@@ -43,7 +44,7 @@ struct CalendarioWidgetEntryView: View {
                 if entry.configuration.configuration == nil {
                     noConfigView
                 } else {
-                    configView
+                    contentView
                 }
             }
         }
@@ -51,25 +52,20 @@ struct CalendarioWidgetEntryView: View {
         .accessibilityIdentifier("widgetEntryView")
     }
 
-    private var configView: some View {
-        VStack(alignment: .leading, spacing: 4) {
-            Text(entry.widgetConfig.name)
-                .font(.caption)
-                .foregroundColor(.secondary)
-            if entry.events.isEmpty {
-                Text(String(localized: "Sin eventos hoy"))
-                    .font(.caption2)
-                    .foregroundColor(.secondary)
-                    .accessibilityIdentifier("noEventsLabel")
-            } else {
-                ForEach(entry.events.prefix(3), id: \.eventIdentifier) { event in
-                    Text(event.title ?? "")
-                        .font(.caption2)
-                        .lineLimit(1)
-                }
-            }
+    @ViewBuilder
+    private var contentView: some View {
+        switch widgetFamily {
+        case .systemSmall:
+            SmallWidgetView(entry: entry)
+        case .systemMedium:
+            MediumWidgetView(entry: entry)
+        case .systemLarge:
+            LargeWidgetView(entry: entry)
+        case .systemExtraLarge:
+            ExtraLargeWidgetView(entry: entry)
+        default:
+            MediumWidgetView(entry: entry)
         }
-        .accessibilityIdentifier("configView")
     }
 
     private var deniedView: some View {
@@ -121,5 +117,6 @@ struct CalendarioWidget: Widget {
         }
         .configurationDisplayName("Calendario")
         .description(String(localized: "Visualiza tus próximos eventos."))
+        .supportedFamilies([.systemSmall, .systemMedium, .systemLarge, .systemExtraLarge])
     }
 }
