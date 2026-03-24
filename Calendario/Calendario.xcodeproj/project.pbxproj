@@ -26,6 +26,9 @@
 		8F2A3B4C5D6E7F8A9B0C1D2E /* SharedConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3FD4EEAC6107E77BFB874AC /* SharedConstants.swift */; };
 		C408DC4F69D2421DB01ADD2E /* Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E91D61BE49A4FBE95D4B1D1 /* Models.swift */; };
 		D6DFC736C9234080BC7AC35E /* Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E91D61BE49A4FBE95D4B1D1 /* Models.swift */; };
+		DD1B2C3D4E5F6A7B8C9D0E1F /* WidgetConfigEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA1B2C3D4E5F6A7B8C9D0E1F /* WidgetConfigEntity.swift */; };
+		EE1B2C3D4E5F6A7B8C9D0E1F /* ConfigurationAppIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB1B2C3D4E5F6A7B8C9D0E1F /* ConfigurationAppIntent.swift */; };
+		FF1B2C3D4E5F6A7B8C9D0E1F /* CALsue4ScenarioTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC1B2C3D4E5F6A7B8C9D0E1F /* CALsue4ScenarioTests.swift */; };
 	/* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -69,6 +72,9 @@
 		FF8F60F6E225C5E41D3E4392 /* ContentView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		7E91D61BE49A4FBE95D4B1D1 /* Models.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Models.swift; path = ../Shared/Models.swift; sourceTree = "<group>"; };
 		9B771D8BD9BD4F5C8D94D565 /* WidgetConfigStore.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = WidgetConfigStore.swift; path = ../Shared/WidgetConfigStore.swift; sourceTree = "<group>"; };
+		AA1B2C3D4E5F6A7B8C9D0E1F /* WidgetConfigEntity.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = WidgetConfigEntity.swift; sourceTree = "<group>"; };
+		BB1B2C3D4E5F6A7B8C9D0E1F /* ConfigurationAppIntent.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ConfigurationAppIntent.swift; sourceTree = "<group>"; };
+		CC1B2C3D4E5F6A7B8C9D0E1F /* CALsue4ScenarioTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = CALsue4ScenarioTests.swift; sourceTree = "<group>"; };
 	/* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -114,6 +120,7 @@
 			children = (
 				14230672672F95C1E9D9C0CD /* CALsue1ScenarioTests.swift */,
 				E7A3F9B2C0D14E8AB1234567 /* CALsue3ScenarioTests.swift */,
+			CC1B2C3D4E5F6A7B8C9D0E1F /* CALsue4ScenarioTests.swift */,
 			);
 			name = CalendarioTests;
 			path = ../CalendarioTests;
@@ -171,6 +178,8 @@
 			isa = PBXGroup;
 			children = (
 				A833F7ED49112F4C0D14B7CE /* CalendarioWidget.swift */,
+			AA1B2C3D4E5F6A7B8C9D0E1F /* WidgetConfigEntity.swift */,
+			BB1B2C3D4E5F6A7B8C9D0E1F /* ConfigurationAppIntent.swift */,
 				8FCC5C9656F6DA0D3F495E27 /* CalendarioWidgetBundle.swift */,
 				810B3796140E31165F4C22A3 /* Info.plist */,
 				2C0DD4B4C9CE111FAFC680C9 /* CalendarioWidget.entitlements */,
@@ -325,6 +334,7 @@
 				8F2A3B4C5D6E7F8A9B0C1D2E /* SharedConstants.swift in Sources */,
 				102D4E2490184D3DB55BD642 /* Models.swift in Sources */,
 				5E61BCAFDAE74F47B5AA5F6D /* WidgetConfigStore.swift in Sources */,
+				FF1B2C3D4E5F6A7B8C9D0E1F /* CALsue4ScenarioTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -337,6 +347,8 @@
 				7D2752B12FAD37D24D6DFEF3 /* CalendarioWidgetBundle.swift in Sources */,
 				D6DFC736C9234080BC7AC35E /* Models.swift in Sources */,
 				05B3D7656450415EB27078C0 /* WidgetConfigStore.swift in Sources */,
+				DD1B2C3D4E5F6A7B8C9D0E1F /* WidgetConfigEntity.swift in Sources */,
+				EE1B2C3D4E5F6A7B8C9D0E1F /* ConfigurationAppIntent.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -1,25 +1,24 @@
 import WidgetKit
 import SwiftUI
 
-struct Provider: TimelineProvider {
+struct Provider: AppIntentTimelineProvider {
     func placeholder(in context: Context) -> SimpleEntry {
-        SimpleEntry(date: Date())
+        SimpleEntry(date: Date(), configuration: ConfigurationAppIntent())
     }
 
-    func getSnapshot(in context: Context, completion: @escaping (SimpleEntry) -> Void) {
-        let entry = SimpleEntry(date: Date())
-        completion(entry)
+    func snapshot(for configuration: ConfigurationAppIntent, in context: Context) async -> SimpleEntry {
+        SimpleEntry(date: Date(), configuration: configuration)
     }
 
-    func getTimeline(in context: Context, completion: @escaping (Timeline<Entry>) -> Void) {
-        let entries = [SimpleEntry(date: Date())]
-        let timeline = Timeline(entries: entries, policy: .atEnd)
-        completion(timeline)
+    func timeline(for configuration: ConfigurationAppIntent, in context: Context) async -> Timeline<SimpleEntry> {
+        let entry = SimpleEntry(date: Date(), configuration: configuration)
+        return Timeline(entries: [entry], policy: .atEnd)
     }
 }
 
 struct SimpleEntry: TimelineEntry {
     let date: Date
+    let configuration: ConfigurationAppIntent
 }
 
 struct CalendarioWidgetEntryView: View {
@@ -28,7 +27,7 @@ struct CalendarioWidgetEntryView: View {
     var body: some View {
         VStack {
             Image(systemName: "calendar")
-            Text("Calendario")
+            Text(entry.configuration.configuration?.name ?? "Calendario")
         }
         .accessibilityIdentifier("widgetEntryView")
     }
@@ -38,11 +37,15 @@ struct CalendarioWidget: Widget {
     let kind: String = "CalendarioWidget"
 
     var body: some WidgetConfiguration {
-        StaticConfiguration(kind: kind, provider: Provider()) { entry in
+        AppIntentConfiguration(
+            kind: kind,
+            intent: ConfigurationAppIntent.self,
+            provider: Provider()
+        ) { entry in
             CalendarioWidgetEntryView(entry: entry)
                 .containerBackground(.fill.tertiary, for: .widget)
         }
         .configurationDisplayName("Calendario")
-        .description("Visualiza tus próximos eventos.")
+        .description(String(localized: "Visualiza tus próximos eventos."))
     }
 }
