@@ -1,0 +1,17 @@
+{
+  "bead_id": "CAL-sue.1",
+  "decision": "approve",
+  "scenario_compliance": {
+    "given_covered": true,
+    "when_implemented": true,
+    "then_tested": true,
+    "and_tested": true
+  },
+  "tests_passed": 4,
+  "tests_failed": 0,
+  "quality_issues": [
+    "AppGroup.defaults uses force unwrap (!) on UserDefaults(suiteName:) — acceptable here because the suite name is a compile-time constant that is guaranteed to be valid; UserDefaults(suiteName:) only returns nil for an empty string."
+  ],
+  "pushed": true,
+  "rejection_reasons": []
+}
