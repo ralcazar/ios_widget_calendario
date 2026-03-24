@@ -4,22 +4,22 @@
 |---|---|---|---|
 | | **Épica 1 — Lectura y visualización** | | |
 | 1.1 | Lectura básica de eventos | P0 | Leer eventos del calendario via EventKit |
-| 1.2 | Renderizado en distintos tamaños | P0 | Small, Medium, Large, Extra Large |
+| 1.2 | Renderizado en distintos tamaños | P0 | Small, Medium, Large, Extra Large (iPad) |
 | | **Épica 2 — Permisos y estados** | | |
-| 2.1 | Manejo de permisos | P0 | Solicitar y gestionar acceso al calendario |
+| 2.1 | Manejo de permisos | P0 | Solicitar acceso desde la app; el widget solo detecta estado |
 | 2.2 | Estado sin eventos | P0 | Mensaje cuando la agenda está vacía |
 | 2.3 | Modo claro y oscuro | P0 | Adaptación automática a la apariencia del sistema |
 | | **Épica 3 — Interacción y personalización** | | |
-| 3.1 | Abrir evento | P0 | Pulsar evento abre la app Calendario |
+| 3.1 | Abrir evento | P0 | Pulsar evento abre Calendar.app en la fecha del evento |
 | 3.2 | Selección de configuración en el widget | P0 | El widget solo permite elegir qué configuración (creada en la app) usar |
-| 3.4 | Widgets interactivos (iOS 17+) | P3 | Acciones rápidas desde el widget |
+| 3.4 | Widgets interactivos (iOS 17+) | P3 | Descartar eventos desde el widget |
 | | **Épica 4 — Filtrado y resaltado** | | |
 | 4.1 | Reglas de filtrado | P2 | Filtrar eventos por texto o regex |
 | 4.2 | Colores por prioridad de regla | P2 | Color según prioridad de la regla que coincide |
 | 4.3 | Vista previa en vivo de reglas | P2 | Probar reglas contra los últimos 50 eventos |
 | | **Épica 5 — Optimización y actualizaciones** | | |
 | 5.1 | Horario laboral | P3 | Mostrar solo eventos dentro del horario definido |
-| 5.2 | Actualización manual | P3 | Forzar refresh del widget |
+| 5.2 | Actualización manual | P3 | Forzar refresh desde la app companion |
 | 5.3 | Eventos solapados | P1 | Visualizar conflictos de horario |
 | 5.4 | Eventos cancelados y rechazados | P1 | Ocultar o mostrar tachados |
 | | **Épica 6 — App companion** | | |
@@ -55,6 +55,22 @@ A continuación se da una *especificación* con **historias en formato Behaviour
 4. **Filtrado y resaltado de eventos mediante reglas**
 5. **Optimización de visualización y actualizaciones avanzadas**
 6. **App companion y onboarding**
+
+---
+
+## **Decisiones técnicas**
+
+| Decisión | Valor | Justificación |
+|---|---|---|
+| Deployment target | iOS 17.0+ | Requerido para `AppIntentConfiguration`, widgets interactivos y Swift Regex |
+| Plataforma | Universal (iPhone + iPad) | Extra Large disponible en iPad |
+| Persistencia compartida | `UserDefaults(suiteName:)` con App Group | SwiftData tiene riesgo de corrupción con acceso concurrente app/widget. UserDefaults es atómico y suficiente para configuraciones pequeñas (JSON codificable) |
+| Configuración del widget | `AppIntentConfiguration` + `AppEntity` | API moderna (iOS 17+). El picker del widget consulta las configuraciones del App Group via `EntityQuery` |
+| Estrategia de timeline | Una entrada por transición de evento + entrada a medianoche, política `.atEnd` | Permite que el widget refleje cambios de estado (evento empieza, termina) sin consumir reload budget |
+| Lectura de eventos | EventKit (solo `EKEventStore`, sin EventKitUI) | EventKitUI no es necesario: solo leemos eventos, no los editamos |
+| Navegación al evento | URL scheme `calshow:<unix_timestamp>` | No existe deep link público a un evento concreto en Calendar.app; solo se puede abrir en la fecha |
+| Regex engine | Swift `Regex` (tipo nativo, iOS 16+) | Validación en tiempo de edición en la app companion. En el widget extension (30 MB de RAM), solo se ejecutan regex ya compilados sobre el set filtrado de eventos del día |
+| Comunicación app → widget | `WidgetCenter.shared.reloadAllTimelines()` al guardar config | El widget se recarga con la nueva configuración. Sujeto a presupuesto diario (~40-70 reloads), pero cambios de configuración son infrecuentes |
 
 ---
 
@@ -101,13 +117,15 @@ Feature: Renderizado de widget
     | Extra Large |
 ```
 
+> **Nota técnica**: Extra Large solo está disponible en iPad. Los tamaños determinan cuántos eventos caben: Small ~1-2, Medium ~3-4, Large ~6-8, Extra Large ~10-12.
+
 ---
 
 ### **Épica 2: Gestión de permisos y estados del widget**
 
 **Historia 2.1 – Manejo de permisos** *(P0)*
 
-*Depende de: EventKit*
+*Depende de: EventKit, App companion (6.1)*
 
 ```gherkin
 Feature: Manejo de permisos
@@ -117,14 +135,22 @@ Feature: Manejo de permisos
 
   Scenario: Solicitud inicial de permisos
     Given que nunca he concedido acceso al calendario
-    When agrego el widget
-    Then debo ver un mensaje solicitando permisos
+    When abro la app companion por primera vez
+    Then la app solicita permiso de acceso al calendario
 
-  Scenario: Mostrar mensaje de error en caso de denegación
+  Scenario: Widget sin permisos concedidos
+    Given que no he concedido acceso al calendario
+    When el widget intenta actualizarse
+    Then debo ver un mensaje indicando que abra la app para conceder permisos
+
+  Scenario: Permisos denegados
     Given que he denegado el acceso al calendario
     When el widget intenta actualizarse
     Then debo ver un mensaje indicando que no hay permisos
+    And un enlace a Ajustes para modificarlos
 ```
+
+> **Nota técnica**: Las widget extensions **no pueden mostrar el diálogo de permisos del sistema** (`EKEventStore.requestAccess`). Solo el proceso de la app companion puede solicitarlos. El widget solo puede consultar `EKEventStore.authorizationStatus(for:)` y mostrar un estado informativo.
 
 **Historia 2.2 – Estado sin eventos** *(P0)*
 
@@ -161,12 +187,9 @@ Feature: Modo claro y oscuro
     Given que el sistema está en modo claro
     When el widget se renderiza
     Then los colores de fondo, texto y acentos deben usar la paleta de modo claro
-
-  Scenario: Cambio dinámico de apariencia
-    Given que el widget está visible
-    When el sistema cambia de modo claro a oscuro (o viceversa)
-    Then el widget debe actualizarse reflejando el nuevo modo
 ```
+
+> **Nota técnica**: SwiftUI en WidgetKit maneja el cambio claro/oscuro automáticamente via `@Environment(\.colorScheme)` — no requiere lógica de actualización explícita. Sin embargo, si la configuración permite colores personalizados para fondo/acento, el usuario podría elegir combinaciones ilegibles en uno de los modos (ej: fondo negro en dark mode). La app companion debe ofrecer **un par de colores (claro + oscuro) por configuración**, o bien restringir los colores a una paleta predefinida que funcione en ambos modos.
 
 ---
 
@@ -185,8 +208,10 @@ Feature: Apertura de evento desde el widget
   Scenario: Pulsar evento
     Given que el widget muestra un evento
     When pulso sobre el evento
-    Then se abre la ficha del evento en la app Calendario
+    Then se abre Calendar.app en la fecha del evento
 ```
+
+> **Nota técnica**: No existe URL scheme pública para abrir un evento específico en Calendar.app. `calshow:<unix_timestamp>` abre Calendar.app en la fecha indicada, que es lo máximo posible. Cada evento en el widget usa un `Link` con URL `calshow:<timestamp_del_evento>`. En widget Small, que solo soporta un `widgetURL` global, se usa el timestamp del próximo evento.
 
 **Historia 3.2 – Selección de configuración en el widget** *(P0)*
 
@@ -215,6 +240,8 @@ Feature: Selección de configuración en el widget
     Then el widget se actualiza reflejando los cambios en la próxima actualización
 ```
 
+> **Nota técnica**: Implementado con `AppIntentConfiguration`. Las configuraciones se modelan como `AppEntity` con un `EntityQuery` que lee del App Group (`UserDefaults(suiteName:)`). Cuando la app guarda un cambio, llama a `WidgetCenter.shared.reloadAllTimelines()` para que el widget recoja la configuración actualizada. El `EntityQuery` se ejecuta en el proceso del widget, no en el de la app.
+
 **Historia 3.4 – Widgets interactivos (iOS 17+)** *(P3)*
 
 *Depende de: Renderizado del widget*
@@ -222,19 +249,16 @@ Feature: Selección de configuración en el widget
 ```gherkin
 Feature: Widgets interactivos
   Como usuario
-  Quiero poder realizar acciones rápidas directamente desde el widget
-  Para gestionar mi agenda sin abrir la app
-
-  Scenario: Marcar evento como completado
-    Given que el widget muestra un evento que ya ha pasado
-    When pulso el botón de completar en el widget
-    Then el evento se marca visualmente como completado
+  Quiero poder descartar eventos irrelevantes directamente desde el widget
+  Para limpiar mi vista sin abrir la app
 
   Scenario: Descartar evento del widget
     Given que el widget muestra un evento irrelevante
     When pulso el botón de descartar
-    Then el evento desaparece del widget hasta la próxima actualización
+    Then el evento desaparece del widget hasta el día siguiente
 ```
+
+> **Nota técnica**: Los widgets interactivos (iOS 17+) solo admiten `Button` y `Toggle`. El estado de "descartado" se almacena en App Group (set de `eventIdentifier` + fecha) y se limpia diariamente. No se sincroniza con Calendar — es estado local de la app.
 
 ---
 
@@ -253,6 +277,8 @@ Feature: Reglas de filtrado
     When creo una regla de filtrado con la palabra "Reunión"
     Then solo deben mostrarse los eventos que contengan "Reunión"
 ```
+
+> **Nota técnica**: La validación del regex se hace en la app companion en tiempo de edición (feedback inmediato si el patrón es inválido). En el widget extension, los regex ya compilados se aplican sobre los eventos del día. La widget extension tiene un **límite de 30 MB de RAM** — con un calendario denso (~50-100 eventos/día) y regex simples, esto no es problema, pero regex con backtracking excesivo podrían causar un crash. Mitigación: usar `Swift Regex` con timeout implícito y limitar la complejidad del patrón en la UI de la app.
 
 **Historia 4.2 – Aplicar colores según prioridad de regla** *(P2)*
 
@@ -282,6 +308,8 @@ Feature: Vista previa en vivo de reglas
     Then debo ver los últimos 50 eventos filtrados y coloreados según las reglas
 ```
 
+> **Nota técnica**: La vista previa se ejecuta en la app companion (sin restricción de 30 MB). `EKEventStore.events(matching:)` con un predicado de rango de fechas devuelve los eventos. Hay que calcular cuántos días hacia atrás consultar para obtener ~50 eventos — depende de la densidad del calendario del usuario.
+
 ---
 
 ### **Épica 5: Optimización de visualización y actualizaciones avanzadas**
@@ -310,9 +338,11 @@ Feature: Actualización manual del widget
 
   Scenario: Usuario actualiza manualmente el widget
     Given que el widget está mostrando eventos
-    When toco el botón de actualizar
-    Then el widget se actualiza respetando las limitaciones de WidgetKit
+    When pulso "Actualizar widgets" en la app companion
+    Then los widgets se actualizan con los datos más recientes
 ```
+
+> **Nota técnica**: La actualización se dispara desde la app companion via `WidgetCenter.shared.reloadAllTimelines()`, no desde un botón en el widget. El sistema impone un **presupuesto diario de ~40-70 reloads**; si se agota, el sistema ignora las solicitudes silenciosamente. Con la estrategia de timeline basada en transiciones de eventos, la necesidad de reloads manuales debería ser mínima.
 
 **Historia 5.3 – Visualización de eventos solapados** *(P1)*
 
@@ -344,6 +374,8 @@ Feature: Eventos solapados
     And al pulsar se abre la app con el detalle
 ```
 
+> **Nota técnica**: La detección de solapamiento es un algoritmo de intervalos (ordenar por start, comparar con end del anterior). La dificultad está en la **visualización en espacio limitado**: en Medium/Large se pueden mostrar eventos apilados con indentación; en Small solo cabe un resumen colapsado. El widget no puede hacer scroll, así que el layout debe decidir estáticamente cuántos eventos mostrar y cuándo colapsar.
+
 **Historia 5.4 – Eventos cancelados y rechazados** *(P1)*
 
 *Depende de: Lectura básica de eventos*
@@ -371,6 +403,8 @@ Feature: Eventos cancelados y rechazados
     When el widget se actualiza
     Then el evento cancelado no debe aparecer en la lista
 ```
+
+> **Nota técnica**: EventKit expone `EKParticipant.participantStatus` (`.declined`, `.accepted`, etc.) y `EKEvent.status` (`.canceled`). Para eventos rechazados, se filtra por `participantStatus == .declined` del participante que corresponde al usuario actual (`EKEventStore.sources`). Esto funciona para calendarios con soporte de invitaciones (Exchange, Google via CalDAV); en calendarios locales sin invitaciones, estos campos no aplican.
 
 ---
 
@@ -448,23 +482,47 @@ Feature: Onboarding
 
 ## **Ítems no representables en Gherkin**
 
-1. **Riesgos técnicos**
-    - Limitaciones de WidgetKit para actualización manual (presupuesto de reloads limitado por el sistema).
-    - Posibles problemas de rendimiento con regex sobre muchos eventos.
-    - Los widgets interactivos (iOS 17+) solo admiten `Button` y `Toggle`; no permiten navegación ni inputs complejos.
-    - EventKit puede devolver eventos de calendarios suscritos (CalDAV, Exchange) con latencia variable.
+1. **Restricciones de plataforma**
+    - **Deployment target**: iOS 17.0+. Requerido para `AppIntentConfiguration`, widgets interactivos y `Swift Regex`.
+    - **Widget extension**: límite de 30 MB de RAM. Afecta la complejidad de regex y la cantidad de eventos procesables en un solo ciclo.
+    - **Presupuesto de reloads**: WidgetKit limita a ~40-70 `reloadAllTimelines()` por día. El timeline basado en transiciones de eventos minimiza la necesidad de reloads explícitos.
+    - **Widgets interactivos (iOS 17+)**: solo admiten `Button` y `Toggle`; no permiten navegación, text input ni gestos complejos.
+    - **Widget Small**: solo admite un `widgetURL` global (no `Link` individuales por evento).
+    - **Extra Large**: solo disponible en iPad.
 2. **Arquitectura y dependencias técnicas**
-    - **App Groups**: obligatorio para compartir datos (configuraciones, caché de eventos) entre la app companion y la widget extension.
-    - **App Intents / WidgetConfigurationIntent**: necesario para exponer las opciones de configuración en el selector de widgets del sistema.
-    - **EventKit + EventKitUI**: lectura de calendarios y eventos.
+    - **App Groups**: obligatorio para compartir datos entre la app companion y la widget extension. Contenedor compartido via `UserDefaults(suiteName:)`.
+    - **AppIntentConfiguration + AppEntity**: el widget expone un picker de configuraciones. El `EntityQuery` lee del App Group y se ejecuta en el proceso del widget.
+    - **EventKit** (`EKEventStore`): lectura de calendarios y eventos. No se usa EventKitUI.
     - **SwiftUI + WidgetKit**: framework de renderizado.
-    - **SwiftData / UserDefaults (suite)**: persistencia de configuraciones y reglas en App Group.
-3. **Camino crítico del MVP**
+    - **UserDefaults (App Group suite)**: persistencia de configuraciones y reglas. Se descarta SwiftData por riesgo de corrupción con acceso concurrente app/widget.
+    - **`calshow:` URL scheme**: navegación a Calendar.app por fecha (no por evento). No documentada oficialmente por Apple pero ampliamente usada y estable.
+    - **Sin dependencias de terceros**: todo el stack es frameworks de Apple.
+3. **Estrategia de timeline**
+    - El `TimelineProvider` genera una entrada por cada transición relevante del día: inicio de evento, fin de evento, y una entrada a medianoche.
+    - Política de reload: `.atEnd` (el sistema recarga al agotar las entradas).
+    - Esto permite que el widget refleje "evento en curso" vs "entre eventos" sin consumir reload budget.
+4. **Modelo de datos compartido**
+    - Una configuración se serializa como `Codable` en `UserDefaults`:
+      ```
+      WidgetConfig {
+        id: UUID
+        name: String
+        calendarIdentifier: String
+        colorSchemeLight: ColorPair  // acento + fondo
+        colorSchemeDark: ColorPair
+        rules: [FilterRule]          // P2
+        showCancelled: Bool
+        workingHours: DateInterval?  // P3
+      }
+      ```
+    - El widget lee el array `[WidgetConfig]` del App Group y filtra por el `id` seleccionado en el `AppIntent`.
+5. **Camino crítico del MVP**
     - Es un documento de planificación, no un comportamiento observable. El orden sugerido es:
       1. P0: Épicas 1 (1.1, 1.2), 2 (2.1, 2.2, 2.3), 3 (3.1, 3.2) y 6 (6.1).
       2. P1: Épicas 5 (5.3, 5.4) y 6 (6.2).
       3. P2: Épica 4.
       4. P3: Historias 3.4, 5.1, 5.2.
-4. **Requisitos de App Store**
+6. **Requisitos de App Store**
     - La app companion debe tener funcionalidad mínima propia (no puede ser solo un lanzador de widget).
-    - Política de privacidad requerida si se acceden datos de calendario.
+    - Política de privacidad requerida (acceso a datos de calendario).
+    - Descripción de uso de calendario requerida en `Info.plist` (`NSCalendarsUsageDescription`).
