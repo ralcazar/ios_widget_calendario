@@ -6,8 +6,8 @@ struct SmallWidgetView: View {
     let entry: CalendarEntry
 
     private var now: Date { entry.date }
-    private var upcomingEvents: [EKEvent] {
-        entry.events.prefix(2).map(\.event)
+    private var clusters: [[EKEvent]] {
+        entry.events.prefix(4).map(\.event).groupedByOverlap()
     }
 
     var body: some View {
@@ -20,27 +20,41 @@ struct SmallWidgetView: View {
                 .font(.title2)
                 .fontWeight(.bold)
             Spacer(minLength: 0)
-            if upcomingEvents.isEmpty {
+            if clusters.isEmpty {
                 Text(String(localized: "Sin eventos"))
                     .font(.caption2)
                     .foregroundColor(.secondary)
                     .accessibilityIdentifier("noEventsSmall")
             } else {
-                ForEach(upcomingEvents, id: \.eventIdentifier) { event in
-                    HStack(spacing: 4) {
-                        if event.isAllDay {
-                            Text(String(localized: "Todo el día"))
+                ForEach(Array(clusters.prefix(2).enumerated()), id: \.offset) { _, cluster in
+                    if cluster.count > 1 {
+                        HStack(spacing: 4) {
+                            Text(cluster[0].startDate, style: .time)
                                 .font(.caption2)
                                 .foregroundColor(.secondary)
-                        } else {
-                            Text(event.startDate, style: .time)
+                            Text("— \(cluster.count) \(String(localized: "eventos"))")
                                 .font(.caption2)
-                                .foregroundColor(.secondary)
+                                .fontWeight(.medium)
+                                .lineLimit(1)
                         }
-                        Text(event.title ?? "")
-                            .font(.caption2)
-                            .fontWeight(.medium)
-                            .lineLimit(1)
+                        .accessibilityIdentifier("collapsed_cluster_\(cluster.count)")
+                    } else {
+                        let event = cluster[0]
+                        HStack(spacing: 4) {
+                            if event.isAllDay {
+                                Text(String(localized: "Todo el día"))
+                                    .font(.caption2)
+                                    .foregroundColor(.secondary)
+                            } else {
+                                Text(event.startDate, style: .time)
+                                    .font(.caption2)
+                                    .foregroundColor(.secondary)
+                            }
+                            Text(event.title ?? "")
+                                .font(.caption2)
+                                .fontWeight(.medium)
+                                .lineLimit(1)
+                        }
                     }
                 }
             }
