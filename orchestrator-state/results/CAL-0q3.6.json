@@ -1,0 +1,18 @@
+{
+  "bead": "CAL-0q3.6",
+  "title": "3.1 Abrir evento en Calendar.app",
+  "status": "passed",
+  "tests": {
+    "new": 4,
+    "total": 38,
+    "result": "PASSED"
+  },
+  "changes": [
+    "Calendario/CalendarioWidget/EventFetcher.swift: added calendarURL(for:) static method using timeIntervalSinceReferenceDate",
+    "Calendario/CalendarioWidget/WidgetViews/EventRowView.swift: wrapped rowContent in Link(destination: calshow: URL)",
+    "Calendario/CalendarioWidget/WidgetViews/SmallWidgetView.swift: added .widgetURL() modifier using first event startDate or entry.date fallback",
+    "CalendarioTests/CAL0q36ScenarioTests.swift: 4 new scenario tests",
+    "Calendario/Calendario.xcodeproj/project.pbxproj: registered new test file"
+  ],
+  "commit": "5d27b92"
+}

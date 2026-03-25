@@ -1,0 +1,20 @@
+{
+  "bead_id": "CAL-0q3.4",
+  "status": "passed",
+  "commit": "c69e222",
+  "tests_passed": 30,
+  "tests_failed": 0,
+  "files_created": [
+    "Calendario/CalendarioWidget/WidgetViews/EventRowView.swift",
+    "Calendario/CalendarioWidget/WidgetViews/SmallWidgetView.swift",
+    "Calendario/CalendarioWidget/WidgetViews/MediumWidgetView.swift",
+    "Calendario/CalendarioWidget/WidgetViews/LargeWidgetView.swift",
+    "Calendario/CalendarioWidget/WidgetViews/ExtraLargeWidgetView.swift",
+    "CalendarioTests/CAL0q34ScenarioTests.swift"
+  ],
+  "files_modified": [
+    "Calendario/CalendarioWidget/CalendarioWidget.swift",
+    "Calendario/Calendario.xcodeproj/project.pbxproj"
+  ],
+  "notes": "EventRowView with color dot, time display (all-day/timed/in-progress bold), and 4 size-aware widget views dispatched via @Environment(\\.widgetFamily). Widget now declares .supportedFamilies([.systemSmall, .systemMedium, .systemLarge, .systemExtraLarge])."
+}

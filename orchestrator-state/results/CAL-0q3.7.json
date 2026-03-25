@@ -1,0 +1,19 @@
+{
+  "bead_id": "CAL-0q3.7",
+  "status": "success",
+  "files_created": ["CalendarioTests/CAL0q37ScenarioTests.swift"],
+  "files_modified": [
+    "Calendario/CalendarioWidget/WidgetViews/ExtraLargeWidgetView.swift",
+    "Calendario/Calendario.xcodeproj/project.pbxproj"
+  ],
+  "tests_added": [
+    "test_CAL0q37_given_noEvents_when_widgetRenders_then_emptyStateTextExists",
+    "test_CAL0q37_given_emptyEventsArray_when_countIsZero_then_emptyStateShown",
+    "test_CAL0q37_given_semanticColors_when_checkingColorNames_then_systemColorsUsed",
+    "test_CAL0q37_given_widgetConfig_when_nameIsEmpty_when_headerStillRenders"
+  ],
+  "tests_passed": 4,
+  "tests_failed": 0,
+  "commit_hash": "9fbaa79",
+  "error": null
+}
