@@ -17,6 +17,7 @@ struct ConfigFormView: View {
     @State private var useSystemColors: Bool = true
     @State private var lightColor: Color = .white
     @State private var darkColor: Color = .black
+    @State private var showCancelled: Bool = false
     @Environment(\.dismiss) private var dismiss
 
     private var isEditing: Bool {
@@ -58,6 +59,10 @@ struct ConfigFormView: View {
                         Text(String(localized: "Vista previa de reglas →"))
                     }
                     .accessibilityIdentifier("rulesPreviewLink")
+                }
+                Section(String(localized: "Eventos")) {
+                    Toggle(String(localized: "Mostrar cancelados"), isOn: $showCancelled)
+                        .accessibilityIdentifier("showCancelledToggle")
                 }
                 Section(String(localized: "Apariencia")) {
                     Toggle(String(localized: "Usar colores del sistema"), isOn: $useSystemColors)
@@ -127,6 +132,7 @@ struct ConfigFormView: View {
             name = config.name
             selectedCalendarId = config.calendarIdentifier
             rules = config.rules
+            showCancelled = config.showCancelled
             let isSystem = config.colorSchemeLight == .system && config.colorSchemeDark == .system
             useSystemColors = isSystem
             if !isSystem {
@@ -158,7 +164,7 @@ struct ConfigFormView: View {
                 colorSchemeLight: newColorSchemeLight,
                 colorSchemeDark: newColorSchemeDark,
                 rules: rules,
-                showCancelled: existing.showCancelled,
+                showCancelled: showCancelled,
                 workStartOffset: existing.workStartOffset,
                 workEndOffset: existing.workEndOffset
             )
@@ -174,7 +180,7 @@ struct ConfigFormView: View {
                 colorSchemeLight: newColorSchemeLight,
                 colorSchemeDark: newColorSchemeDark,
                 rules: rules,
-                showCancelled: newConfig.showCancelled,
+                showCancelled: showCancelled,
                 workStartOffset: newConfig.workStartOffset,
                 workEndOffset: newConfig.workEndOffset
             )

@@ -19,6 +19,9 @@ enum EventFetcher {
                 let selfAttendee = attendees.first { $0.isCurrentUser }
                 return selfAttendee?.participantStatus != .declined
             }
+            .filter { event in
+                config.showCancelled || event.status != .canceled
+            }
             .sorted { $0.startDate < $1.startDate }
     }
 

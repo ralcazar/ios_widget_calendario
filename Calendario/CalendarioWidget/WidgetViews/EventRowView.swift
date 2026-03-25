@@ -9,6 +9,7 @@ struct EventRowView: View {
 
     private var isAllDay: Bool { event.isAllDay }
     private var isInProgress: Bool { event.startDate <= now && now < event.endDate }
+    private var isCancelled: Bool { event.status == .canceled }
 
     private var timeText: String {
         if isAllDay { return String(localized: "Todo el día") }
@@ -56,9 +57,11 @@ struct EventRowView: View {
                     .font(.subheadline)
                     .fontWeight(.medium)
                     .lineLimit(1)
+                    .strikethrough(isCancelled)
             }
         }
         .frame(height: 32, alignment: .leading)
+        .opacity(isCancelled ? 0.5 : 1.0)
         .accessibilityIdentifier("eventRow_\(event.eventIdentifier ?? "")")
     }
 }
