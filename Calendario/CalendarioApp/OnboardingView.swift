@@ -47,6 +47,7 @@ struct OnboardingStep1View: View {
                     .font(.body)
                     .foregroundStyle(.secondary)
                     .multilineTextAlignment(.center)
+                    .fixedSize(horizontal: false, vertical: true)
                     .padding(.horizontal)
             }
 
@@ -124,6 +125,7 @@ struct OnboardingStep2View: View {
                         .font(.body)
                         .foregroundStyle(.secondary)
                         .multilineTextAlignment(.center)
+                        .fixedSize(horizontal: false, vertical: true)
                         .padding(.horizontal)
                 }
 
