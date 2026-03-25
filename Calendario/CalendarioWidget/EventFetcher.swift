@@ -28,13 +28,13 @@ enum EventFetcher {
         return URL(string: "calshow:\(timestamp)")
     }
 
-    static func buildTimelineEntries(events: [EKEvent], configuration: ConfigurationAppIntent, config: WidgetConfig) -> [CalendarEntry] {
+    static func buildTimelineEntries(events: [(event: EKEvent, matchedColor: String?)], configuration: ConfigurationAppIntent, config: WidgetConfig) -> [CalendarEntry] {
         let now = Date()
         var transitionDates: [Date] = [now]
 
-        for event in events {
-            if event.startDate > now { transitionDates.append(event.startDate) }
-            if event.endDate > now { transitionDates.append(event.endDate) }
+        for annotated in events {
+            if annotated.event.startDate > now { transitionDates.append(annotated.event.startDate) }
+            if annotated.event.endDate > now { transitionDates.append(annotated.event.endDate) }
         }
 
         let calendar = Calendar.current

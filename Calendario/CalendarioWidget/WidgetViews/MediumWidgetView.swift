@@ -6,7 +6,7 @@ struct MediumWidgetView: View {
     let entry: CalendarEntry
 
     private var now: Date { entry.date }
-    private var visibleEvents: [EKEvent] { Array(entry.events.prefix(4)) }
+    private var visibleEvents: [EKEvent] { entry.events.prefix(4).map(\.event) }
 
     var body: some View {
         VStack(alignment: .leading, spacing: 4) {

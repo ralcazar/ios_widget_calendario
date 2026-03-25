@@ -48,6 +48,10 @@
 		A1B2C3D4E5F6070809AABB06 /* CAL0q34ScenarioTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1C2D3E4F5A607080910AAC0 /* CAL0q34ScenarioTests.swift */; };
 		BE1B2C3D4E5F6A7B8C9D0E1F /* CAL0q37ScenarioTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF1B2C3D4E5F6A7B8C9D0E1F /* CAL0q37ScenarioTests.swift */; };
 		EF1B2C3D4E5F6A7B8C9D0E1F /* CAL0q36ScenarioTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF1B2C3D4E5F6A7B8C9D0E1F /* CAL0q36ScenarioTests.swift */; };
+		A2B3C4D5E6F7A8B9C0D1E2F3 /* RuleEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3C4D5E6F7A8B9C0D1E2F3A4 /* RuleEngine.swift */; };
+		C2D3E4F5A6B7C8D9E0F1A2B3 /* RuleEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3C4D5E6F7A8B9C0D1E2F3A4 /* RuleEngine.swift */; };
+		D2E3F4A5B6C7D8E9F0A1B2C3 /* RuleEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3C4D5E6F7A8B9C0D1E2F3A4 /* RuleEngine.swift */; };
+		E2F3A4B5C6D7E8F9A0B1C2D3 /* CALevk1ScenarioTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3A4B5C6D7E8F9A0B1C2D3E4 /* CALevk1ScenarioTests.swift */; };
 	/* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -94,6 +98,7 @@
 		810B3796140E31165F4C22A3 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8FCC5C9656F6DA0D3F495E27 /* CalendarioWidgetBundle.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = CalendarioWidgetBundle.swift; sourceTree = "<group>"; };
 		A3FD4EEAC6107E77BFB874AC /* SharedConstants.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SharedConstants.swift; path = ../Shared/SharedConstants.swift; sourceTree = "<group>"; };
+		B3C4D5E6F7A8B9C0D1E2F3A4 /* RuleEngine.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = RuleEngine.swift; path = ../Shared/RuleEngine.swift; sourceTree = "<group>"; };
 		A833F7ED49112F4C0D14B7CE /* CalendarioWidget.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = CalendarioWidget.swift; sourceTree = "<group>"; };
 		D30B1406E1503531D5CEE812 /* CalendarioWidget.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = CalendarioWidget.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		EA98274D0106940E806C5673 /* Calendario.entitlements */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.entitlements; path = Calendario.entitlements; sourceTree = "<group>"; };
@@ -121,6 +126,7 @@
 		B1C2D3E4F5A607080910AAC0 /* CAL0q34ScenarioTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = CAL0q34ScenarioTests.swift; sourceTree = "<group>"; };
 		CF1B2C3D4E5F6A7B8C9D0E1F /* CAL0q37ScenarioTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = CAL0q37ScenarioTests.swift; sourceTree = "<group>"; };
 		DF1B2C3D4E5F6A7B8C9D0E1F /* CAL0q36ScenarioTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = CAL0q36ScenarioTests.swift; sourceTree = "<group>"; };
+		F3A4B5C6D7E8F9A0B1C2D3E4 /* CALevk1ScenarioTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = CALevk1ScenarioTests.swift; sourceTree = "<group>"; };
 	/* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -185,6 +191,7 @@
 				B1C2D3E4F5A607080910AAC0 /* CAL0q34ScenarioTests.swift */,
 				CF1B2C3D4E5F6A7B8C9D0E1F /* CAL0q37ScenarioTests.swift */,
 			DF1B2C3D4E5F6A7B8C9D0E1F /* CAL0q36ScenarioTests.swift */,
+			F3A4B5C6D7E8F9A0B1C2D3E4 /* CALevk1ScenarioTests.swift */,
 			);
 			name = CalendarioTests;
 			path = ../CalendarioTests;
@@ -196,6 +203,7 @@
 				A3FD4EEAC6107E77BFB874AC /* SharedConstants.swift */,
 				7E91D61BE49A4FBE95D4B1D1 /* Models.swift */,
 				9B771D8BD9BD4F5C8D94D565 /* WidgetConfigStore.swift */,
+				B3C4D5E6F7A8B9C0D1E2F3A4 /* RuleEngine.swift */,
 			);
 			name = Shared;
 			path = Shared;
@@ -446,6 +454,7 @@
 				A1B2C3D4E5F6A7B8C9D0E1F2 /* ConfigListView.swift in Sources */,
 				C3D4E5F6A7B8C9D0E1F2A3B4 /* ConfigFormView.swift in Sources */,
 				BC1B2C3D4E5F6A7B8C9D0E1F /* CalendarPermissionManager.swift in Sources */,
+			A2B3C4D5E6F7A8B9C0D1E2F3 /* RuleEngine.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -466,6 +475,8 @@
 				FD1B2C3D4E5F6A7B8C9D0E1F /* CAL0q33ScenarioTests.swift in Sources */,
 				A1B2C3D4E5F6070809AABB06 /* CAL0q34ScenarioTests.swift in Sources */,
 				EF1B2C3D4E5F6A7B8C9D0E1F /* CAL0q36ScenarioTests.swift in Sources */,
+				D2E3F4A5B6C7D8E9F0A1B2C3 /* RuleEngine.swift in Sources */,
+				E2F3A4B5C6D7E8F9A0B1C2D3 /* CALevk1ScenarioTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -487,6 +498,7 @@
 				A1B2C3D4E5F6070809AABB03 /* MediumWidgetView.swift in Sources */,
 				A1B2C3D4E5F6070809AABB04 /* LargeWidgetView.swift in Sources */,
 				A1B2C3D4E5F6070809AABB05 /* ExtraLargeWidgetView.swift in Sources */,
+				C2D3E4F5A6B7C8D9E0F1A2B3 /* RuleEngine.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

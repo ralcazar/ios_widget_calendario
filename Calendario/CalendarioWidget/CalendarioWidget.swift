@@ -9,14 +9,16 @@ struct Provider: AppIntentTimelineProvider {
 
     func snapshot(for configuration: ConfigurationAppIntent, in context: Context) async -> CalendarEntry {
         let widgetConfig = resolveConfig(from: configuration)
-        let events = EventFetcher.fetchEvents(for: widgetConfig)
-        return CalendarEntry(date: Date(), events: events, configuration: configuration, widgetConfig: widgetConfig)
+        let rawEvents = EventFetcher.fetchEvents(for: widgetConfig)
+        let annotatedEvents = RuleEngine.apply(rules: widgetConfig.rules, to: rawEvents)
+        return CalendarEntry(date: Date(), events: annotatedEvents, configuration: configuration, widgetConfig: widgetConfig)
     }
 
     func timeline(for configuration: ConfigurationAppIntent, in context: Context) async -> Timeline<CalendarEntry> {
         let widgetConfig = resolveConfig(from: configuration)
-        let events = EventFetcher.fetchEvents(for: widgetConfig)
-        let entries = EventFetcher.buildTimelineEntries(events: events, configuration: configuration, config: widgetConfig)
+        let rawEvents = EventFetcher.fetchEvents(for: widgetConfig)
+        let annotatedEvents = RuleEngine.apply(rules: widgetConfig.rules, to: rawEvents)
+        let entries = EventFetcher.buildTimelineEntries(events: annotatedEvents, configuration: configuration, config: widgetConfig)
         return Timeline(entries: entries, policy: .atEnd)
     }
 

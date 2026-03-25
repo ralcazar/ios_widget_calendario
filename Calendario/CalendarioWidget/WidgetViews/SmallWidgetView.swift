@@ -7,7 +7,7 @@ struct SmallWidgetView: View {
 
     private var now: Date { entry.date }
     private var upcomingEvents: [EKEvent] {
-        Array(entry.events.prefix(2))
+        entry.events.prefix(2).map(\.event)
     }
 
     var body: some View {
@@ -47,6 +47,6 @@ struct SmallWidgetView: View {
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .leading)
         .accessibilityIdentifier("smallWidgetView")
-        .widgetURL(EventFetcher.calendarURL(for: entry.events.first?.startDate ?? entry.date))
+        .widgetURL(EventFetcher.calendarURL(for: entry.events.first?.event.startDate ?? entry.date))
     }
 }

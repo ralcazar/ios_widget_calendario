@@ -7,7 +7,7 @@ struct ExtraLargeWidgetView: View {
     private let maxVisible = 12
 
     private var now: Date { entry.date }
-    private var visibleEvents: [EKEvent] { Array(entry.events.prefix(maxVisible)) }
+    private var visibleEvents: [EKEvent] { entry.events.prefix(maxVisible).map(\.event) }
     private var extraCount: Int { max(0, entry.events.count - maxVisible) }
 
     var body: some View {
