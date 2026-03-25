@@ -1,11 +1,11 @@
 {
-  "status": "idle",
-  "current_bead": null,
-  "current_stage": null,
-  "completed": ["CAL-sue.1", "CAL-sue.3", "CAL-sue.4", "CAL-0q3.1", "CAL-0q3.5", "CAL-0q3.2", "CAL-0q3.3", "CAL-0q3.4"],
+  "status": "busy",
+  "current_bead": "CAL-0q3.6",
+  "current_stage": "verification",
+  "completed": ["CAL-sue.1", "CAL-sue.3", "CAL-sue.4", "CAL-0q3.1", "CAL-0q3.5", "CAL-0q3.2", "CAL-0q3.3", "CAL-0q3.4", "CAL-0q3.7"],
   "failed": [],
-  "last_update": "2026-03-25T00:51:00",
-  "last_ui_test_run": null,
-  "last_ui_test_result": null,
-  "last_ui_test_summary": null
+  "last_update": "2026-03-25T00:00:00",
+  "last_ui_test_run": "2026-03-25T06:09:05",
+  "last_ui_test_result": "passed",
+  "last_ui_test_summary": "10 passed, 0 failed"
 }
