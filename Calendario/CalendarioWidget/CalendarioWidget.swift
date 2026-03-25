@@ -34,6 +34,16 @@ struct Provider: AppIntentTimelineProvider {
 struct CalendarioWidgetEntryView: View {
     var entry: Provider.Entry
     @Environment(\.widgetFamily) var widgetFamily
+    @Environment(\.colorScheme) var colorScheme
+
+    var backgroundColor: Color {
+        let pair = colorScheme == .dark
+            ? entry.widgetConfig.colorSchemeDark
+            : entry.widgetConfig.colorSchemeLight
+        guard !pair.lightHex.isEmpty else { return Color(.systemBackground) }
+        let hex = colorScheme == .dark ? pair.darkHex : pair.lightHex
+        return Color(hex: hex.isEmpty ? pair.lightHex : hex) ?? Color(.systemBackground)
+    }
 
     var body: some View {
         Group {
@@ -50,7 +60,7 @@ struct CalendarioWidgetEntryView: View {
                 }
             }
         }
-        .containerBackground(.fill.tertiary, for: .widget)
+        .containerBackground(backgroundColor, for: .widget)
         .accessibilityIdentifier("widgetEntryView")
     }
 

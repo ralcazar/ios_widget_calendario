@@ -58,6 +58,7 @@
 		E7F8A9B0C1D2E3F4A5B6C7D8 /* CALevk2ScenarioTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7A8B9C0D1E2F3A4B5C6D7E8 /* CALevk2ScenarioTests.swift */; };
 		BA2B3C4D5E6F7A8B9C0D1FA2 /* RulesPreviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA2B3C4D5E6F7A8B9C0D1FA2 /* RulesPreviewView.swift */; };
 		E8B9C0D1E2F3A4B5C6D7E8F9 /* CALevk3ScenarioTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8B9C0D1E2F3A4B5C6D7E8F9 /* CALevk3ScenarioTests.swift */; };
+		E9CAu911D2E3F4A5B6C7D8E9 /* CALu911ScenarioTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9CAu911D2E3F4A5B6C7D8E9 /* CALu911ScenarioTests.swift */; };
 		B4C5D6E7F8A9B0C1D2E3F4A5 /* Color+Hex.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3B4C5D6E7F8A9B0C1D2E3F4 /* Color+Hex.swift */; };
 		C5D6E7F8A9B0C1D2E3F4A5B6 /* Color+Hex.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3B4C5D6E7F8A9B0C1D2E3F4 /* Color+Hex.swift */; };
 		D6E7F8A9B0C1D2E3F4A5B6C7 /* Color+Hex.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3B4C5D6E7F8A9B0C1D2E3F4 /* Color+Hex.swift */; };
@@ -142,6 +143,7 @@
 		F7A8B9C0D1E2F3A4B5C6D7E8 /* CALevk2ScenarioTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = CALevk2ScenarioTests.swift; sourceTree = "<group>"; };
 		FA2B3C4D5E6F7A8B9C0D1FA2 /* RulesPreviewView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = RulesPreviewView.swift; sourceTree = "<group>"; };
 		F8B9C0D1E2F3A4B5C6D7E8F9 /* CALevk3ScenarioTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = CALevk3ScenarioTests.swift; sourceTree = "<group>"; };
+		F9CAu911D2E3F4A5B6C7D8E9 /* CALu911ScenarioTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = CALu911ScenarioTests.swift; sourceTree = "<group>"; };
 		A3B4C5D6E7F8A9B0C1D2E3F4 /* Color+Hex.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "Color+Hex.swift"; path = "../Shared/Color+Hex.swift"; sourceTree = "<group>"; };
 	/* End PBXFileReference section */
 
@@ -211,6 +213,7 @@
 		FA1B2C3D4E5F6A7B8C9D0E1F /* CALbktScenarioTests.swift */,
 		F7A8B9C0D1E2F3A4B5C6D7E8 /* CALevk2ScenarioTests.swift */,
 		F8B9C0D1E2F3A4B5C6D7E8F9 /* CALevk3ScenarioTests.swift */,
+			F9CAu911D2E3F4A5B6C7D8E9 /* CALu911ScenarioTests.swift */,
 			);
 			name = CalendarioTests;
 			path = ../CalendarioTests;
@@ -507,6 +510,7 @@
 			AB1B2C3D4E5F6A7B8C9D0E1F /* CALbktScenarioTests.swift in Sources */,
 					E7F8A9B0C1D2E3F4A5B6C7D8 /* CALevk2ScenarioTests.swift in Sources */,
 				E8B9C0D1E2F3A4B5C6D7E8F9 /* CALevk3ScenarioTests.swift in Sources */,
+				E9CAu911D2E3F4A5B6C7D8E9 /* CALu911ScenarioTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

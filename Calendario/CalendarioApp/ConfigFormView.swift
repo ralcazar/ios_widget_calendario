@@ -14,6 +14,9 @@ struct ConfigFormView: View {
     @State private var selectedCalendarId: String = ""
     @State private var calendars: [EKCalendar] = []
     @State private var rules: [FilterRule] = []
+    @State private var useSystemColors: Bool = true
+    @State private var lightColor: Color = .white
+    @State private var darkColor: Color = .black
     @Environment(\.dismiss) private var dismiss
 
     private var isEditing: Bool {
@@ -55,6 +58,16 @@ struct ConfigFormView: View {
                         Text(String(localized: "Vista previa de reglas →"))
                     }
                     .accessibilityIdentifier("rulesPreviewLink")
+                }
+                Section(String(localized: "Apariencia")) {
+                    Toggle(String(localized: "Usar colores del sistema"), isOn: $useSystemColors)
+                        .accessibilityIdentifier("useSystemColorsToggle")
+                    if !useSystemColors {
+                        ColorPicker(String(localized: "Fondo claro"), selection: $lightColor)
+                            .accessibilityIdentifier("lightColorPicker")
+                        ColorPicker(String(localized: "Fondo oscuro"), selection: $darkColor)
+                            .accessibilityIdentifier("darkColorPicker")
+                    }
                 }
                 Section("Calendario") {
                     if calendars.isEmpty {
@@ -114,40 +127,57 @@ struct ConfigFormView: View {
             name = config.name
             selectedCalendarId = config.calendarIdentifier
             rules = config.rules
+            let isSystem = config.colorSchemeLight == .system && config.colorSchemeDark == .system
+            useSystemColors = isSystem
+            if !isSystem {
+                lightColor = Color(hex: config.colorSchemeLight.lightHex) ?? .white
+                darkColor = Color(hex: config.colorSchemeDark.darkHex) ?? .black
+            }
         }
     }
 
     private func save() {
+        let newColorSchemeLight: ColorPair
+        let newColorSchemeDark: ColorPair
+        if useSystemColors {
+            newColorSchemeLight = .system
+            newColorSchemeDark = .system
+        } else {
+            let lHex = lightColor.hexString
+            let dHex = darkColor.hexString
+            newColorSchemeLight = ColorPair(lightHex: lHex, darkHex: lHex)
+            newColorSchemeDark = ColorPair(lightHex: dHex, darkHex: dHex)
+        }
+
         let config: WidgetConfig
         if let existing = existingConfig {
             config = WidgetConfig(
                 id: existing.id,
                 name: name.trimmingCharacters(in: .whitespaces),
                 calendarIdentifier: selectedCalendarId,
-                colorSchemeLight: existing.colorSchemeLight,
-                colorSchemeDark: existing.colorSchemeDark,
+                colorSchemeLight: newColorSchemeLight,
+                colorSchemeDark: newColorSchemeDark,
                 rules: rules,
                 showCancelled: existing.showCancelled,
                 workStartOffset: existing.workStartOffset,
                 workEndOffset: existing.workEndOffset
             )
         } else {
-            var newConfig = WidgetConfig.new(
+            let newConfig = WidgetConfig.new(
                 name: name.trimmingCharacters(in: .whitespaces),
                 calendarIdentifier: selectedCalendarId
             )
-            newConfig = WidgetConfig(
+            config = WidgetConfig(
                 id: newConfig.id,
                 name: newConfig.name,
                 calendarIdentifier: newConfig.calendarIdentifier,
-                colorSchemeLight: newConfig.colorSchemeLight,
-                colorSchemeDark: newConfig.colorSchemeDark,
+                colorSchemeLight: newColorSchemeLight,
+                colorSchemeDark: newColorSchemeDark,
                 rules: rules,
                 showCancelled: newConfig.showCancelled,
                 workStartOffset: newConfig.workStartOffset,
                 workEndOffset: newConfig.workEndOffset
             )
-            config = newConfig
         }
         onSave(config)
     }
