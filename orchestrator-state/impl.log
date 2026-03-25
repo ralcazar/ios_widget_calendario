@@ -1,8 +1,1 @@
-**CAL-evk.1 complete.** Summary:
 
-- **Created** `Shared/RuleEngine.swift` — filters/annotates events by active rules with priority ordering, safe regex handling (invalid patterns + >100 char patterns don't crash)
-- **Updated** `CalendarEntry.events` from `[EKEvent]` to `[(event: EKEvent, matchedColor: String?)]`
-- **Integrated** `RuleEngine.apply` in both `snapshot` and `timeline` in the Provider
-- **Updated** `EventFetcher.buildTimelineEntries` and all 4 widget views to handle the annotated tuple type
-- **Tests**: 9 new tests, 47 total — all passing, 0 regressions
-- **Commit**: `8f40d06`

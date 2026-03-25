@@ -1,0 +1,22 @@
+{
+  "bead_id": "CAL-u91.4",
+  "status": "success",
+  "files_created": [
+    "Calendario/CalendarioApp/OnboardingView.swift",
+    "CalendarioTests/CALu914ScenarioTests.swift"
+  ],
+  "files_modified": [
+    "Calendario/CalendarioApp/ContentView.swift",
+    "Calendario/Calendario.xcodeproj/project.pbxproj"
+  ],
+  "tests_added": [
+    "test_CALu914_given_onboardingCompletedNotSet_when_checkingFlag_then_defaultsToFalse",
+    "test_CALu914_given_onboardingCompletedIsTrue_when_checkingFlag_then_onboardingDoesNotShow",
+    "test_CALu914_given_onboardingCompleted_when_settingTrueInUserDefaults_then_persistsCorrectly",
+    "test_CALu914_given_onboardingCompletedTrue_when_removingObject_then_defaultsToFalseAgain"
+  ],
+  "tests_passed": 4,
+  "tests_failed": 0,
+  "commit_hash": "65f0a07",
+  "error": null
+}

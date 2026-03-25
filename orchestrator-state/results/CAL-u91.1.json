@@ -1,0 +1,30 @@
+{
+  "bead_id": "CAL-u91.1",
+  "status": "success",
+  "files_created": [
+    "CalendarioTests/CALu911ScenarioTests.swift"
+  ],
+  "files_modified": [
+    "Calendario/Shared/Color+Hex.swift",
+    "Calendario/CalendarioApp/ConfigFormView.swift",
+    "Calendario/CalendarioWidget/CalendarioWidget.swift",
+    "Calendario/Calendario.xcodeproj/project.pbxproj"
+  ],
+  "tests_added": [
+    "test_CALu911_given_systemColorPair_when_inspectingHex_then_bothHexAreEmpty",
+    "test_CALu911_given_systemColorPair_when_checkingEmpty_then_signalsSystemBackground",
+    "test_CALu911_given_customColorPair_when_lightMode_then_lightHexUsed",
+    "test_CALu911_given_customColorPair_when_darkMode_then_darkHexUsed",
+    "test_CALu911_given_hexColor_when_convertingToHexString_then_roundTrips",
+    "test_CALu911_given_whiteColor_when_convertingToHexString_then_returnsWhiteHex",
+    "test_CALu911_given_blackColor_when_convertingToHexString_then_returnsBlackHex",
+    "test_CALu911_given_emptyString_when_initializingColorWithHex_then_returnsNil",
+    "test_CALu911_given_invalidHex_when_initializingColor_then_returnsNil",
+    "test_CALu911_given_validHexWithHash_when_initializingColor_then_succeeds",
+    "test_CALu911_given_validHexWithoutHash_when_initializingColor_then_succeeds"
+  ],
+  "tests_passed": 11,
+  "tests_failed": 0,
+  "commit_hash": "388df1c",
+  "error": null
+}

@@ -1,0 +1,30 @@
+{
+  "bead_id": "CAL-u91.2",
+  "status": "success",
+  "files_created": [
+    "CalendarioTests/CALu912ScenarioTests.swift"
+  ],
+  "files_modified": [
+    "Calendario/CalendarioWidget/EventFetcher.swift",
+    "Calendario/CalendarioWidget/WidgetViews/EventRowView.swift",
+    "Calendario/CalendarioApp/ConfigFormView.swift"
+  ],
+  "tests_added": [
+    "test_CALu912_given_newWidgetConfig_when_checkingShowCancelled_then_defaultIsFalse",
+    "test_CALu912_given_showCancelledFalse_when_eventIsCanceled_then_filterRemovesIt",
+    "test_CALu912_given_showCancelledFalse_when_eventIsConfirmed_then_filterKeepsIt",
+    "test_CALu912_given_showCancelledFalse_when_eventIsNone_then_filterKeepsIt",
+    "test_CALu912_given_showCancelledTrue_when_eventIsCanceled_then_filterKeepsIt",
+    "test_CALu912_given_showCancelledTrue_when_eventIsConfirmed_then_filterKeepsIt",
+    "test_CALu912_given_canceledStatus_when_checkingIsCancelled_then_returnsTrue",
+    "test_CALu912_given_confirmedStatus_when_checkingIsCancelled_then_returnsFalse",
+    "test_CALu912_given_tentativeStatus_when_checkingIsCancelled_then_returnsFalse",
+    "test_CALu912_given_widgetConfig_when_settingShowCancelledTrue_then_valueIsTrue",
+    "test_CALu912_given_widgetConfig_when_encodingAndDecoding_then_showCancelledPersists",
+    "test_CALu912_given_widgetConfigDefaultFalse_when_encodingAndDecoding_then_showCancelledRemainsFalse"
+  ],
+  "tests_passed": 11,
+  "tests_failed": 0,
+  "commit_hash": "4996004579a67fc8ee6983a927400a294d8949f0",
+  "error": null
+}

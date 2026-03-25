@@ -1,0 +1,28 @@
+{
+  "bead_id": "CAL-bkt",
+  "status": "success",
+  "files_created": [
+    "Calendario/CalendarioApp/RulesListView.swift",
+    "Calendario/CalendarioApp/RuleEditView.swift",
+    "CalendarioTests/CALbktScenarioTests.swift"
+  ],
+  "files_modified": [
+    "Calendario/CalendarioApp/ConfigFormView.swift",
+    "Calendario/Calendario.xcodeproj/project.pbxproj"
+  ],
+  "tests_added": [
+    "test_CALbkt_given_emptyConfig_when_addRule_then_rulesArrayContainsRule",
+    "test_CALbkt_given_configWithRule_when_addSecondRule_then_rulesArrayHasTwoRules",
+    "test_CALbkt_given_invalidRegexPattern_when_validatePattern_then_errorDetected",
+    "test_CALbkt_given_validRegexPattern_when_validatePattern_then_noError",
+    "test_CALbkt_given_simpleTextPattern_when_validatePattern_then_noError",
+    "test_CALbkt_given_configWithOneRule_when_deleteRule_then_rulesArrayIsEmpty",
+    "test_CALbkt_given_configWithTwoRules_when_deleteFirstRule_then_secondRuleRemains",
+    "test_CALbkt_given_twoRules_when_reorder_then_prioritiesAreUpdated",
+    "test_CALbkt_given_threeRules_when_moveLastToFirst_then_prioritiesAreConsecutive"
+  ],
+  "tests_passed": 9,
+  "tests_failed": 0,
+  "commit_hash": "2806c6dcee4a7bc7f0ec8443c16df42abf376816",
+  "error": null
+}

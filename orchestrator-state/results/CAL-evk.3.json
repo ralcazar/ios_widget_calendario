@@ -1,0 +1,25 @@
+{
+  "bead_id": "CAL-evk.3",
+  "status": "success",
+  "files_created": [
+    "Calendario/CalendarioApp/RulesPreviewView.swift",
+    "CalendarioTests/CALevk3ScenarioTests.swift"
+  ],
+  "files_modified": [
+    "Calendario/CalendarioApp/ConfigFormView.swift",
+    "Calendario/Calendario.xcodeproj/project.pbxproj"
+  ],
+  "tests_added": [
+    "test_CALevk3_given_noEnabledRules_when_applyRuleEngine_then_allEventsPassThroughWithNilColor",
+    "test_CALevk3_given_emptyRules_when_applyRuleEngine_then_allEventsPassThroughWithNilColor",
+    "test_CALevk3_given_activeRule_when_applyRuleEngine_then_matchingEventsHaveColor",
+    "test_CALevk3_given_multipleActiveRules_when_applyRuleEngine_then_eventsColoredByMatchingRule",
+    "test_CALevk3_given_events_when_sortedByStartDate_then_chronologicalOrder",
+    "test_CALevk3_given_moreThan50Events_when_limitedTo50_then_only50Returned",
+    "test_CALevk3_given_twoRulesMatchingSameEvent_when_applyRuleEngine_then_highestPriorityColorUsed"
+  ],
+  "tests_passed": 7,
+  "tests_failed": 0,
+  "commit_hash": "4b484ad",
+  "error": null
+}

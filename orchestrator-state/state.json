@@ -1,6 +1,6 @@
 {
   "status": "busy",
-  "current_bead": "CAL-evk.1",
+  "current_bead": "CAL-u91.4",
   "current_stage": "verification",
   "completed": [
     "CAL-sue.1",
@@ -11,7 +11,14 @@
     "CAL-0q3.2",
     "CAL-0q3.3",
     "CAL-0q3.4",
-    "CAL-0q3.7"
+    "CAL-0q3.7",
+    "CAL-evk.1",
+    "CAL-bkt",
+    "CAL-evk.2",
+    "CAL-evk.3",
+    "CAL-u91.1",
+    "CAL-u91.2",
+    "CAL-u91.3"
   ],
   "failed": [],
   "last_update": "2026-03-25T00:00:00",

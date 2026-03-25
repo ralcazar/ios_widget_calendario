@@ -1,0 +1,17 @@
+{
+  "bead_id": "CAL-evk.3",
+  "decision": "approve",
+  "scenario_compliance": {
+    "given_covered": true,
+    "when_implemented": true,
+    "then_tested": true,
+    "and_tested": true
+  },
+  "tests_passed": 7,
+  "tests_failed": 0,
+  "quality_issues": [
+    "Force unwraps on calendar.date(byAdding:) in RulesPreviewView.swift lines 72-73 — near-zero runtime risk but violates no-force-unwrap rule"
+  ],
+  "pushed": true,
+  "rejection_reasons": []
+}

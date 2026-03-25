@@ -1,0 +1,28 @@
+{
+  "bead_id": "CAL-u91.3",
+  "status": "success",
+  "files_created": [
+    "Calendario/Shared/Array+OverlapGrouping.swift",
+    "CalendarioTests/CALu913ScenarioTests.swift"
+  ],
+  "files_modified": [
+    "Calendario/CalendarioWidget/WidgetViews/SmallWidgetView.swift",
+    "Calendario/CalendarioWidget/WidgetViews/MediumWidgetView.swift",
+    "Calendario/CalendarioWidget/WidgetViews/LargeWidgetView.swift",
+    "Calendario/CalendarioWidget/WidgetViews/ExtraLargeWidgetView.swift",
+    "Calendario/Calendario.xcodeproj/project.pbxproj"
+  ],
+  "tests_added": [
+    "test_CALu913_given_twoOverlappingEvents_when_groupedByOverlap_then_oneClusterOfTwo",
+    "test_CALu913_given_twoNonOverlappingEvents_when_groupedByOverlap_then_twoClustersOfOne",
+    "test_CALu913_given_threeEventsWhere1And2And2And3Overlap_when_groupedByOverlap_then_oneClusterOfThree",
+    "test_CALu913_given_emptyArray_when_groupedByOverlap_then_emptyClusters",
+    "test_CALu913_given_singleEvent_when_groupedByOverlap_then_oneClusterOfOne",
+    "test_CALu913_given_threeEventsWithFirstTwoOverlapping_when_groupedByOverlap_then_twoCluster",
+    "test_CALu913_given_eventWithNilEndDate_when_groupedByOverlap_then_treatedAsZeroDuration"
+  ],
+  "tests_passed": 7,
+  "tests_failed": 0,
+  "commit_hash": "d602c20395ea807756b0bdd7199dbf0cb98360a9",
+  "error": null
+}
