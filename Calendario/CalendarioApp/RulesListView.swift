@@ -133,16 +133,3 @@ private struct RuleRowView: View {
         }
     }
 }
-
-extension Color {
-    init?(hex: String) {
-        var hexString = hex.trimmingCharacters(in: .whitespacesAndNewlines)
-        hexString = hexString.hasPrefix("#") ? String(hexString.dropFirst()) : hexString
-        guard hexString.count == 6,
-              let hexValue = UInt64(hexString, radix: 16) else { return nil }
-        let r = Double((hexValue >> 16) & 0xFF) / 255
-        let g = Double((hexValue >> 8) & 0xFF) / 255
-        let b = Double(hexValue & 0xFF) / 255
-        self.init(red: r, green: g, blue: b)
-    }
-}

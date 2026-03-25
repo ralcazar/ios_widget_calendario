@@ -6,7 +6,7 @@ struct MediumWidgetView: View {
     let entry: CalendarEntry
 
     private var now: Date { entry.date }
-    private var visibleEvents: [EKEvent] { entry.events.prefix(4).map(\.event) }
+    private var visibleEvents: [(event: EKEvent, matchedColor: String?)] { Array(entry.events.prefix(4)) }
 
     var body: some View {
         VStack(alignment: .leading, spacing: 4) {
@@ -31,8 +31,8 @@ struct MediumWidgetView: View {
                     .foregroundColor(.secondary)
                     .accessibilityIdentifier("noEventsMedium")
             } else {
-                ForEach(visibleEvents, id: \.eventIdentifier) { event in
-                    EventRowView(event: event, now: now, showColorDot: true)
+                ForEach(visibleEvents, id: \.event.eventIdentifier) { item in
+                    EventRowView(event: item.event, now: now, showColorDot: true, matchedColor: item.matchedColor)
                 }
             }
             Spacer(minLength: 0)

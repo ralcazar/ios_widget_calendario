@@ -7,7 +7,7 @@ struct LargeWidgetView: View {
     private let maxVisible = 8
 
     private var now: Date { entry.date }
-    private var visibleEvents: [EKEvent] { entry.events.prefix(maxVisible).map(\.event) }
+    private var visibleEvents: [(event: EKEvent, matchedColor: String?)] { Array(entry.events.prefix(maxVisible)) }
     private var extraCount: Int { max(0, entry.events.count - maxVisible) }
 
     var body: some View {
@@ -32,8 +32,8 @@ struct LargeWidgetView: View {
                     .foregroundColor(.secondary)
                     .accessibilityIdentifier("noEventsLarge")
             } else {
-                ForEach(visibleEvents, id: \.eventIdentifier) { event in
-                    EventRowView(event: event, now: now, showColorDot: true)
+                ForEach(visibleEvents, id: \.event.eventIdentifier) { item in
+                    EventRowView(event: item.event, now: now, showColorDot: true, matchedColor: item.matchedColor)
                 }
                 if extraCount > 0 {
                     Text(String(localized: "+ \(extraCount) más"))

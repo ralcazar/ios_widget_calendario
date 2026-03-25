@@ -5,6 +5,7 @@ struct EventRowView: View {
     let event: EKEvent
     let now: Date
     let showColorDot: Bool
+    var matchedColor: String? = nil
 
     private var isAllDay: Bool { event.isAllDay }
     private var isInProgress: Bool { event.startDate <= now && now < event.endDate }
@@ -32,6 +33,15 @@ struct EventRowView: View {
 
     private var rowContent: some View {
         HStack(spacing: 6) {
+            if let hex = matchedColor, let color = Color(hex: hex) {
+                Rectangle()
+                    .fill(color)
+                    .frame(width: 3)
+                    .clipShape(Capsule())
+                    .accessibilityIdentifier("accentBar_\(event.eventIdentifier ?? "")")
+            } else {
+                Spacer().frame(width: 3)
+            }
             if showColorDot {
                 Circle()
                     .fill(Color(cgColor: event.calendar.cgColor))
