@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		AA4B3C4D5E6F7A8B9C0D1E2F /* CAL0q31UITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB4B3C4D5E6F7A8B9C0D1E2F /* CAL0q31UITests.swift */; };
+		CC4B3C4D5E6F7A8B9C0D1E2F /* CAL0q32UITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD4B3C4D5E6F7A8B9C0D1E2F /* CAL0q32UITests.swift */; };
 		03A9624B3F37A6C9AD89E4D0 /* CalendarioApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 560609AFF0F9B04159E5A397 /* CalendarioApp.swift */; };
 		31E8DB2CC7C2A196C7ACCD98 /* CALsue1ScenarioTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14230672672F95C1E9D9C0CD /* CALsue1ScenarioTests.swift */; };
 		F9B2C0D14E8AB12345678901 /* CALsue3ScenarioTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7A3F9B2C0D14E8AB1234567 /* CALsue3ScenarioTests.swift */; };
@@ -56,6 +58,13 @@
 			remoteGlobalIDString = 556A156F78AF513A03214F91;
 			remoteInfo = Calendario;
 		};
+		DD3B3C4D5E6F7A8B9C0D1E2F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 068E1379B70C995A4276612B /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 556A156F78AF513A03214F91;
+			remoteInfo = Calendario;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -74,6 +83,9 @@
 
 /* Begin PBXFileReference section */
 		069C3B3DDC7227969DB385A2 /* CalendarioTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CalendarioTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		AA2B3C4D5E6F7A8B9C0D1E2F /* CalendarioUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CalendarioUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		AB4B3C4D5E6F7A8B9C0D1E2F /* CAL0q31UITests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = CAL0q31UITests.swift; sourceTree = "<group>"; };
+		CD4B3C4D5E6F7A8B9C0D1E2F /* CAL0q32UITests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = CAL0q32UITests.swift; sourceTree = "<group>"; };
 		14230672672F95C1E9D9C0CD /* CALsue1ScenarioTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = CALsue1ScenarioTests.swift; sourceTree = "<group>"; };
 		E7A3F9B2C0D14E8AB1234567 /* CALsue3ScenarioTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = CALsue3ScenarioTests.swift; sourceTree = "<group>"; };
 		2C0DD4B4C9CE111FAFC680C9 /* CalendarioWidget.entitlements */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.entitlements; path = CalendarioWidget.entitlements; sourceTree = "<group>"; };
@@ -145,8 +157,19 @@
 				F714B02BC1F07883D4B273B6 /* Calendario.app */,
 				D30B1406E1503531D5CEE812 /* CalendarioWidget.appex */,
 				069C3B3DDC7227969DB385A2 /* CalendarioTests.xctest */,
+				AA2B3C4D5E6F7A8B9C0D1E2F /* CalendarioUITests.xctest */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		FF2B3C4D5E6F7A8B9C0D1E2F /* CalendarioUITests */ = {
+			isa = PBXGroup;
+			children = (
+				AB4B3C4D5E6F7A8B9C0D1E2F /* CAL0q31UITests.swift */,
+				CD4B3C4D5E6F7A8B9C0D1E2F /* CAL0q32UITests.swift */,
+			);
+			name = CalendarioUITests;
+			path = ../CalendarioUITests;
 			sourceTree = "<group>";
 		};
 		3AFDA4F1BA745D9CA30E6660 /* CalendarioTests */ = {
@@ -192,6 +215,7 @@
 				F714B02BC1F07883D4B273B6 /* Calendario.app */,
 				D30B1406E1503531D5CEE812 /* CalendarioWidget.appex */,
 				069C3B3DDC7227969DB385A2 /* CalendarioTests.xctest */,
+				AA2B3C4D5E6F7A8B9C0D1E2F /* CalendarioUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -257,6 +281,7 @@
 				5C8B7D08CAB3A5214737418E /* Shared */,
 				EF4EA9DE894EF1E8C4A7BDFB /* CalendarioWidget */,
 				3AFDA4F1BA745D9CA30E6660 /* CalendarioTests */,
+				FF2B3C4D5E6F7A8B9C0D1E2F /* CalendarioUITests */,
 				27C1901E212F6DD7D9D04799 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -317,6 +342,24 @@
 			productReference = 069C3B3DDC7227969DB385A2 /* CalendarioTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
+		BB2B3C4D5E6F7A8B9C0D1E2F /* CalendarioUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = AA3B3C4D5E6F7A8B9C0D1E2F /* Build configuration list for PBXNativeTarget "CalendarioUITests" */;
+			buildPhases = (
+				CC2B3C4D5E6F7A8B9C0D1E2F /* Sources */,
+				DD2B3C4D5E6F7A8B9C0D1E2F /* Frameworks */,
+				EE2B3C4D5E6F7A8B9C0D1E2F /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				EE3B3C4D5E6F7A8B9C0D1E2F /* PBXTargetDependency */,
+			);
+			name = CalendarioUITests;
+			productName = CalendarioUITests;
+			productReference = AA2B3C4D5E6F7A8B9C0D1E2F /* CalendarioUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -344,9 +387,20 @@
 				556A156F78AF513A03214F91 /* Calendario */,
 				635329BCBE862208F7841FCD /* CalendarioWidget */,
 				A1431B97A797D5F4D9C4ACE3 /* CalendarioTests */,
+				BB2B3C4D5E6F7A8B9C0D1E2F /* CalendarioUITests */,
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXFrameworksBuildPhase section (UITests) */
+		DD2B3C4D5E6F7A8B9C0D1E2F /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section (UITests) */
 
 /* Begin PBXResourcesBuildPhase section */
 		5ABDC980954570874B745C90 /* Resources */ = {
@@ -364,6 +418,13 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		C58AB869E7773CAE0BFB0ECE /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		EE2B3C4D5E6F7A8B9C0D1E2F /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -429,6 +490,15 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		CC2B3C4D5E6F7A8B9C0D1E2F /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AA4B3C4D5E6F7A8B9C0D1E2F /* CAL0q31UITests.swift in Sources */,
+				CC4B3C4D5E6F7A8B9C0D1E2F /* CAL0q32UITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -437,6 +507,12 @@
 			name = Calendario;
 			target = 556A156F78AF513A03214F91 /* Calendario */;
 			targetProxy = 75E18FF2ADAFCD4E2B9F5157 /* PBXContainerItemProxy */;
+		};
+		EE3B3C4D5E6F7A8B9C0D1E2F /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = Calendario;
+			target = 556A156F78AF513A03214F91 /* Calendario */;
+			targetProxy = DD3B3C4D5E6F7A8B9C0D1E2F /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -679,6 +755,37 @@
 			};
 			name = Debug;
 		};
+		BB3B3C4D5E6F7A8B9C0D1E2F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = VM3BNYCM22;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ralcazar.calendarioUITests;
+				SDKROOT = iphoneos;
+				SWIFT_VERSION = 5.0;
+				TEST_TARGET_NAME = Calendario;
+			};
+			name = Debug;
+		};
+		CC3B3C4D5E6F7A8B9C0D1E2F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = VM3BNYCM22;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ralcazar.calendarioUITests;
+				SDKROOT = iphoneos;
+				SWIFT_VERSION = 5.0;
+				TEST_TARGET_NAME = Calendario;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -714,6 +821,15 @@
 			buildConfigurations = (
 				4651CE0E431CF5B778F3701D /* Release */,
 				EADDCE35CB29A288FE28AF81 /* Debug */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		AA3B3C4D5E6F7A8B9C0D1E2F /* Build configuration list for PBXNativeTarget "CalendarioUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CC3B3C4D5E6F7A8B9C0D1E2F /* Release */,
+				BB3B3C4D5E6F7A8B9C0D1E2F /* Debug */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
