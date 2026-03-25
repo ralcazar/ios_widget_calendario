@@ -18,6 +18,9 @@ struct ConfigFormView: View {
     @State private var lightColor: Color = .white
     @State private var darkColor: Color = .black
     @State private var showCancelled: Bool = false
+    @State private var workHoursEnabled: Bool = false
+    @State private var workStart: Date = Calendar.current.date(bySettingHour: 9, minute: 0, second: 0, of: Date()) ?? Date()
+    @State private var workEnd: Date = Calendar.current.date(bySettingHour: 18, minute: 0, second: 0, of: Date()) ?? Date()
     @State private var store = EKEventStore()
     @Environment(\.dismiss) private var dismiss
 
@@ -91,6 +94,16 @@ struct ConfigFormView: View {
                     Toggle(String(localized: "Mostrar cancelados"), isOn: $showCancelled)
                         .accessibilityIdentifier("showCancelledToggle")
                 }
+                Section(String(localized: "Horario laboral")) {
+                    Toggle(String(localized: "Filtrar por horario"), isOn: $workHoursEnabled)
+                        .accessibilityIdentifier("work_hours_toggle")
+                    if workHoursEnabled {
+                        DatePicker(String(localized: "Inicio"), selection: $workStart, displayedComponents: .hourAndMinute)
+                            .accessibilityIdentifier("work_hours_start_picker")
+                        DatePicker(String(localized: "Fin"), selection: $workEnd, displayedComponents: .hourAndMinute)
+                            .accessibilityIdentifier("work_hours_end_picker")
+                    }
+                }
                 Section(String(localized: "Apariencia")) {
                     Toggle(String(localized: "Usar colores del sistema"), isOn: $useSystemColors)
                         .accessibilityIdentifier("useSystemColorsToggle")
@@ -155,12 +168,26 @@ struct ConfigFormView: View {
                 lightColor = Color(hex: config.colorSchemeLight.lightHex) ?? .white
                 darkColor = Color(hex: config.colorSchemeDark.darkHex) ?? .black
             }
+            if config.workStartOffset >= 0, config.workEndOffset >= 0 {
+                workHoursEnabled = true
+                workStart = offsetToDate(config.workStartOffset)
+                workEnd = offsetToDate(config.workEndOffset)
+            }
         }
     }
 
     @MainActor
     private func loadCalendars() {
         calendars = store.calendars(for: .event).sorted { $0.title < $1.title }
+    }
+
+    private func timeOffset(from date: Date) -> TimeInterval {
+        let components = Calendar.current.dateComponents([.hour, .minute], from: date)
+        return TimeInterval((components.hour ?? 0) * 3600 + (components.minute ?? 0) * 60)
+    }
+
+    private func offsetToDate(_ offset: TimeInterval) -> Date {
+        Calendar.current.startOfDay(for: Date()).addingTimeInterval(offset)
     }
 
     private func save() {
@@ -176,6 +203,9 @@ struct ConfigFormView: View {
             newColorSchemeDark = ColorPair(lightHex: dHex, darkHex: dHex)
         }
 
+        let startOffset = workHoursEnabled ? timeOffset(from: workStart) : -1
+        let endOffset   = workHoursEnabled ? timeOffset(from: workEnd)   : -1
+
         let config: WidgetConfig
         if let existing = existingConfig {
             config = WidgetConfig(
@@ -186,8 +216,8 @@ struct ConfigFormView: View {
                 colorSchemeDark: newColorSchemeDark,
                 rules: rules,
                 showCancelled: showCancelled,
-                workStartOffset: existing.workStartOffset,
-                workEndOffset: existing.workEndOffset
+                workStartOffset: startOffset,
+                workEndOffset: endOffset
             )
         } else {
             let newConfig = WidgetConfig.new(
@@ -202,8 +232,8 @@ struct ConfigFormView: View {
                 colorSchemeDark: newColorSchemeDark,
                 rules: rules,
                 showCancelled: showCancelled,
-                workStartOffset: newConfig.workStartOffset,
-                workEndOffset: newConfig.workEndOffset
+                workStartOffset: startOffset,
+                workEndOffset: endOffset
             )
         }
         onSave(config)

@@ -72,6 +72,10 @@
 		DA914F1B2C3D4E5F6A7B8C9D /* CALu914ScenarioTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA914F1B2C3D4E5F6A7B8C9D /* CALu914ScenarioTests.swift */; };
 		FBjo53C2D3E4F5A6B7C8D9E0 /* CALjo53ScenarioTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAjo53B1C2D3E4F5A6B7C8D9 /* CALjo53ScenarioTests.swift */; };
 		E3F4A5B6C7D8E9F0A1B2C3D4 /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3E4F5A6B7C8D9E0F1A2B3C4 /* OnboardingView.swift */; };
+		B6C7D8E9F0A1B2C3D4E5F6A7 /* WorkHoursFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6B7C8D9E0F1A2B3C4D5E6F7 /* WorkHoursFilter.swift */; };
+		C7D8E9F0A1B2C3D4E5F6A7B8 /* WorkHoursFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6B7C8D9E0F1A2B3C4D5E6F7 /* WorkHoursFilter.swift */; };
+		D8E9F0A1B2C3D4E5F6A7B8C9 /* WorkHoursFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6B7C8D9E0F1A2B3C4D5E6F7 /* WorkHoursFilter.swift */; };
+		FBjo52C2D3E4F5A6B7C8D9E0 /* CALjo52ScenarioTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAjo52B1C2D3E4F5A6B7C8D9 /* CALjo52ScenarioTests.swift */; };
 	/* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -162,6 +166,8 @@
 		B0E1F2A3B4C5D6E7F8A9B0C1 /* CALu913ScenarioTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = CALu913ScenarioTests.swift; sourceTree = "<group>"; };
 		CA914F1B2C3D4E5F6A7B8C9D /* CALu914ScenarioTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = CALu914ScenarioTests.swift; sourceTree = "<group>"; };
 		EAjo53B1C2D3E4F5A6B7C8D9 /* CALjo53ScenarioTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = CALjo53ScenarioTests.swift; sourceTree = "<group>"; };
+		A6B7C8D9E0F1A2B3C4D5E6F7 /* WorkHoursFilter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = WorkHoursFilter.swift; path = "../Shared/WorkHoursFilter.swift"; sourceTree = "<group>"; };
+		EAjo52B1C2D3E4F5A6B7C8D9 /* CALjo52ScenarioTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = CALjo52ScenarioTests.swift; sourceTree = "<group>"; };
 		D3E4F5A6B7C8D9E0F1A2B3C4 /* OnboardingView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
 	/* End PBXFileReference section */
 
@@ -238,6 +244,7 @@
 				EAjo53B1C2D3E4F5A6B7C8D9 /* CALjo53ScenarioTests.swift */,
 			A3D1B2C3D4E5F6A7B8C9D0E1 /* CALb3dScenarioTests.swift */,
 		AMX1B2C3D4E5F6A7B8C9D0E1 /* CALbmxScenarioTests.swift */,
+			EAjo52B1C2D3E4F5A6B7C8D9 /* CALjo52ScenarioTests.swift */,
 			);
 			name = CalendarioTests;
 			path = ../CalendarioTests;
@@ -252,6 +259,7 @@
 				B3C4D5E6F7A8B9C0D1E2F3A4 /* RuleEngine.swift */,
 				A3B4C5D6E7F8A9B0C1D2E3F4 /* Color+Hex.swift */,
 				A5B6C7D8E9F0A1B2C3D4E5F6 /* Array+OverlapGrouping.swift */,
+			A6B7C8D9E0F1A2B3C4D5E6F7 /* WorkHoursFilter.swift */,
 			);
 			name = Shared;
 			path = Shared;
@@ -513,6 +521,7 @@
 			BA2B3C4D5E6F7A8B9C0D1FA2 /* RulesPreviewView.swift in Sources */,
 				B4C5D6E7F8A9B0C1D2E3F4A5 /* Color+Hex.swift in Sources */,
 				B5C6D7E8F9A0B1C2D3E4F5A6 /* Array+OverlapGrouping.swift in Sources */,
+			B6C7D8E9F0A1B2C3D4E5F6A7 /* WorkHoursFilter.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -546,6 +555,8 @@
 				B3D1A2B3C4D5E6F7A8B9C0D1 /* CALb3dScenarioTests.swift in Sources */,
 			BMX1A2B3C4D5E6F7A8B9C0D1 /* CALbmxScenarioTests.swift in Sources */,
 				D7E8F9A0B1C2D3E4F5A6B7C8 /* Array+OverlapGrouping.swift in Sources */,
+			C7D8E9F0A1B2C3D4E5F6A7B8 /* WorkHoursFilter.swift in Sources */,
+			FBjo52C2D3E4F5A6B7C8D9E0 /* CALjo52ScenarioTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -570,6 +581,7 @@
 				C2D3E4F5A6B7C8D9E0F1A2B3 /* RuleEngine.swift in Sources */,
 				C5D6E7F8A9B0C1D2E3F4A5B6 /* Color+Hex.swift in Sources */,
 				C6D7E8F9A0B1C2D3E4F5A6B7 /* Array+OverlapGrouping.swift in Sources */,
+			D8E9F0A1B2C3D4E5F6A7B8C9 /* WorkHoursFilter.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
