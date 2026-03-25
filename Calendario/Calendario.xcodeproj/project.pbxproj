@@ -11,6 +11,7 @@
 		CC4B3C4D5E6F7A8B9C0D1E2F /* CAL0q32UITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD4B3C4D5E6F7A8B9C0D1E2F /* CAL0q32UITests.swift */; };
 		03A9624B3F37A6C9AD89E4D0 /* CalendarioApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 560609AFF0F9B04159E5A397 /* CalendarioApp.swift */; };
 		31E8DB2CC7C2A196C7ACCD98 /* CALsue1ScenarioTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14230672672F95C1E9D9C0CD /* CALsue1ScenarioTests.swift */; };
+		B3D1A2B3C4D5E6F7A8B9C0D1 /* CALb3dScenarioTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3D1B2C3D4E5F6A7B8C9D0E1 /* CALb3dScenarioTests.swift */; };
 		F9B2C0D14E8AB12345678901 /* CALsue3ScenarioTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7A3F9B2C0D14E8AB1234567 /* CALsue3ScenarioTests.swift */; };
 		5331DABF246087AAA9222708 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55FBC385BF6EEC4C9A65CDCA /* Foundation.framework */; };
 		6C04CA0D7C196782CCBA843D /* SharedConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3FD4EEAC6107E77BFB874AC /* SharedConstants.swift */; };
@@ -109,6 +110,7 @@
 		AB4B3C4D5E6F7A8B9C0D1E2F /* CAL0q31UITests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = CAL0q31UITests.swift; sourceTree = "<group>"; };
 		CD4B3C4D5E6F7A8B9C0D1E2F /* CAL0q32UITests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = CAL0q32UITests.swift; sourceTree = "<group>"; };
 		14230672672F95C1E9D9C0CD /* CALsue1ScenarioTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = CALsue1ScenarioTests.swift; sourceTree = "<group>"; };
+		A3D1B2C3D4E5F6A7B8C9D0E1 /* CALb3dScenarioTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = CALb3dScenarioTests.swift; sourceTree = "<group>"; };
 		E7A3F9B2C0D14E8AB1234567 /* CALsue3ScenarioTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = CALsue3ScenarioTests.swift; sourceTree = "<group>"; };
 		2C0DD4B4C9CE111FAFC680C9 /* CalendarioWidget.entitlements */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.entitlements; path = CalendarioWidget.entitlements; sourceTree = "<group>"; };
 		55FBC385BF6EEC4C9A65CDCA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS18.0.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
@@ -232,6 +234,7 @@
 			B0E1F2A3B4C5D6E7F8A9B0C1 /* CALu913ScenarioTests.swift */,
 				CA914F1B2C3D4E5F6A7B8C9D /* CALu914ScenarioTests.swift */,
 				EAjo53B1C2D3E4F5A6B7C8D9 /* CALjo53ScenarioTests.swift */,
+			A3D1B2C3D4E5F6A7B8C9D0E1 /* CALb3dScenarioTests.swift */,
 			);
 			name = CalendarioTests;
 			path = ../CalendarioTests;
@@ -537,6 +540,7 @@
 				C1F2A3B4C5D6E7F8A9B0C1D2 /* CALu913ScenarioTests.swift in Sources */,
 				DA914F1B2C3D4E5F6A7B8C9D /* CALu914ScenarioTests.swift in Sources */,
 				FBjo53C2D3E4F5A6B7C8D9E0 /* CALjo53ScenarioTests.swift in Sources */,
+				B3D1A2B3C4D5E6F7A8B9C0D1 /* CALb3dScenarioTests.swift in Sources */,
 				D7E8F9A0B1C2D3E4F5A6B7C8 /* Array+OverlapGrouping.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

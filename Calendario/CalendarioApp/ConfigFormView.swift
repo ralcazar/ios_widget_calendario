@@ -18,6 +18,7 @@ struct ConfigFormView: View {
     @State private var lightColor: Color = .white
     @State private var darkColor: Color = .black
     @State private var showCancelled: Bool = false
+    @State private var store = EKEventStore()
     @Environment(\.dismiss) private var dismiss
 
     private var isEditing: Bool {
@@ -37,6 +38,32 @@ struct ConfigFormView: View {
     var body: some View {
         NavigationStack {
             Form {
+                Section("Calendario") {
+                    if calendars.isEmpty {
+                        Text("No hay calendarios disponibles")
+                            .foregroundColor(.secondary)
+                            .accessibilityIdentifier("noCalendarsLabel")
+                    } else {
+                        ForEach(calendars, id: \.calendarIdentifier) { calendar in
+                            HStack {
+                                Circle()
+                                    .fill(Color(cgColor: calendar.cgColor))
+                                    .frame(width: 12, height: 12)
+                                Text(calendar.title)
+                                Spacer()
+                                if selectedCalendarId == calendar.calendarIdentifier {
+                                    Image(systemName: "checkmark")
+                                        .foregroundColor(.accentColor)
+                                }
+                            }
+                            .contentShape(Rectangle())
+                            .onTapGesture {
+                                selectedCalendarId = calendar.calendarIdentifier
+                            }
+                            .accessibilityIdentifier("calendarRow_\(calendar.calendarIdentifier)")
+                        }
+                    }
+                }
                 Section("General") {
                     TextField("Nombre", text: $name)
                         .accessibilityIdentifier("nameField")
@@ -74,32 +101,6 @@ struct ConfigFormView: View {
                             .accessibilityIdentifier("darkColorPicker")
                     }
                 }
-                Section("Calendario") {
-                    if calendars.isEmpty {
-                        Text("No hay calendarios disponibles")
-                            .foregroundColor(.secondary)
-                            .accessibilityIdentifier("noCalendarsLabel")
-                    } else {
-                        ForEach(calendars, id: \.calendarIdentifier) { calendar in
-                            HStack {
-                                Circle()
-                                    .fill(Color(cgColor: calendar.cgColor))
-                                    .frame(width: 12, height: 12)
-                                Text(calendar.title)
-                                Spacer()
-                                if selectedCalendarId == calendar.calendarIdentifier {
-                                    Image(systemName: "checkmark")
-                                        .foregroundColor(.accentColor)
-                                }
-                            }
-                            .contentShape(Rectangle())
-                            .onTapGesture {
-                                selectedCalendarId = calendar.calendarIdentifier
-                            }
-                            .accessibilityIdentifier("calendarRow_\(calendar.calendarIdentifier)")
-                        }
-                    }
-                }
             }
             .navigationTitle(isEditing ? "Editar configuración" : "Nueva configuración")
             .navigationBarTitleDisplayMode(.inline)
@@ -119,13 +120,28 @@ struct ConfigFormView: View {
                 }
             }
         }
-        .onAppear(perform: setup)
+        .onAppear {
+            Task { await setup() }
+        }
     }
 
-    private func setup() {
-        // Load calendars
-        let store = EKEventStore()
-        calendars = store.calendars(for: .event).sorted { $0.title < $1.title }
+    @MainActor
+    private func setup() async {
+        // Load calendars after confirming/requesting authorization
+        let status = EKEventStore.authorizationStatus(for: .event)
+        if status == .fullAccess || status == .authorized {
+            loadCalendars()
+        } else if status == .notDetermined {
+            do {
+                if #available(iOS 17.0, *) {
+                    try await store.requestFullAccessToEvents()
+                } else {
+                    try await store.requestAccess(to: .event)
+                }
+            } catch {}
+            loadCalendars()
+        }
+        // .denied / .restricted: leave calendars empty
 
         // Pre-populate for edit mode
         if let config = existingConfig {
@@ -140,6 +156,11 @@ struct ConfigFormView: View {
                 darkColor = Color(hex: config.colorSchemeDark.darkHex) ?? .black
             }
         }
+    }
+
+    @MainActor
+    private func loadCalendars() {
+        calendars = store.calendars(for: .event).sorted { $0.title < $1.title }
     }
 
     private func save() {
