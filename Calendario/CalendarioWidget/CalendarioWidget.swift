@@ -12,7 +12,9 @@ struct Provider: AppIntentTimelineProvider {
         let rawEvents = EventFetcher.fetchEvents(for: widgetConfig)
         let filtered = rawEvents.filter { WorkHoursFilter.isWithinWorkHours(event: $0, config: widgetConfig) }
         let annotatedEvents = RuleEngine.apply(rules: widgetConfig.rules, to: filtered)
-        return CalendarEntry(date: Date(), events: annotatedEvents, configuration: configuration, widgetConfig: widgetConfig)
+        DismissedEventsStore.cleanUpIfNeeded()
+        let visibleEvents = annotatedEvents.filter { !DismissedEventsStore.isDismissed($0.event.eventIdentifier ?? "") }
+        return CalendarEntry(date: Date(), events: visibleEvents, configuration: configuration, widgetConfig: widgetConfig)
     }
 
     func timeline(for configuration: ConfigurationAppIntent, in context: Context) async -> Timeline<CalendarEntry> {
@@ -20,7 +22,9 @@ struct Provider: AppIntentTimelineProvider {
         let rawEvents = EventFetcher.fetchEvents(for: widgetConfig)
         let filtered = rawEvents.filter { WorkHoursFilter.isWithinWorkHours(event: $0, config: widgetConfig) }
         let annotatedEvents = RuleEngine.apply(rules: widgetConfig.rules, to: filtered)
-        let entries = EventFetcher.buildTimelineEntries(events: annotatedEvents, configuration: configuration, config: widgetConfig)
+        DismissedEventsStore.cleanUpIfNeeded()
+        let visibleEvents = annotatedEvents.filter { !DismissedEventsStore.isDismissed($0.event.eventIdentifier ?? "") }
+        let entries = EventFetcher.buildTimelineEntries(events: visibleEvents, configuration: configuration, config: widgetConfig)
         return Timeline(entries: entries, policy: .atEnd)
     }
 

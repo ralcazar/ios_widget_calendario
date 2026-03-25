@@ -59,6 +59,14 @@ struct EventRowView: View {
                     .lineLimit(1)
                     .strikethrough(isCancelled)
             }
+            Spacer()
+            if #available(iOS 17.0, *) {
+                Button(intent: DismissEventIntent(eventIdentifier: event.eventIdentifier ?? "")) {
+                    Image(systemName: "xmark.circle.fill")
+                        .foregroundStyle(.secondary)
+                }
+                .accessibilityIdentifier("dismiss_event_button")
+            }
         }
         .frame(height: 32, alignment: .leading)
         .opacity(isCancelled ? 0.5 : 1.0)

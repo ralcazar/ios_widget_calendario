@@ -76,6 +76,11 @@
 		C7D8E9F0A1B2C3D4E5F6A7B8 /* WorkHoursFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6B7C8D9E0F1A2B3C4D5E6F7 /* WorkHoursFilter.swift */; };
 		D8E9F0A1B2C3D4E5F6A7B8C9 /* WorkHoursFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6B7C8D9E0F1A2B3C4D5E6F7 /* WorkHoursFilter.swift */; };
 		FBjo52C2D3E4F5A6B7C8D9E0 /* CALjo52ScenarioTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAjo52B1C2D3E4F5A6B7C8D9 /* CALjo52ScenarioTests.swift */; };
+		BAjo51B1C2D3E4F5A6B7C8D9 /* DismissedEventsStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAjo51A1B2C3D4E5F6A7B8C9 /* DismissedEventsStore.swift */; };
+		CAjo51C1D2E3F4A5B6C7D8E9 /* DismissedEventsStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAjo51A1B2C3D4E5F6A7B8C9 /* DismissedEventsStore.swift */; };
+		DAjo51D1E2F3A4B5C6D7E8F9 /* DismissedEventsStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAjo51A1B2C3D4E5F6A7B8C9 /* DismissedEventsStore.swift */; };
+		FAjo51F1A2B3C4D5E6F7A8B9 /* DismissEventIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAjo51E1F2A3B4C5D6E7F8A9 /* DismissEventIntent.swift */; };
+		HAjo51B2C3D4E5F6A7B8C9D0 /* CALjo51ScenarioTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = GAjo51A2B3C4D5E6F7A8B9C0 /* CALjo51ScenarioTests.swift */; };
 	/* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -169,6 +174,9 @@
 		A6B7C8D9E0F1A2B3C4D5E6F7 /* WorkHoursFilter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = WorkHoursFilter.swift; path = "../Shared/WorkHoursFilter.swift"; sourceTree = "<group>"; };
 		EAjo52B1C2D3E4F5A6B7C8D9 /* CALjo52ScenarioTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = CALjo52ScenarioTests.swift; sourceTree = "<group>"; };
 		D3E4F5A6B7C8D9E0F1A2B3C4 /* OnboardingView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
+		AAjo51A1B2C3D4E5F6A7B8C9 /* DismissedEventsStore.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = DismissedEventsStore.swift; path = "../Shared/DismissedEventsStore.swift"; sourceTree = "<group>"; };
+		EAjo51E1F2A3B4C5D6E7F8A9 /* DismissEventIntent.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = DismissEventIntent.swift; sourceTree = "<group>"; };
+		GAjo51A2B3C4D5E6F7A8B9C0 /* CALjo51ScenarioTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = CALjo51ScenarioTests.swift; sourceTree = "<group>"; };
 	/* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -245,6 +253,7 @@
 			A3D1B2C3D4E5F6A7B8C9D0E1 /* CALb3dScenarioTests.swift */,
 		AMX1B2C3D4E5F6A7B8C9D0E1 /* CALbmxScenarioTests.swift */,
 			EAjo52B1C2D3E4F5A6B7C8D9 /* CALjo52ScenarioTests.swift */,
+				GAjo51A2B3C4D5E6F7A8B9C0 /* CALjo51ScenarioTests.swift */,
 			);
 			name = CalendarioTests;
 			path = ../CalendarioTests;
@@ -260,6 +269,7 @@
 				A3B4C5D6E7F8A9B0C1D2E3F4 /* Color+Hex.swift */,
 				A5B6C7D8E9F0A1B2C3D4E5F6 /* Array+OverlapGrouping.swift */,
 			A6B7C8D9E0F1A2B3C4D5E6F7 /* WorkHoursFilter.swift */,
+				AAjo51A1B2C3D4E5F6A7B8C9 /* DismissedEventsStore.swift */,
 			);
 			name = Shared;
 			path = Shared;
@@ -335,6 +345,7 @@
 				810B3796140E31165F4C22A3 /* Info.plist */,
 				2C0DD4B4C9CE111FAFC680C9 /* CalendarioWidget.entitlements */,
 				C1D2E3F4A5B607080910AABB /* WidgetViews */,
+				EAjo51E1F2A3B4C5D6E7F8A9 /* DismissEventIntent.swift */,
 			);
 			name = CalendarioWidget;
 			path = CalendarioWidget;
@@ -522,6 +533,7 @@
 				B4C5D6E7F8A9B0C1D2E3F4A5 /* Color+Hex.swift in Sources */,
 				B5C6D7E8F9A0B1C2D3E4F5A6 /* Array+OverlapGrouping.swift in Sources */,
 			B6C7D8E9F0A1B2C3D4E5F6A7 /* WorkHoursFilter.swift in Sources */,
+				BAjo51B1C2D3E4F5A6B7C8D9 /* DismissedEventsStore.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -557,6 +569,8 @@
 				D7E8F9A0B1C2D3E4F5A6B7C8 /* Array+OverlapGrouping.swift in Sources */,
 			C7D8E9F0A1B2C3D4E5F6A7B8 /* WorkHoursFilter.swift in Sources */,
 			FBjo52C2D3E4F5A6B7C8D9E0 /* CALjo52ScenarioTests.swift in Sources */,
+				DAjo51D1E2F3A4B5C6D7E8F9 /* DismissedEventsStore.swift in Sources */,
+				HAjo51B2C3D4E5F6A7B8C9D0 /* CALjo51ScenarioTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -582,6 +596,8 @@
 				C5D6E7F8A9B0C1D2E3F4A5B6 /* Color+Hex.swift in Sources */,
 				C6D7E8F9A0B1C2D3E4F5A6B7 /* Array+OverlapGrouping.swift in Sources */,
 			D8E9F0A1B2C3D4E5F6A7B8C9 /* WorkHoursFilter.swift in Sources */,
+				CAjo51C1D2E3F4A5B6C7D8E9 /* DismissedEventsStore.swift in Sources */,
+				FAjo51F1A2B3C4D5E6F7A8B9 /* DismissEventIntent.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
