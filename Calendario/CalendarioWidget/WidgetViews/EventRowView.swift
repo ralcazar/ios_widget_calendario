@@ -18,6 +18,19 @@ struct EventRowView: View {
     }
 
     var body: some View {
+        let url = EventFetcher.calendarURL(for: event.startDate)
+        Group {
+            if let url = url {
+                Link(destination: url) {
+                    rowContent
+                }
+            } else {
+                rowContent
+            }
+        }
+    }
+
+    private var rowContent: some View {
         HStack(spacing: 6) {
             if showColorDot {
                 Circle()

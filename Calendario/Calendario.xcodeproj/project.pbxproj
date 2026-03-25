@@ -45,6 +45,7 @@
 		A1B2C3D4E5F6070809AABB05 /* ExtraLargeWidgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1C2D3E4F5A607080910AABF /* ExtraLargeWidgetView.swift */; };
 		A1B2C3D4E5F6070809AABB06 /* CAL0q34ScenarioTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1C2D3E4F5A607080910AAC0 /* CAL0q34ScenarioTests.swift */; };
 		BE1B2C3D4E5F6A7B8C9D0E1F /* CAL0q37ScenarioTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF1B2C3D4E5F6A7B8C9D0E1F /* CAL0q37ScenarioTests.swift */; };
+		EF1B2C3D4E5F6A7B8C9D0E1F /* CAL0q36ScenarioTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF1B2C3D4E5F6A7B8C9D0E1F /* CAL0q36ScenarioTests.swift */; };
 	/* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -107,6 +108,7 @@
 		B1C2D3E4F5A607080910AABF /* ExtraLargeWidgetView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ExtraLargeWidgetView.swift; sourceTree = "<group>"; };
 		B1C2D3E4F5A607080910AAC0 /* CAL0q34ScenarioTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = CAL0q34ScenarioTests.swift; sourceTree = "<group>"; };
 		CF1B2C3D4E5F6A7B8C9D0E1F /* CAL0q37ScenarioTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = CAL0q37ScenarioTests.swift; sourceTree = "<group>"; };
+		DF1B2C3D4E5F6A7B8C9D0E1F /* CAL0q36ScenarioTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = CAL0q36ScenarioTests.swift; sourceTree = "<group>"; };
 	/* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -159,6 +161,7 @@
 				1E2F3A4B5C6D7E8F9A0B1C2D /* CAL0q33ScenarioTests.swift */,
 				B1C2D3E4F5A607080910AAC0 /* CAL0q34ScenarioTests.swift */,
 				CF1B2C3D4E5F6A7B8C9D0E1F /* CAL0q37ScenarioTests.swift */,
+			DF1B2C3D4E5F6A7B8C9D0E1F /* CAL0q36ScenarioTests.swift */,
 			);
 			name = CalendarioTests;
 			path = ../CalendarioTests;
@@ -401,6 +404,7 @@
 				AD1B2C3D4E5F6A7B8C9D0E1F /* CAL0q32ScenarioTests.swift in Sources */,
 				FD1B2C3D4E5F6A7B8C9D0E1F /* CAL0q33ScenarioTests.swift in Sources */,
 				A1B2C3D4E5F6070809AABB06 /* CAL0q34ScenarioTests.swift in Sources */,
+				EF1B2C3D4E5F6A7B8C9D0E1F /* CAL0q36ScenarioTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

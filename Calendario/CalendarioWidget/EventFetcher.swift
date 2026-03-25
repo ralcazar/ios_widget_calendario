@@ -22,6 +22,12 @@ enum EventFetcher {
             .sorted { $0.startDate < $1.startDate }
     }
 
+    static func calendarURL(for date: Date) -> URL? {
+        // calshow: uses timeIntervalSinceReferenceDate (seconds since Jan 1, 2001)
+        let timestamp = Int(date.timeIntervalSinceReferenceDate)
+        return URL(string: "calshow:\(timestamp)")
+    }
+
     static func buildTimelineEntries(events: [EKEvent], configuration: ConfigurationAppIntent, config: WidgetConfig) -> [CalendarEntry] {
         let now = Date()
         var transitionDates: [Date] = [now]

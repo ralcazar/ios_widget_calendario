@@ -47,5 +47,6 @@ struct SmallWidgetView: View {
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .leading)
         .accessibilityIdentifier("smallWidgetView")
+        .widgetURL(EventFetcher.calendarURL(for: entry.events.first?.startDate ?? entry.date))
     }
 }
