@@ -49,6 +49,12 @@ struct ConfigFormView: View {
                         }
                     }
                     .accessibilityIdentifier("rulesLink")
+                    NavigationLink {
+                        RulesPreviewView(rules: rules)
+                    } label: {
+                        Text(String(localized: "Vista previa de reglas →"))
+                    }
+                    .accessibilityIdentifier("rulesPreviewLink")
                 }
                 Section("Calendario") {
                     if calendars.isEmpty {

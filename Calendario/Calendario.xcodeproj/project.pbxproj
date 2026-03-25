@@ -56,6 +56,8 @@
 		EA1B2C3D4E5F6A7B8C9D0E1F /* RuleEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA1B2C3D4E5F6A7B8C9D0E1F /* RuleEditView.swift */; };
 		AB1B2C3D4E5F6A7B8C9D0E1F /* CALbktScenarioTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA1B2C3D4E5F6A7B8C9D0E1F /* CALbktScenarioTests.swift */; };
 		E7F8A9B0C1D2E3F4A5B6C7D8 /* CALevk2ScenarioTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7A8B9C0D1E2F3A4B5C6D7E8 /* CALevk2ScenarioTests.swift */; };
+		BA2B3C4D5E6F7A8B9C0D1FA2 /* RulesPreviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA2B3C4D5E6F7A8B9C0D1FA2 /* RulesPreviewView.swift */; };
+		E8B9C0D1E2F3A4B5C6D7E8F9 /* CALevk3ScenarioTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8B9C0D1E2F3A4B5C6D7E8F9 /* CALevk3ScenarioTests.swift */; };
 		B4C5D6E7F8A9B0C1D2E3F4A5 /* Color+Hex.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3B4C5D6E7F8A9B0C1D2E3F4 /* Color+Hex.swift */; };
 		C5D6E7F8A9B0C1D2E3F4A5B6 /* Color+Hex.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3B4C5D6E7F8A9B0C1D2E3F4 /* Color+Hex.swift */; };
 		D6E7F8A9B0C1D2E3F4A5B6C7 /* Color+Hex.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3B4C5D6E7F8A9B0C1D2E3F4 /* Color+Hex.swift */; };
@@ -138,6 +140,8 @@
 		DA1B2C3D4E5F6A7B8C9D0E1F /* RuleEditView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = RuleEditView.swift; sourceTree = "<group>"; };
 		FA1B2C3D4E5F6A7B8C9D0E1F /* CALbktScenarioTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = CALbktScenarioTests.swift; sourceTree = "<group>"; };
 		F7A8B9C0D1E2F3A4B5C6D7E8 /* CALevk2ScenarioTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = CALevk2ScenarioTests.swift; sourceTree = "<group>"; };
+		FA2B3C4D5E6F7A8B9C0D1FA2 /* RulesPreviewView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = RulesPreviewView.swift; sourceTree = "<group>"; };
+		F8B9C0D1E2F3A4B5C6D7E8F9 /* CALevk3ScenarioTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = CALevk3ScenarioTests.swift; sourceTree = "<group>"; };
 		A3B4C5D6E7F8A9B0C1D2E3F4 /* Color+Hex.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "Color+Hex.swift"; path = "../Shared/Color+Hex.swift"; sourceTree = "<group>"; };
 	/* End PBXFileReference section */
 
@@ -206,6 +210,7 @@
 			F3A4B5C6D7E8F9A0B1C2D3E4 /* CALevk1ScenarioTests.swift */,
 		FA1B2C3D4E5F6A7B8C9D0E1F /* CALbktScenarioTests.swift */,
 		F7A8B9C0D1E2F3A4B5C6D7E8 /* CALevk2ScenarioTests.swift */,
+		F8B9C0D1E2F3A4B5C6D7E8F9 /* CALevk3ScenarioTests.swift */,
 			);
 			name = CalendarioTests;
 			path = ../CalendarioTests;
@@ -260,6 +265,7 @@
 				D4E5F6A7B8C9D0E1F2A3B4C5 /* ConfigFormView.swift */,
 			BA1B2C3D4E5F6A7B8C9D0E1F /* RulesListView.swift */,
 			DA1B2C3D4E5F6A7B8C9D0E1F /* RuleEditView.swift */,
+			FA2B3C4D5E6F7A8B9C0D1FA2 /* RulesPreviewView.swift */,
 				AC1B2C3D4E5F6A7B8C9D0E1F /* CalendarPermissionManager.swift */,
 				EA98274D0106940E806C5673 /* Calendario.entitlements */,
 			);
@@ -474,6 +480,7 @@
 			A2B3C4D5E6F7A8B9C0D1E2F3 /* RuleEngine.swift in Sources */,
 		CA1B2C3D4E5F6A7B8C9D0E1F /* RulesListView.swift in Sources */,
 		EA1B2C3D4E5F6A7B8C9D0E1F /* RuleEditView.swift in Sources */,
+			BA2B3C4D5E6F7A8B9C0D1FA2 /* RulesPreviewView.swift in Sources */,
 				B4C5D6E7F8A9B0C1D2E3F4A5 /* Color+Hex.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -499,6 +506,7 @@
 				E2F3A4B5C6D7E8F9A0B1C2D3 /* CALevk1ScenarioTests.swift in Sources */,
 			AB1B2C3D4E5F6A7B8C9D0E1F /* CALbktScenarioTests.swift in Sources */,
 					E7F8A9B0C1D2E3F4A5B6C7D8 /* CALevk2ScenarioTests.swift in Sources */,
+				E8B9C0D1E2F3A4B5C6D7E8F9 /* CALevk3ScenarioTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
