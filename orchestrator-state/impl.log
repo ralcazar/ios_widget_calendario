@@ -1,11 +1,8 @@
-Done. Here's a summary of what was implemented:
+**CAL-evk.1 complete.** Summary:
 
-**CAL-sue.1 — Complete**
-
-- **Xcode project** created at `Calendario/Calendario.xcodeproj` with:
-  - `Calendario` app target (bundle: `com.ralcazar.calendario`, iOS 17+, SwiftUI)
-  - `CalendarioWidget` extension target (bundle: `com.ralcazar.calendario.widget`)
-  - `CalendarioTests` unit test bundle
-- **App Groups** configured on both targets via entitlements files (`group.com.ralcazar.calendario`)
-- **`SharedConstants.swift`** with `AppGroup` enum shared across app + widget targets
-- **4 tests** all passing — covering identifier format, `UserDefaults` not nil, read/write roundtrip, and multiple key roundtrip
+- **Created** `Shared/RuleEngine.swift` — filters/annotates events by active rules with priority ordering, safe regex handling (invalid patterns + >100 char patterns don't crash)
+- **Updated** `CalendarEntry.events` from `[EKEvent]` to `[(event: EKEvent, matchedColor: String?)]`
+- **Integrated** `RuleEngine.apply` in both `snapshot` and `timeline` in the Provider
+- **Updated** `EventFetcher.buildTimelineEntries` and all 4 widget views to handle the annotated tuple type
+- **Tests**: 9 new tests, 47 total — all passing, 0 regressions
+- **Commit**: `8f40d06`

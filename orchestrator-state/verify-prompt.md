@@ -4,49 +4,49 @@ You are verifying a BDD scenario implementation for this iOS widget/calendar pro
 
 ## Your Bead
 
-- **ID**: CAL-sue.1
-- **Title**: Crear proyecto Xcode con targets + configurar App Group
+- **ID**: CAL-evk.1
+- **Title**: Motor de reglas: modelo, filtrado y persistencia
 - **Scenario**:
 
-◐ CAL-sue.1 · Crear proyecto Xcode con targets + configurar App Group   [● P0 · IN_PROGRESS]
-Owner: Roberto Alcázar · Assignee: Roberto Alcázar · Type: task
-Created: 2026-03-24 · Updated: 2026-03-24
+Implementar el modelo FilterRule y el motor de filtrado aplicado en el widget extension antes de renderizar eventos.
 
-DESCRIPTION
-Crear el proyecto Xcode con dos targets (app companion + widget extension) y configurar el App Group capability en ambos targets para compartir datos via UserDefaults(suiteName:).
+```gherkin
+Feature: Motor de reglas de filtrado
 
-## Especificaciones del proyecto
-- **Nombre de la app**: Calendario
-- **Bundle ID app**: com.ralcazar.calendario
-- **Bundle ID widget**: com.ralcazar.calendario.widget
-- **App Group ID**: group.com.ralcazar.calendario
-- **Deployment target**: iOS 17.0 (mínimo para widgets interactivos)
-- **Lenguaje**: Swift, SwiftUI
-- **Scheme**: Calendario
+  Scenario: Sin reglas se muestran todos los eventos
+    Given que WidgetConfig.rules está vacío
+    When se llama a RuleEngine.apply(rules: [], to: events)
+    Then se devuelven todos los eventos con matchedColor = nil
 
-## Pasos
-1. Crear proyecto Xcode: File → New → Project → App, nombre 'Calendario', bundle ID com.ralcazar.calendario, SwiftUI, Swift
-2. Añadir Widget Extension target: File → New → Target → Widget Extension, nombre 'CalendarioWidget', bundle ID com.ralcazar.calendario.widget. Desmarcar 'Include Live Activity' y 'Include Configuration App Intent' (se añade manualmente más adelante)
-3. Activar App Groups en ambos targets: Signing & Capabilities → + Capability → App Groups → añadir 'group.com.ralcazar.calendario'
-4. Crear SharedConstants.swift accesible por ambos targets con:
-   ```swift
-   enum AppGroup {
-       static let identifier = "group.com.ralcazar.calendario"
-       static var defaults: UserDefaults { UserDefaults(suiteName: identifier)! }
-   }
-   ```
-5. Verificar que ambos targets tienen el mismo App Group identifier
+  Scenario: Regla literal filtra por subcadena
+    Given una regla literal con pattern "trabajo" habilitada
+    And eventos con títulos ["Reunión de trabajo", "Cumpleaños", "Trabajo remoto"]
+    When se aplica RuleEngine
+    Then solo se devuelven los eventos que contienen "trabajo" (case-insensitive)
+    And matchedColor es el colorHex de la regla
 
-## Criterios de aceptación
-- El proyecto compila sin errores en simulador iPhone
-- Ambos targets (app + widget) tienen App Groups activado con 'group.com.ralcazar.calendario'
-- Se puede escribir y leer un valor de prueba: AppGroup.defaults.set('test', forKey: 'ping') desde app, leer desde widget
+  Scenario: Regex inválido no crashea
+    Given una regla con isRegex=true y pattern "[invalid" habilitada
+    When se aplica RuleEngine a cualquier evento
+    Then la regla no coincide con nada (no exception)
 
-PARENT
-  ↑ ○ CAL-sue: (EPIC) Fase 0: Infraestructura ● P0
+  Scenario: Regex demasiado largo no se evalúa
+    Given una regla con isRegex=true y pattern de 101 caracteres
+    When se aplica RuleEngine
+    Then la regla no coincide con nada
 
-BLOCKS
-  ← ✓ CAL-sue.2: Configurar App Group compartido ● P0
+  Scenario: Prioridad determina el orden de evaluación
+    Given dos reglas: prioridad 0 con color "#FF0000" y prioridad 1 con color "#00FF00"
+    And un evento cuyo título coincide con ambas
+    When se aplica RuleEngine
+    Then el matchedColor es "#FF0000" (prioridad mayor = número menor)
+```
+
+## Implementation Result (from implementer)
+
+Files created: Calendario/Shared/RuleEngine.swift, CalendarioTests/CALevk1ScenarioTests.swift
+Files modified: CalendarEntry.swift, EventFetcher.swift, CalendarioWidget.swift, all WidgetViews, project.pbxproj
+Tests: 9 added, 9 passed. Commit: 8f40d06
 
 
 
@@ -89,17 +89,17 @@ Run unit tests (see CLAUDE.md for command). ALL must pass — no regressions.
 **APPROVE** if all checks pass:
 ```bash
 git push
-bd update CAL-sue.1 --notes="Verified and pushed. Tests: N passed."
+bd update CAL-evk.1 --notes="Verified and pushed. Tests: N passed."
 ```
 
 **REJECT** if any check fails. Do NOT revert, do NOT push. The orchestrator decides next steps.
 
 ### 7. Write Result
-Write to `orchestrator-state/results/CAL-sue.1-verify.json`:
+Write to `orchestrator-state/results/CAL-evk.1-verify.json`:
 
 ```json
 {
-  "bead_id": "CAL-sue.1",
+  "bead_id": "CAL-evk.1",
   "decision": "approve|reject",
   "scenario_compliance": {
     "given_covered": true,

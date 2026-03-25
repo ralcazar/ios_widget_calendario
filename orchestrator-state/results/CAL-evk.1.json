@@ -1,0 +1,33 @@
+{
+  "bead_id": "CAL-evk.1",
+  "status": "success",
+  "files_created": [
+    "Calendario/Shared/RuleEngine.swift",
+    "CalendarioTests/CALevk1ScenarioTests.swift"
+  ],
+  "files_modified": [
+    "Calendario/CalendarioWidget/CalendarEntry.swift",
+    "Calendario/CalendarioWidget/EventFetcher.swift",
+    "Calendario/CalendarioWidget/CalendarioWidget.swift",
+    "Calendario/CalendarioWidget/WidgetViews/SmallWidgetView.swift",
+    "Calendario/CalendarioWidget/WidgetViews/MediumWidgetView.swift",
+    "Calendario/CalendarioWidget/WidgetViews/LargeWidgetView.swift",
+    "Calendario/CalendarioWidget/WidgetViews/ExtraLargeWidgetView.swift",
+    "Calendario/Calendario.xcodeproj/project.pbxproj"
+  ],
+  "tests_added": [
+    "test_CALevk1_given_emptyRules_when_applyRuleEngine_then_allEventsReturnedWithNilColor",
+    "test_CALevk1_given_allDisabledRules_when_applyRuleEngine_then_allEventsReturnedWithNilColor",
+    "test_CALevk1_given_literalRule_when_titlesMatchSubstring_then_onlyMatchingEventsReturned",
+    "test_CALevk1_given_literalRule_when_eventMatches_then_matchedColorIsRuleColorHex",
+    "test_CALevk1_given_invalidRegex_when_applyRuleEngine_then_ruleMatchesNothing",
+    "test_CALevk1_given_regexPatternOver100Chars_when_applyRuleEngine_then_ruleMatchesNothing",
+    "test_CALevk1_given_regexPatternExactly100Chars_when_applyRuleEngine_then_ruleIsEvaluated",
+    "test_CALevk1_given_twoRules_when_eventMatchesBoth_then_higherPriorityColorIsUsed",
+    "test_CALevk1_given_twoRulesInsertedReversed_when_eventMatchesBoth_then_priorityOrderDeterminesColor"
+  ],
+  "tests_passed": 9,
+  "tests_failed": 0,
+  "commit_hash": "8f40d06",
+  "error": null
+}
