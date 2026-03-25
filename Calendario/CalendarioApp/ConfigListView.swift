@@ -18,6 +18,12 @@ struct ConfigListView: View {
         }
         .navigationTitle("Configuraciones")
         .toolbar {
+            ToolbarItem(placement: .navigationBarLeading) {
+                Button(String(localized: "Actualizar widgets")) {
+                    WidgetCenter.shared.reloadAllTimelines()
+                }
+                .accessibilityIdentifier("refresh_widgets_button")
+            }
             ToolbarItem(placement: .navigationBarTrailing) {
                 Button {
                     showCreateSheet = true
