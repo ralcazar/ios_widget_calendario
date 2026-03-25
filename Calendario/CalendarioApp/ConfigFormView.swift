@@ -13,6 +13,7 @@ struct ConfigFormView: View {
     @State private var name: String = ""
     @State private var selectedCalendarId: String = ""
     @State private var calendars: [EKCalendar] = []
+    @State private var rules: [FilterRule] = []
     @Environment(\.dismiss) private var dismiss
 
     private var isEditing: Bool {
@@ -35,6 +36,19 @@ struct ConfigFormView: View {
                 Section("General") {
                     TextField("Nombre", text: $name)
                         .accessibilityIdentifier("nameField")
+                }
+                Section(String(localized: "Reglas")) {
+                    NavigationLink {
+                        RulesListView(rules: $rules)
+                    } label: {
+                        HStack {
+                            Text(String(localized: "Reglas de filtrado"))
+                            Spacer()
+                            Text("\(rules.count)")
+                                .foregroundColor(.secondary)
+                        }
+                    }
+                    .accessibilityIdentifier("rulesLink")
                 }
                 Section("Calendario") {
                     if calendars.isEmpty {
@@ -93,6 +107,7 @@ struct ConfigFormView: View {
         if let config = existingConfig {
             name = config.name
             selectedCalendarId = config.calendarIdentifier
+            rules = config.rules
         }
     }
 
@@ -105,16 +120,28 @@ struct ConfigFormView: View {
                 calendarIdentifier: selectedCalendarId,
                 colorSchemeLight: existing.colorSchemeLight,
                 colorSchemeDark: existing.colorSchemeDark,
-                rules: existing.rules,
+                rules: rules,
                 showCancelled: existing.showCancelled,
                 workStartOffset: existing.workStartOffset,
                 workEndOffset: existing.workEndOffset
             )
         } else {
-            config = WidgetConfig.new(
+            var newConfig = WidgetConfig.new(
                 name: name.trimmingCharacters(in: .whitespaces),
                 calendarIdentifier: selectedCalendarId
             )
+            newConfig = WidgetConfig(
+                id: newConfig.id,
+                name: newConfig.name,
+                calendarIdentifier: newConfig.calendarIdentifier,
+                colorSchemeLight: newConfig.colorSchemeLight,
+                colorSchemeDark: newConfig.colorSchemeDark,
+                rules: rules,
+                showCancelled: newConfig.showCancelled,
+                workStartOffset: newConfig.workStartOffset,
+                workEndOffset: newConfig.workEndOffset
+            )
+            config = newConfig
         }
         onSave(config)
     }

@@ -52,6 +52,9 @@
 		C2D3E4F5A6B7C8D9E0F1A2B3 /* RuleEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3C4D5E6F7A8B9C0D1E2F3A4 /* RuleEngine.swift */; };
 		D2E3F4A5B6C7D8E9F0A1B2C3 /* RuleEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3C4D5E6F7A8B9C0D1E2F3A4 /* RuleEngine.swift */; };
 		E2F3A4B5C6D7E8F9A0B1C2D3 /* CALevk1ScenarioTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3A4B5C6D7E8F9A0B1C2D3E4 /* CALevk1ScenarioTests.swift */; };
+		CA1B2C3D4E5F6A7B8C9D0E1F /* RulesListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA1B2C3D4E5F6A7B8C9D0E1F /* RulesListView.swift */; };
+		EA1B2C3D4E5F6A7B8C9D0E1F /* RuleEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA1B2C3D4E5F6A7B8C9D0E1F /* RuleEditView.swift */; };
+		AB1B2C3D4E5F6A7B8C9D0E1F /* CALbktScenarioTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA1B2C3D4E5F6A7B8C9D0E1F /* CALbktScenarioTests.swift */; };
 	/* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -127,6 +130,9 @@
 		CF1B2C3D4E5F6A7B8C9D0E1F /* CAL0q37ScenarioTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = CAL0q37ScenarioTests.swift; sourceTree = "<group>"; };
 		DF1B2C3D4E5F6A7B8C9D0E1F /* CAL0q36ScenarioTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = CAL0q36ScenarioTests.swift; sourceTree = "<group>"; };
 		F3A4B5C6D7E8F9A0B1C2D3E4 /* CALevk1ScenarioTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = CALevk1ScenarioTests.swift; sourceTree = "<group>"; };
+		BA1B2C3D4E5F6A7B8C9D0E1F /* RulesListView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = RulesListView.swift; sourceTree = "<group>"; };
+		DA1B2C3D4E5F6A7B8C9D0E1F /* RuleEditView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = RuleEditView.swift; sourceTree = "<group>"; };
+		FA1B2C3D4E5F6A7B8C9D0E1F /* CALbktScenarioTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = CALbktScenarioTests.swift; sourceTree = "<group>"; };
 	/* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -192,6 +198,7 @@
 				CF1B2C3D4E5F6A7B8C9D0E1F /* CAL0q37ScenarioTests.swift */,
 			DF1B2C3D4E5F6A7B8C9D0E1F /* CAL0q36ScenarioTests.swift */,
 			F3A4B5C6D7E8F9A0B1C2D3E4 /* CALevk1ScenarioTests.swift */,
+		FA1B2C3D4E5F6A7B8C9D0E1F /* CALbktScenarioTests.swift */,
 			);
 			name = CalendarioTests;
 			path = ../CalendarioTests;
@@ -243,6 +250,8 @@
 				FF8F60F6E225C5E41D3E4392 /* ContentView.swift */,
 				B1C2D3E4F5A6B7C8D9E0F1A2 /* ConfigListView.swift */,
 				D4E5F6A7B8C9D0E1F2A3B4C5 /* ConfigFormView.swift */,
+			BA1B2C3D4E5F6A7B8C9D0E1F /* RulesListView.swift */,
+			DA1B2C3D4E5F6A7B8C9D0E1F /* RuleEditView.swift */,
 				AC1B2C3D4E5F6A7B8C9D0E1F /* CalendarPermissionManager.swift */,
 				EA98274D0106940E806C5673 /* Calendario.entitlements */,
 			);
@@ -455,6 +464,8 @@
 				C3D4E5F6A7B8C9D0E1F2A3B4 /* ConfigFormView.swift in Sources */,
 				BC1B2C3D4E5F6A7B8C9D0E1F /* CalendarPermissionManager.swift in Sources */,
 			A2B3C4D5E6F7A8B9C0D1E2F3 /* RuleEngine.swift in Sources */,
+		CA1B2C3D4E5F6A7B8C9D0E1F /* RulesListView.swift in Sources */,
+		EA1B2C3D4E5F6A7B8C9D0E1F /* RuleEditView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -477,6 +488,7 @@
 				EF1B2C3D4E5F6A7B8C9D0E1F /* CAL0q36ScenarioTests.swift in Sources */,
 				D2E3F4A5B6C7D8E9F0A1B2C3 /* RuleEngine.swift in Sources */,
 				E2F3A4B5C6D7E8F9A0B1C2D3 /* CALevk1ScenarioTests.swift in Sources */,
+			AB1B2C3D4E5F6A7B8C9D0E1F /* CALbktScenarioTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
