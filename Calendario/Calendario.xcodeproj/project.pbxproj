@@ -115,6 +115,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		AC001122334455667788AABB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		AC001122334455667788AABC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AC001122334455667788AABB /* Assets.xcassets */; };
 		069C3B3DDC7227969DB385A2 /* CalendarioTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CalendarioTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		AA2B3C4D5E6F7A8B9C0D1E2F /* CalendarioUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CalendarioUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		AB4B3C4D5E6F7A8B9C0D1E2F /* CAL0q31UITests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = CAL0q31UITests.swift; sourceTree = "<group>"; };
@@ -304,6 +306,7 @@
 				AC1B2C3D4E5F6A7B8C9D0E1F /* CalendarPermissionManager.swift */,
 				D3E4F5A6B7C8D9E0F1A2B3C4 /* OnboardingView.swift */,
 				EA98274D0106940E806C5673 /* Calendario.entitlements */,
+				AC001122334455667788AABB /* Assets.xcassets */,
 			);
 			name = Calendario;
 			path = CalendarioApp;
@@ -474,6 +477,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AC001122334455667788AABC /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
