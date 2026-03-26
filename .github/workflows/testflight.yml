@@ -1,0 +1,39 @@
+name: TestFlight
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:  # permite lanzarlo manualmente desde GitHub
+
+jobs:
+  beta:
+    runs-on: macos-15
+    timeout-minutes: 60
+
+    steps:
+      - name: Checkout código
+        uses: actions/checkout@v4
+
+      - name: Instalar Ruby + Bundler
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: "3.3"
+          bundler-cache: true  # cachea gems automáticamente
+
+      - name: Escribir API Key de App Store Connect
+        env:
+          API_KEY_JSON: ${{ secrets.APP_STORE_CONNECT_API_KEY_JSON }}
+        run: |
+          mkdir -p ~/.appstoreconnect
+          echo "$API_KEY_JSON" > ~/.appstoreconnect/api_key.json
+
+      - name: Configurar SSH para Match (repo de certificados privado)
+        uses: webfactory/ssh-agent@v0.9.0
+        with:
+          ssh-private-key: ${{ secrets.MATCH_SSH_KEY }}
+
+      - name: Compilar y subir a TestFlight
+        env:
+          MATCH_PASSWORD: ${{ secrets.MATCH_PASSWORD }}
+          FASTLANE_XCODEBUILD_SETTINGS_TIMEOUT: "120"
+        run: bundle exec fastlane beta

@@ -142,7 +142,7 @@ struct ConfigFormView: View {
     private func setup() async {
         // Load calendars after confirming/requesting authorization
         let status = EKEventStore.authorizationStatus(for: .event)
-        if status == .fullAccess || status == .authorized {
+        if status == .fullAccess {
             loadCalendars()
         } else if status == .notDetermined {
             do {

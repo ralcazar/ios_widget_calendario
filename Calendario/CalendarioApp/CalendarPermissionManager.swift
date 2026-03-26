@@ -24,7 +24,7 @@ final class CalendarPermissionManager {
     }
 
     var isAuthorized: Bool {
-        authorizationStatus == .fullAccess || authorizationStatus == .authorized
+        authorizationStatus == .fullAccess
     }
 
     var isDenied: Bool {
