@@ -1,6 +1,6 @@
 default_platform(:ios)
 
-APP_PROJECT    = "Calendario.xcodeproj"
+APP_PROJECT    = "Calendario/Calendario.xcodeproj"
 APP_SCHEME     = "Calendario"
 BUILD_DIR      = "build"
 API_KEY_FILE   = File.expand_path("~/.appstoreconnect/api_key.json")
