@@ -1,7 +1,7 @@
 {
-  "status": "busy",
-  "current_bead": "CAL-u91.4",
-  "current_stage": "verification",
+  "status": "idle",
+  "current_bead": null,
+  "current_stage": null,
   "completed": [
     "CAL-sue.1",
     "CAL-sue.3",
@@ -18,7 +18,13 @@
     "CAL-evk.3",
     "CAL-u91.1",
     "CAL-u91.2",
-    "CAL-u91.3"
+    "CAL-u91.3",
+    "CAL-u91.4",
+    "CAL-jo5.3",
+    "CAL-b3d",
+    "CAL-bmx",
+    "CAL-jo5.2",
+    "CAL-jo5.1"
   ],
   "failed": [],
   "last_update": "2026-03-25T00:00:00",

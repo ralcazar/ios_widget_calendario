@@ -1,0 +1,17 @@
+{
+  "bead_id": "CAL-jo5.3",
+  "status": "success",
+  "files_created": ["CalendarioTests/CALjo53ScenarioTests.swift"],
+  "files_modified": [
+    "Calendario/Calendario.xcodeproj/project.pbxproj",
+    "Calendario/CalendarioApp/ConfigListView.swift"
+  ],
+  "tests_added": [
+    "test_CALjo53_given_refreshButton_when_tapped_then_reloadAllTimelinesIsCalled",
+    "test_CALjo53_given_configListView_when_refreshButtonExists_then_accessibilityIdentifierIsSet"
+  ],
+  "tests_passed": 2,
+  "tests_failed": 0,
+  "commit_hash": "90d406a",
+  "error": null
+}

@@ -1,0 +1,25 @@
+{
+  "bead_id": "CAL-jo5.2",
+  "status": "success",
+  "files_created": [
+    "Calendario/Shared/WorkHoursFilter.swift",
+    "CalendarioTests/CALjo52ScenarioTests.swift"
+  ],
+  "files_modified": [
+    "Calendario/CalendarioWidget/CalendarioWidget.swift",
+    "Calendario/CalendarioApp/ConfigFormView.swift",
+    "Calendario/Calendario.xcodeproj/project.pbxproj"
+  ],
+  "tests_added": [
+    "test_CALjo52_given_noFilter_when_isWithinWorkHours_then_returnsTrue",
+    "test_CALjo52_given_eventOverlapsWindowStart_when_isWithinWorkHours_then_included",
+    "test_CALjo52_given_eventEndsBeforeWindowStarts_when_isWithinWorkHours_then_excluded",
+    "test_CALjo52_given_eventStartsAtWindowStart_when_isWithinWorkHours_then_included",
+    "test_CALjo52_given_eventStartsAtWindowEnd_when_isWithinWorkHours_then_excluded",
+    "test_CALjo52_given_eventWithNilEndDate_when_isWithinWorkHours_then_usesStartPlusOneHour"
+  ],
+  "tests_passed": 6,
+  "tests_failed": 0,
+  "commit_hash": "08cc8c895cb6b20a6bce0fb147e6dc65d2d21a14",
+  "error": null
+}
