@@ -207,17 +207,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		27C1901E212F6DD7D9D04799 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				F714B02BC1F07883D4B273B6 /* Calendario.app */,
-				D30B1406E1503531D5CEE812 /* CalendarioWidget.appex */,
-				069C3B3DDC7227969DB385A2 /* CalendarioTests.xctest */,
-				AA2B3C4D5E6F7A8B9C0D1E2F /* CalendarioUITests.xctest */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
 		FF2B3C4D5E6F7A8B9C0D1E2F /* CalendarioUITests */ = {
 			isa = PBXGroup;
 			children = (
@@ -361,7 +350,6 @@
 				EF4EA9DE894EF1E8C4A7BDFB /* CalendarioWidget */,
 				3AFDA4F1BA745D9CA30E6660 /* CalendarioTests */,
 				FF2B3C4D5E6F7A8B9C0D1E2F /* CalendarioUITests */,
-				27C1901E212F6DD7D9D04799 /* Products */,
 			);
 			sourceTree = "<group>";
 		};
