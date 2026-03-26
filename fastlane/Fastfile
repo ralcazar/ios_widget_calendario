@@ -1,0 +1,120 @@
+default_platform(:ios)
+
+APP_PROJECT    = "Calendario.xcodeproj"
+APP_SCHEME     = "Calendario"
+BUILD_DIR      = "build"
+API_KEY_FILE   = File.expand_path("~/.appstoreconnect/api_key.json")
+
+platform :ios do
+
+  # Carga la API Key antes de cualquier lane (evita login con Apple ID y el bug de SSL)
+  before_all do
+    # Fix SSL en rbenv Ruby (cert bundle del sistema macOS)
+    ENV["SSL_CERT_FILE"] = "/etc/ssl/cert.pem"
+
+    if File.exist?(API_KEY_FILE)
+      key = JSON.parse(File.read(API_KEY_FILE))
+      app_store_connect_api_key(
+        key_id:       key["key_id"],
+        issuer_id:    key["issuer_id"],
+        key_filepath: File.expand_path(key["key_filepath"])
+      )
+    else
+      UI.important("⚠️  No se encontró #{API_KEY_FILE} — se usará Apple ID (puede fallar por SSL/2FA)")
+    end
+  end
+
+  # ── Sincronizar certificados con match ────────────────────────────────────
+  desc "Descarga/renueva certificados y provisioning profiles"
+  lane :certs do
+    match(type: "appstore", readonly: false)
+  end
+
+  # ── CI: compilar y archivar ──────────────────────────────────────────────
+  desc "Actualiza repo, incrementa build y genera el IPA"
+  lane :build do
+    sh("git -C .. pull --ff-only")
+
+    match(type: "appstore", readonly: true)
+
+    increment_build_number(
+      build_number: latest_testflight_build_number + 1,
+      xcodeproj: APP_PROJECT
+    )
+
+    gym(
+      project:          APP_PROJECT,
+      scheme:           APP_SCHEME,
+      configuration:    "Release",
+      export_method:    "app-store",
+      output_directory: BUILD_DIR,
+      output_name:      "Calendario.ipa",
+      clean:            true
+    )
+  end
+
+  # ── CD: subir a TestFlight (testers internos, sin revisión de Apple) ─────
+  desc "Compila y sube a TestFlight para testers internos"
+  lane :beta do
+    build
+
+    pilot(
+      ipa:                               "#{BUILD_DIR}/Calendario.ipa",
+      distribute_external:               false,
+      notify_external_testers:           false,
+      skip_waiting_for_build_processing: false,
+      changelog:                         "Build automático"
+    )
+  end
+
+  # ── App Store: subir metadatos y screenshots ─────────────────────────────
+  desc "Sube metadatos y screenshots a App Store Connect (sin enviar a revisión)"
+  lane :metadata do
+    deliver(
+      app_identifier:        "com.ralcazar.calendario",
+      skip_binary_upload:    true,
+      skip_screenshots:      false,
+      overwrite_screenshots: true,
+      force:                 true,
+      precheck_include_in_app_purchases: false,
+      submit_for_review:     false
+    )
+  end
+
+  # ── App Store: compilar + subir + enviar a revisión ──────────────────────
+  desc "Compila, sube IPA y metadatos a App Store y envía a revisión de Apple"
+  lane :release do
+    build
+
+    deliver(
+      app_identifier:        "com.ralcazar.calendario",
+      ipa:                   "#{BUILD_DIR}/Calendario.ipa",
+      skip_screenshots:      false,
+      overwrite_screenshots: true,
+      force:                 true,
+      submit_for_review:     true,
+      automatic_release:     false,
+      submission_information: {
+        add_id_info_uses_idfa: false
+      }
+    )
+  end
+
+  # ── Screenshots automáticos con Snapshot ─────────────────────────────────
+  desc "Genera screenshots en simulador para todos los dispositivos requeridos"
+  lane :screenshots do
+    snapshot(
+      scheme:                     APP_SCHEME,
+      output_directory:           "fastlane/screenshots",
+      clear_previous_screenshots: true,
+      devices: [
+        "iPhone 15 Pro Max",
+        "iPhone 15",
+        "iPad Pro (12.9-inch) (6th generation)"
+      ],
+#       languages: ["en-US", "es-ES"]
+      languages: ["en-GB"]
+    )
+  end
+
+end

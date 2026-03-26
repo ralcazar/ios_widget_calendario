@@ -1,0 +1,7 @@
+app_identifier("com.ralcazar.calendario")
+apple_id("ralcazar@gmail.com")
+
+# Obtén estos IDs en developer.apple.com y appstoreconnect.apple.com
+# (aparecen en la URL o en el perfil de tu cuenta)
+team_id("VM3BNYCM22")
+itc_team_id("VM3BNYCM22")

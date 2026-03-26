@@ -1,0 +1,19 @@
+app_identifier "com.ralcazar.calendario"
+username "ralcazar@gmail.com"
+
+# Categoría principal
+primary_category "PRODUCTIVITY"
+
+# Precio (se gestiona en App Store Connect, no aquí)
+# price_tier 1  # $0.99 - tier 1, tier 4 = $3.99, tier 5 = $4.99
+
+# Metadatos y screenshots
+metadata_path "./fastlane/metadata"
+screenshots_path "./fastlane/screenshots"
+
+# Idiomas gestionados
+# languages ["en-US", "es-ES"]
+languages ["en-GB"]
+
+# No preguntar confirmación en CI
+force true
