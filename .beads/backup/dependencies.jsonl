@@ -16,6 +16,7 @@
 {"created_at":"2026-03-24T21:03:52Z","created_by":"Roberto Alcázar","depends_on_id":"CAL-0q3.4","issue_id":"CAL-0q3.7","metadata":"{}","type":"blocks"}
 {"created_at":"2026-03-24T21:04:07Z","created_by":"Roberto Alcázar","depends_on_id":"CAL-0q3","issue_id":"CAL-0q3.8","metadata":"{}","type":"parent-child"}
 {"created_at":"2026-03-24T21:04:08Z","created_by":"Roberto Alcázar","depends_on_id":"CAL-0q3.4","issue_id":"CAL-0q3.8","metadata":"{}","type":"blocks"}
+{"created_at":"2026-03-27T04:27:51Z","created_by":"Roberto Alcázar","depends_on_id":"CAL-eb3","issue_id":"CAL-3qm","metadata":"{}","type":"blocks"}
 {"created_at":"2026-03-27T04:00:43Z","created_by":"Roberto Alcázar","depends_on_id":"CAL-7rx","issue_id":"CAL-ap9","metadata":"{}","type":"blocks"}
 {"created_at":"2026-03-24T22:12:22Z","created_by":"Roberto Alcázar","depends_on_id":"CAL-evk","issue_id":"CAL-bkt","metadata":"{}","type":"parent-child"}
 {"created_at":"2026-03-24T22:12:01Z","created_by":"Roberto Alcázar","depends_on_id":"CAL-evk.1","issue_id":"CAL-bkt","metadata":"{}","type":"blocks"}
