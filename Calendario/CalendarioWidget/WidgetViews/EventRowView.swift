@@ -69,7 +69,7 @@ struct EventRowView: View {
                 .accessibilityIdentifier("dismiss_event_button")
             }
         }
-        .frame(height: 32, alignment: .leading)
+        .frame(minHeight: 32, alignment: .leading)
         .opacity(isCancelled ? 0.5 : 1.0)
         .accessibilityIdentifier("eventRow_\(event.eventIdentifier ?? "")")
     }

@@ -77,6 +77,7 @@ struct ConfigListView: View {
             }
             .accessibilityIdentifier("createFirstConfigButton")
         }
+        .frame(maxWidth: 400)
     }
 
     private var configList: some View {
