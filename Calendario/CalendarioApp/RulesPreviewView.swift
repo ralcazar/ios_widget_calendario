@@ -102,7 +102,7 @@ private struct EventPreviewRow: View {
         if let hex = colorHex, let color = Color(hex: hex) {
             return color
         }
-        return .clear
+        return Color(cgColor: event.calendar.cgColor)
     }
 
     var body: some View {

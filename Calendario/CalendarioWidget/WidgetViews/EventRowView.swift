@@ -34,15 +34,16 @@ struct EventRowView: View {
 
     private var rowContent: some View {
         HStack(spacing: 6) {
-            if let hex = matchedColor, let color = Color(hex: hex) {
-                Rectangle()
-                    .fill(color)
-                    .frame(width: 3)
-                    .clipShape(Capsule())
-                    .accessibilityIdentifier("accentBar_\(event.eventIdentifier ?? "")")
-            } else {
-                Spacer().frame(width: 3)
-            }
+            Rectangle()
+                .fill({
+                    if let hex = matchedColor, let color = Color(hex: hex) {
+                        return color
+                    }
+                    return Color(cgColor: event.calendar.cgColor)
+                }())
+                .frame(width: 3)
+                .clipShape(Capsule())
+                .accessibilityIdentifier("accentBar_\(event.eventIdentifier ?? "")")
             if showColorDot {
                 Circle()
                     .fill(Color(cgColor: event.calendar.cgColor))

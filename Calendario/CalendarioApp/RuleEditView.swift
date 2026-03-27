@@ -9,6 +9,7 @@ struct RuleEditView: View {
     let mode: RuleEditMode
     let onSave: (FilterRule) -> Void
 
+    @State private var ruleType: RuleType = .highlight
     @State private var pattern: String = ""
     @State private var isRegex: Bool = false
     @State private var isEnabled: Bool = true
@@ -37,6 +38,15 @@ struct RuleEditView: View {
     var body: some View {
         NavigationStack {
             Form {
+                Section(String(localized: "Tipo de regla")) {
+                    Picker(String(localized: "Tipo"), selection: $ruleType) {
+                        Text(String(localized: "Resaltar")).tag(RuleType.highlight)
+                        Text(String(localized: "Ocultar")).tag(RuleType.hide)
+                    }
+                    .pickerStyle(.segmented)
+                    .disabled(isEditing)
+                    .accessibilityIdentifier("ruleTypePicker")
+                }
                 Section(String(localized: "Patrón")) {
                     TextField(String(localized: "Texto o regex"), text: $pattern)
                         .autocorrectionDisabled()
@@ -55,9 +65,11 @@ struct RuleEditView: View {
                         .accessibilityIdentifier("regexErrorLabel")
                     }
                 }
-                Section(String(localized: "Color")) {
-                    ColorPicker(String(localized: "Color del evento"), selection: $selectedColor, supportsOpacity: false)
-                        .accessibilityIdentifier("colorPicker")
+                if ruleType == .highlight {
+                    Section(String(localized: "Color")) {
+                        ColorPicker(String(localized: "Color del evento"), selection: $selectedColor, supportsOpacity: false)
+                            .accessibilityIdentifier("colorPicker")
+                    }
                 }
                 Section {
                     Toggle(String(localized: "Habilitada"), isOn: $isEnabled)
@@ -87,6 +99,7 @@ struct RuleEditView: View {
 
     private func setup() {
         guard let rule = existingRule else { return }
+        ruleType = rule.type
         pattern = rule.pattern
         isRegex = rule.isRegex
         isEnabled = rule.isEnabled
@@ -94,11 +107,12 @@ struct RuleEditView: View {
     }
 
     private func save() {
-        let colorHex = selectedColor.toHex() ?? "#FF0000"
+        let colorHex = ruleType == .highlight ? (selectedColor.toHex() ?? "#FF0000") : ""
         let rule: FilterRule
         if let existing = existingRule {
             rule = FilterRule(
                 id: existing.id,
+                type: ruleType,
                 pattern: pattern.trimmingCharacters(in: .whitespaces),
                 isRegex: isRegex,
                 colorHex: colorHex,
@@ -108,6 +122,7 @@ struct RuleEditView: View {
         } else {
             rule = FilterRule(
                 id: UUID(),
+                type: ruleType,
                 pattern: pattern.trimmingCharacters(in: .whitespaces),
                 isRegex: isRegex,
                 colorHex: colorHex,

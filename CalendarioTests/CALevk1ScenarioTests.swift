@@ -47,7 +47,7 @@ final class CALevk1ScenarioTests: XCTestCase {
 
     // MARK: - Scenario: Regla literal filtra por subcadena
 
-    func test_CALevk1_given_literalRule_when_titlesMatchSubstring_then_onlyMatchingEventsReturned() {
+    func test_CALevk1_given_literalRule_when_titlesMatchSubstring_then_matchingEventsColored() {
         // Given
         let rule = makeRule(pattern: "trabajo", colorHex: "#0000FF")
         let events = [
@@ -57,11 +57,14 @@ final class CALevk1ScenarioTests: XCTestCase {
         ]
         // When
         let result = RuleEngine.apply(rules: [rule], to: events)
-        // Then — only events containing "trabajo" (case-insensitive) are returned
-        XCTAssertEqual(result.count, 2)
-        let titles = result.map(\.event.title)
-        XCTAssertTrue(titles.contains("Reunión de trabajo"))
-        XCTAssertTrue(titles.contains("Trabajo remoto"))
+        // Then — all events shown; matching ones have color, non-matching has nil
+        XCTAssertEqual(result.count, 3)
+        let trabajo = result.first { $0.event.title == "Reunión de trabajo" }
+        let remoto = result.first { $0.event.title == "Trabajo remoto" }
+        let cumple = result.first { $0.event.title == "Cumpleaños" }
+        XCTAssertEqual(trabajo?.matchedColor, "#0000FF")
+        XCTAssertEqual(remoto?.matchedColor, "#0000FF")
+        XCTAssertNil(cumple?.matchedColor)
     }
 
     func test_CALevk1_given_literalRule_when_eventMatches_then_matchedColorIsRuleColorHex() {
@@ -83,8 +86,9 @@ final class CALevk1ScenarioTests: XCTestCase {
         let events = [makeEvent(title: "cualquier evento")]
         // When — must not throw or crash
         let result = RuleEngine.apply(rules: [rule], to: events)
-        // Then
-        XCTAssertEqual(result.count, 0)
+        // Then — event shown with nil color (no match, but not hidden)
+        XCTAssertEqual(result.count, 1)
+        XCTAssertNil(result[0].matchedColor)
     }
 
     // MARK: - Scenario: Regex demasiado largo no se evalúa
@@ -96,8 +100,9 @@ final class CALevk1ScenarioTests: XCTestCase {
         let events = [makeEvent(title: String(repeating: "a", count: 200))]
         // When
         let result = RuleEngine.apply(rules: [rule], to: events)
-        // Then
-        XCTAssertEqual(result.count, 0)
+        // Then — event shown with nil color (no match, but not hidden)
+        XCTAssertEqual(result.count, 1)
+        XCTAssertNil(result[0].matchedColor)
     }
 
     func test_CALevk1_given_regexPatternExactly100Chars_when_applyRuleEngine_then_ruleIsEvaluated() {

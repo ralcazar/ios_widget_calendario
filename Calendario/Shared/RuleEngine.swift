@@ -9,12 +9,25 @@ struct RuleEngine {
         guard !activeRules.isEmpty else {
             return events.map { ($0, nil) }
         }
+
+        let hideRules = activeRules.filter { $0.type == .hide }
+        let highlightRules = activeRules.filter { $0.type == .highlight }
+
         return events.compactMap { event in
-            guard let title = event.title else { return nil }
-            if let matched = activeRules.first(where: { rule in matches(rule: rule, title: title) }) {
+            guard let title = event.title else { return (event, nil) }
+
+            // Si coincide con alguna regla de ocultar → excluir
+            if hideRules.contains(where: { matches(rule: $0, title: title) }) {
+                return nil
+            }
+
+            // Si coincide con alguna regla de resaltar → color de la primera que coincida
+            if let matched = highlightRules.first(where: { matches(rule: $0, title: title) }) {
                 return (event, matched.colorHex)
             }
-            return nil  // evento no coincide con ninguna regla → se oculta
+
+            // No coincide con nada → mostrar con matchedColor = nil
+            return (event, nil)
         }
     }
 

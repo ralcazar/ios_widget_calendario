@@ -39,6 +39,7 @@ struct RulesListView: View {
                 var updated = newRule
                 updated = FilterRule(
                     id: newRule.id,
+                    type: newRule.type,
                     pattern: newRule.pattern,
                     isRegex: newRule.isRegex,
                     colorHex: newRule.colorHex,
@@ -72,6 +73,7 @@ struct RulesListView: View {
             if let i = rules.firstIndex(where: { $0.id == rule.id }) {
                 rules[i] = FilterRule(
                     id: rule.id,
+                    type: rule.type,
                     pattern: rule.pattern,
                     isRegex: rule.isRegex,
                     colorHex: rule.colorHex,
@@ -88,6 +90,7 @@ struct RulesListView: View {
             if let i = rules.firstIndex(where: { $0.id == rule.id }) {
                 rules[i] = FilterRule(
                     id: rule.id,
+                    type: rule.type,
                     pattern: rule.pattern,
                     isRegex: rule.isRegex,
                     colorHex: rule.colorHex,
@@ -104,9 +107,15 @@ private struct RuleRowView: View {
 
     var body: some View {
         HStack(spacing: 12) {
-            Circle()
-                .fill(Color(hex: rule.colorHex) ?? .accentColor)
-                .frame(width: 12, height: 12)
+            if rule.type == .highlight {
+                Circle()
+                    .fill(Color(hex: rule.colorHex) ?? .accentColor)
+                    .frame(width: 12, height: 12)
+            } else {
+                Image(systemName: "eye.slash")
+                    .foregroundColor(.secondary)
+                    .frame(width: 12, height: 12)
+            }
             VStack(alignment: .leading, spacing: 2) {
                 Text(rule.pattern)
                     .foregroundColor(.primary)

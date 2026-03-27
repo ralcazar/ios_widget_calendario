@@ -55,10 +55,12 @@ final class CALevk3ScenarioTests: XCTestCase {
         let events = [makeEvent(title: "Reunión de trabajo"), makeEvent(title: "Dentista")]
         // When
         let result = RuleEngine.apply(rules: [rule], to: events)
-        // Then — only matching event is included
-        XCTAssertEqual(result.count, 1)
-        XCTAssertEqual(result[0].event.title, "Reunión de trabajo")
-        XCTAssertEqual(result[0].matchedColor, "#00FF00")
+        // Then — all events shown; matching one has color, non-matching has nil
+        XCTAssertEqual(result.count, 2)
+        let trabajo = result.first { $0.event.title == "Reunión de trabajo" }
+        let dentista = result.first { $0.event.title == "Dentista" }
+        XCTAssertEqual(trabajo?.matchedColor, "#00FF00")
+        XCTAssertNil(dentista?.matchedColor)
     }
 
     func test_CALevk3_given_multipleActiveRules_when_applyRuleEngine_then_eventsColoredByMatchingRule() {
@@ -72,12 +74,14 @@ final class CALevk3ScenarioTests: XCTestCase {
         ]
         // When
         let result = RuleEngine.apply(rules: [ruleA, ruleB], to: events)
-        // Then
-        XCTAssertEqual(result.count, 2)
+        // Then — all 3 events shown; unmatched has nil color
+        XCTAssertEqual(result.count, 3)
         let trabajo = result.first { $0.event.title == "Reunión de trabajo" }
         let personal = result.first { $0.event.title == "Cita personal" }
+        let dentista = result.first { $0.event.title == "Dentista" }
         XCTAssertEqual(trabajo?.matchedColor, "#0000FF")
         XCTAssertEqual(personal?.matchedColor, "#FF0000")
+        XCTAssertNil(dentista?.matchedColor)
     }
 
     // MARK: - Scenario: Cambios en reglas se reflejan (sort order preserved)

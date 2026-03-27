@@ -116,6 +116,7 @@ final class CALbktScenarioTests: XCTestCase {
         for (index, rule) in rules.enumerated() {
             rules[index] = FilterRule(
                 id: rule.id,
+                type: rule.type,
                 pattern: rule.pattern,
                 isRegex: rule.isRegex,
                 colorHex: rule.colorHex,
@@ -141,6 +142,7 @@ final class CALbktScenarioTests: XCTestCase {
         for (index, rule) in rules.enumerated() {
             rules[index] = FilterRule(
                 id: rule.id,
+                type: rule.type,
                 pattern: rule.pattern,
                 isRegex: rule.isRegex,
                 colorHex: rule.colorHex,
