@@ -32,13 +32,16 @@ struct RuleEngine {
     }
 
     private static func matches(rule: FilterRule, title: String) -> Bool {
-        if rule.isRegex {
-            // Limitar complejidad: rechazar patrones con más de 100 caracteres
-            guard rule.pattern.count <= 100 else { return false }
-            guard let regex = try? Regex(rule.pattern) else { return false }
+        matches(pattern: rule.pattern, isRegex: rule.isRegex, title: title)
+    }
+
+    static func matches(pattern: String, isRegex: Bool, title: String) -> Bool {
+        if isRegex {
+            guard pattern.count <= 100 else { return false }
+            guard let regex = try? Regex(pattern) else { return false }
             return title.contains(regex)
         } else {
-            return title.localizedCaseInsensitiveContains(rule.pattern)
+            return title.localizedCaseInsensitiveContains(pattern)
         }
     }
 }

@@ -17,6 +17,8 @@
 		EB31A2B3C4D5E6F7A8B9C0D1 /* CALeb3ScenarioTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB31B2C3D4E5F6A7B8C9D0E1 /* CALeb3ScenarioTests.swift */; };
 		KQ51A2B3C4D5E6F7A8B9C0D1 /* CALkq5ScenarioTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = KQ51B2C3D4E5F6A7B8C9D0E1 /* CALkq5ScenarioTests.swift */; };
 		X1Y1A2B3C4D5E6F7A8B9C0D1 /* CALx1yScenarioTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = X1Y1B2C3D4E5F6A7B8C9D0E1 /* CALx1yScenarioTests.swift */; };
+		7I71A2B3C4D5E6F7A8B9C0D1 /* CAL7i7ScenarioTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7I71B2C3D4E5F6A7B8C9D0E1 /* CAL7i7ScenarioTests.swift */; };
+		RP1A2B3C4D5E6F7A8B9C0D1E /* RulePreviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = RP1B2C3D4E5F6A7B8C9D0E1F /* RulePreviewView.swift */; };
 		F9B2C0D14E8AB12345678901 /* CALsue3ScenarioTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7A3F9B2C0D14E8AB1234567 /* CALsue3ScenarioTests.swift */; };
 		5331DABF246087AAA9222708 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55FBC385BF6EEC4C9A65CDCA /* Foundation.framework */; };
 		6C04CA0D7C196782CCBA843D /* SharedConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3FD4EEAC6107E77BFB874AC /* SharedConstants.swift */; };
@@ -132,6 +134,8 @@
 		EB31B2C3D4E5F6A7B8C9D0E1 /* CALeb3ScenarioTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = CALeb3ScenarioTests.swift; sourceTree = "<group>"; };
 		KQ51B2C3D4E5F6A7B8C9D0E1 /* CALkq5ScenarioTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = CALkq5ScenarioTests.swift; sourceTree = "<group>"; };
 		X1Y1B2C3D4E5F6A7B8C9D0E1 /* CALx1yScenarioTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = CALx1yScenarioTests.swift; sourceTree = "<group>"; };
+		7I71B2C3D4E5F6A7B8C9D0E1 /* CAL7i7ScenarioTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = CAL7i7ScenarioTests.swift; sourceTree = "<group>"; };
+		RP1B2C3D4E5F6A7B8C9D0E1F /* RulePreviewView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = RulePreviewView.swift; sourceTree = "<group>"; };
 		E7A3F9B2C0D14E8AB1234567 /* CALsue3ScenarioTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = CALsue3ScenarioTests.swift; sourceTree = "<group>"; };
 		2C0DD4B4C9CE111FAFC680C9 /* CalendarioWidget.entitlements */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.entitlements; path = CalendarioWidget.entitlements; sourceTree = "<group>"; };
 		55FBC385BF6EEC4C9A65CDCA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS18.0.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
@@ -257,6 +261,7 @@
 				EB31B2C3D4E5F6A7B8C9D0E1 /* CALeb3ScenarioTests.swift */,
 				KQ51B2C3D4E5F6A7B8C9D0E1 /* CALkq5ScenarioTests.swift */,
 				X1Y1B2C3D4E5F6A7B8C9D0E1 /* CALx1yScenarioTests.swift */,
+			7I71B2C3D4E5F6A7B8C9D0E1 /* CAL7i7ScenarioTests.swift */,
 			);
 			name = CalendarioTests;
 			path = ../CalendarioTests;
@@ -315,6 +320,7 @@
 			BA1B2C3D4E5F6A7B8C9D0E1F /* RulesListView.swift */,
 			DA1B2C3D4E5F6A7B8C9D0E1F /* RuleEditView.swift */,
 			FA2B3C4D5E6F7A8B9C0D1FA2 /* RulesPreviewView.swift */,
+			RP1B2C3D4E5F6A7B8C9D0E1F /* RulePreviewView.swift */,
 				AC1B2C3D4E5F6A7B8C9D0E1F /* CalendarPermissionManager.swift */,
 				D3E4F5A6B7C8D9E0F1A2B3C4 /* OnboardingView.swift */,
 				EA98274D0106940E806C5673 /* Calendario.entitlements */,
@@ -534,6 +540,7 @@
 		CA1B2C3D4E5F6A7B8C9D0E1F /* RulesListView.swift in Sources */,
 		EA1B2C3D4E5F6A7B8C9D0E1F /* RuleEditView.swift in Sources */,
 			BA2B3C4D5E6F7A8B9C0D1FA2 /* RulesPreviewView.swift in Sources */,
+			RP1A2B3C4D5E6F7A8B9C0D1E /* RulePreviewView.swift in Sources */,
 				B4C5D6E7F8A9B0C1D2E3F4A5 /* Color+Hex.swift in Sources */,
 				B5C6D7E8F9A0B1C2D3E4F5A6 /* Array+OverlapGrouping.swift in Sources */,
 			B6C7D8E9F0A1B2C3D4E5F6A7 /* WorkHoursFilter.swift in Sources */,
@@ -579,6 +586,7 @@
 				EB31A2B3C4D5E6F7A8B9C0D1 /* CALeb3ScenarioTests.swift in Sources */,
 				KQ51A2B3C4D5E6F7A8B9C0D1 /* CALkq5ScenarioTests.swift in Sources */,
 				X1Y1A2B3C4D5E6F7A8B9C0D1 /* CALx1yScenarioTests.swift in Sources */,
+			7I71A2B3C4D5E6F7A8B9C0D1 /* CAL7i7ScenarioTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

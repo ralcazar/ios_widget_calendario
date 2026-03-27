@@ -72,6 +72,15 @@ struct RuleEditView: View {
                     }
                 }
                 Section {
+                    NavigationLink {
+                        RulePreviewView(pattern: pattern, isRegex: isRegex, ruleType: ruleType)
+                    } label: {
+                        Label(String(localized: "Vista previa"), systemImage: "eye")
+                    }
+                    .disabled(pattern.trimmingCharacters(in: .whitespaces).isEmpty || regexError != nil)
+                    .accessibilityIdentifier("rulePreviewLink")
+                }
+                Section {
                     Toggle(String(localized: "Habilitada"), isOn: $isEnabled)
                         .accessibilityIdentifier("isEnabledToggle")
                 }
