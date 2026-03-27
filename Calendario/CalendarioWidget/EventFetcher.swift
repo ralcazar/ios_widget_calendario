@@ -26,9 +26,7 @@ enum EventFetcher {
     }
 
     static func calendarURL(for date: Date) -> URL? {
-        // calshow: uses timeIntervalSinceReferenceDate (seconds since Jan 1, 2001)
-        let timestamp = Int(date.timeIntervalSinceReferenceDate)
-        return URL(string: "calshow:\(timestamp)")
+        CalendarURL.forDate(date)
     }
 
     static func buildTimelineEntries(events: [(event: EKEvent, matchedColor: String?)], configuration: ConfigurationAppIntent, config: WidgetConfig) -> [CalendarEntry] {

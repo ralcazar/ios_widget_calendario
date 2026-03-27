@@ -39,8 +39,14 @@ struct RulesPreviewView: View {
             } else {
                 List(annotatedEvents.indices, id: \.self) { index in
                     let item = annotatedEvents[index]
-                    EventPreviewRow(event: item.event, colorHex: item.matchedColor)
-                        .accessibilityIdentifier("previewRow_\(index)")
+                    Button {
+                        if let url = CalendarURL.forDate(item.event.startDate) {
+                            UIApplication.shared.open(url)
+                        }
+                    } label: {
+                        EventPreviewRow(event: item.event, colorHex: item.matchedColor)
+                    }
+                    .accessibilityIdentifier("previewRow_tap_\(index)")
                 }
                 .accessibilityIdentifier("previewEventsList")
             }
