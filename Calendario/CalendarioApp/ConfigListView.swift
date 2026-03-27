@@ -1,5 +1,6 @@
 import SwiftUI
 import WidgetKit
+import EventKit
 
 struct ConfigListView: View {
     @State private var configs: [WidgetConfig] = []
@@ -7,6 +8,7 @@ struct ConfigListView: View {
     @State private var editingConfig: WidgetConfig? = nil
     @State private var deletingConfig: WidgetConfig? = nil
     @State private var showDeleteAlert = false
+    @State private var calendarNames: [String: String] = [:]
 
     var body: some View {
         Group {
@@ -86,9 +88,17 @@ struct ConfigListView: View {
                     VStack(alignment: .leading) {
                         Text(config.name)
                             .foregroundColor(.primary)
-                        Text(config.calendarIdentifier)
-                            .font(.caption)
-                            .foregroundColor(.secondary)
+                        HStack(spacing: 4) {
+                            Text(calendarDisplayName(for: config.calendarIdentifier))
+                                .font(.caption)
+                                .foregroundColor(.secondary)
+                            Text("·")
+                                .font(.caption)
+                                .foregroundColor(.secondary)
+                            Text(rulesCountText(config.rules.count))
+                                .font(.caption)
+                                .foregroundColor(.secondary)
+                        }
                     }
                 }
                 .accessibilityIdentifier("configRow_\(config.id)")
@@ -108,6 +118,21 @@ struct ConfigListView: View {
 
     private func loadConfigs() {
         configs = WidgetConfigStore.loadAll()
+        loadCalendarNames()
+    }
+
+    private func loadCalendarNames() {
+        guard EKEventStore.authorizationStatus(for: .event) == .fullAccess else { return }
+        let store = EKEventStore()
+        var names: [String: String] = [:]
+        for calendar in store.calendars(for: .event) {
+            names[calendar.calendarIdentifier] = calendar.title
+        }
+        calendarNames = names
+    }
+
+    private func calendarDisplayName(for identifier: String) -> String {
+        resolveCalendarDisplayName(for: identifier, in: calendarNames)
     }
 
     private func deleteConfig(_ config: WidgetConfig) {
@@ -117,4 +142,16 @@ struct ConfigListView: View {
         WidgetCenter.shared.reloadAllTimelines()
         loadConfigs()
     }
+}
+
+func rulesCountText(_ count: Int) -> String {
+    switch count {
+    case 0: return String(localized: "Sin reglas")
+    case 1: return String(localized: "1 regla")
+    default: return String(localized: "\(count) reglas")
+    }
+}
+
+func resolveCalendarDisplayName(for identifier: String, in names: [String: String]) -> String {
+    names[identifier] ?? identifier
 }
