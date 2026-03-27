@@ -1,1 +1,13 @@
+Implementation complete. Here's what was delivered:
 
+**Files created:**
+- `Shared/TimelineLayoutEngine.swift` — pure calculation engine (yFraction, heightFraction, column layout algorithm) — unit-testable from `@testable import Calendario`
+- `CalendarioWidget/WidgetViews/TimelineView.swift` — GeometryReader-based visual timeline with hour grid, event blocks, now-line, all-day strip
+- `CalendarioWidget/WidgetViews/TimelineEventBlock.swift` — individual event block with color accent bar, tappable link, canceled opacity
+- `CalendarioTests/CAL3qmScenarioTests.swift` — 17 unit tests
+
+**Files modified:**
+- `MediumWidgetView.swift` / `LargeWidgetView.swift` — replaced text list with `TimelineView` (`compact: true/false`)
+- `project.pbxproj` — added all new files to correct targets (app, widget, tests)
+
+**Tests: 17/17 passed** — covering yFraction clamping, heightFraction clamping, default work hours fallback, and the greedy column layout algorithm for overlapping events.

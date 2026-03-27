@@ -1,0 +1,16 @@
+{
+  "bead_id": "CAL-ap9",
+  "status": "success",
+  "files_created": ["CalendarioTests/CALap9ScenarioTests.swift"],
+  "files_modified": ["Calendario/CalendarioApp/OnboardingView.swift"],
+  "tests_added": [
+    "test_CALap9_given_onboardingView_when_rendered_then_singleScreenNoTabView",
+    "test_CALap9_given_onboardingNotCompleted_when_entendidoTapped_then_marksCompleted",
+    "test_CALap9_given_onboardingView_when_created_then_hasIsPresentedBinding",
+    "test_CALap9_given_onboardingView_when_rendered_then_doesNotImportEventKit"
+  ],
+  "tests_passed": 144,
+  "tests_failed": 0,
+  "commit_hash": "f1a3022",
+  "error": null
+}

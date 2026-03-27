@@ -1,0 +1,20 @@
+{
+  "bead_id": "CAL-yw8",
+  "status": "success",
+  "files_created": [
+    "CalendarioTests/CALyw8ScenarioTests.swift"
+  ],
+  "files_modified": [
+    "Calendario/CalendarioApp/ContentView.swift",
+    "Calendario/CalendarioApp/ConfigListView.swift",
+    "Calendario/CalendarioWidget/WidgetViews/EventRowView.swift"
+  ],
+  "tests_added": [
+    "test_CALyw8_given_emptyConfigs_when_rulesCountText_then_sinReglas",
+    "test_CALyw8_given_calendarIdentifier_when_resolveDisplayName_then_fallsBackToIdentifier"
+  ],
+  "tests_passed": 156,
+  "tests_failed": 0,
+  "commit_hash": "332152627aac2fb8d38b1383a9b551698d4d0dea",
+  "error": null
+}

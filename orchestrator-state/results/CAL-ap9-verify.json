@@ -1,0 +1,15 @@
+{
+  "bead_id": "CAL-ap9",
+  "decision": "approve",
+  "scenario_compliance": {
+    "given_covered": true,
+    "when_implemented": true,
+    "then_tested": true,
+    "and_tested": true
+  },
+  "tests_passed": 144,
+  "tests_failed": 0,
+  "quality_issues": [],
+  "pushed": true,
+  "rejection_reasons": []
+}

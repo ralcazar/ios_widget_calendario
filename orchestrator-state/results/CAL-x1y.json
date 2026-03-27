@@ -1,0 +1,21 @@
+{
+  "bead_id": "CAL-x1y",
+  "status": "success",
+  "files_created": ["CalendarioTests/CALx1yScenarioTests.swift"],
+  "files_modified": [
+    "Calendario/Shared/SharedConstants.swift",
+    "Calendario/CalendarioWidget/EventFetcher.swift",
+    "Calendario/CalendarioApp/RulesPreviewView.swift",
+    "Calendario/Calendario.xcodeproj/project.pbxproj"
+  ],
+  "tests_added": [
+    "test_CALx1y_given_eventWithStartDate_when_calendarURLGenerated_then_usesCalshowScheme",
+    "test_CALx1y_given_eventWithStartDate_when_calendarURLGenerated_then_timestampMatchesStartDate",
+    "test_CALx1y_given_allDayEvent_when_calendarURLGenerated_then_urlPointsToCorrectDate",
+    "test_CALx1y_given_calendarURL_when_generated_then_returnsValidURL"
+  ],
+  "tests_passed": 4,
+  "tests_failed": 0,
+  "commit_hash": "657ba66",
+  "error": null
+}

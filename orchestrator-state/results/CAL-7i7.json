@@ -1,0 +1,27 @@
+{
+  "bead_id": "CAL-7i7",
+  "status": "success",
+  "files_created": [
+    "Calendario/CalendarioApp/RulePreviewView.swift",
+    "CalendarioTests/CAL7i7ScenarioTests.swift"
+  ],
+  "files_modified": [
+    "Calendario/CalendarioApp/RuleEditView.swift",
+    "Calendario/Shared/RuleEngine.swift",
+    "Calendario/Calendario.xcodeproj/project.pbxproj"
+  ],
+  "tests_added": [
+    "test_CAL7i7_given_plainPatternMatchingTitle_when_matches_then_returnsTrue",
+    "test_CAL7i7_given_plainPatternNotMatchingTitle_when_matches_then_returnsFalse",
+    "test_CAL7i7_given_plainPatternCaseInsensitive_when_matches_then_returnsTrue",
+    "test_CAL7i7_given_validRegexMatchingTitle_when_matches_then_returnsTrue",
+    "test_CAL7i7_given_validRegexNotMatchingTitle_when_matches_then_returnsFalse",
+    "test_CAL7i7_given_invalidRegex_when_matches_then_returnsFalse",
+    "test_CAL7i7_given_regexPatternOver100Chars_when_matches_then_returnsFalse",
+    "test_CAL7i7_given_emptyTitle_when_plainPatternMatch_then_returnsFalse"
+  ],
+  "tests_passed": 8,
+  "tests_failed": 0,
+  "commit_hash": "3546cd47ca1d56ef02d6a42b8498c1906b16f4d2",
+  "error": null
+}

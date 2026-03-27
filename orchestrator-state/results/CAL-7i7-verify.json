@@ -1,0 +1,28 @@
+{
+  "bead_id": "CAL-7i7",
+  "decision": "approve",
+  "scenario_compliance": {
+    "given_covered": true,
+    "when_implemented": true,
+    "then_tested": true,
+    "and_tested": true
+  },
+  "criteria": {
+    "navigationlink_in_ruleEditView": true,
+    "link_disabled_when_empty_or_invalid_regex": true,
+    "shows_events_plus_minus_30_days": true,
+    "visual_match_indicators": true,
+    "matched_checkmark_green_full_opacity": true,
+    "unmatched_xmark_gray_reduced_opacity": true,
+    "on_demand_permissions_notDetermined": true,
+    "uses_ruleEngine_matches_no_duplication": true,
+    "rows_are_tappable_open_calendar_app": true,
+    "string_localized_and_accessibility_identifiers": true,
+    "rulePreviewView_in_calendarioApp_target": true
+  },
+  "tests_passed": 156,
+  "tests_failed": 0,
+  "quality_issues": [],
+  "pushed": true,
+  "rejection_reasons": []
+}

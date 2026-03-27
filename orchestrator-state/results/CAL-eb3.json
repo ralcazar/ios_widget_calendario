@@ -1,0 +1,33 @@
+{
+  "bead_id": "CAL-eb3",
+  "status": "success",
+  "files_created": [
+    "CalendarioTests/CALeb3ScenarioTests.swift"
+  ],
+  "files_modified": [
+    "Calendario/Shared/Models.swift",
+    "Calendario/Shared/RuleEngine.swift",
+    "Calendario/CalendarioWidget/WidgetViews/EventRowView.swift",
+    "Calendario/CalendarioApp/RulesPreviewView.swift",
+    "Calendario/CalendarioApp/RuleEditView.swift",
+    "Calendario/CalendarioApp/RulesListView.swift",
+    "CalendarioTests/CALevk3ScenarioTests.swift",
+    "CalendarioTests/CALevk1ScenarioTests.swift",
+    "CalendarioTests/CALbktScenarioTests.swift"
+  ],
+  "tests_added": [
+    "test_CALeb3_given_onlyHighlightRules_when_applyRuleEngine_then_matchingEventsHaveColorAndRestHaveNil",
+    "test_CALeb3_given_onlyHideRules_when_applyRuleEngine_then_matchingEventsRemoved",
+    "test_CALeb3_given_hideAndHighlightRules_when_eventMatchesBoth_then_hideWins",
+    "test_CALeb3_given_mixedRules_when_applyRuleEngine_then_correctBehaviorPerType",
+    "test_CALeb3_given_noRules_when_applyRuleEngine_then_allEventsWithNilColor",
+    "test_CALeb3_given_jsonWithoutTypeField_when_decode_then_typeIsHighlight",
+    "test_CALeb3_given_jsonWithTypeField_when_decode_then_typeIsPreserved",
+    "test_CALeb3_given_disabledHideRule_when_applyRuleEngine_then_eventNotHidden",
+    "test_CALeb3_given_hideRuleType_when_created_then_colorHexIsEmpty"
+  ],
+  "tests_passed": 129,
+  "tests_failed": 0,
+  "commit_hash": "1bbdd92",
+  "error": null
+}

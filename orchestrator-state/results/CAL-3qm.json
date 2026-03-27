@@ -1,0 +1,38 @@
+{
+  "bead_id": "CAL-3qm",
+  "status": "success",
+  "files_created": [
+    "Calendario/Shared/TimelineLayoutEngine.swift",
+    "Calendario/CalendarioWidget/WidgetViews/TimelineView.swift",
+    "Calendario/CalendarioWidget/WidgetViews/TimelineEventBlock.swift",
+    "CalendarioTests/CAL3qmScenarioTests.swift"
+  ],
+  "files_modified": [
+    "Calendario/CalendarioWidget/WidgetViews/MediumWidgetView.swift",
+    "Calendario/CalendarioWidget/WidgetViews/LargeWidgetView.swift",
+    "Calendario/Calendario.xcodeproj/project.pbxproj"
+  ],
+  "tests_added": [
+    "test_CAL3qm_given_eventAtWorkStart_when_yFraction_then_zero",
+    "test_CAL3qm_given_eventAtWorkEnd_when_yFraction_then_one",
+    "test_CAL3qm_given_eventAtMidday_when_yFraction_then_oneThird",
+    "test_CAL3qm_given_eventBeforeWorkStart_when_yFraction_then_clampsToZero",
+    "test_CAL3qm_given_eventAfterWorkEnd_when_yFraction_then_clampsToOne",
+    "test_CAL3qm_given_minusOneOffsets_when_effectiveHours_then_defaults8to20",
+    "test_CAL3qm_given_customOffsets_when_effectiveHours_then_usesCustom",
+    "test_CAL3qm_given_oneHourEvent_when_heightFraction_then_onetwelfth",
+    "test_CAL3qm_given_twoHourEvent_when_heightFraction_then_onesixth",
+    "test_CAL3qm_given_eventPartiallyBeforeWindow_when_heightFraction_then_clampsCorrectly",
+    "test_CAL3qm_given_eventOutsideWindow_when_heightFraction_then_zero",
+    "test_CAL3qm_given_nonOverlappingEvents_when_layoutColumns_then_singleColumn",
+    "test_CAL3qm_given_twoOverlappingEvents_when_layoutColumns_then_twoColumns",
+    "test_CAL3qm_given_threeOverlappingEvents_when_layoutColumns_then_threeColumns",
+    "test_CAL3qm_given_emptyEvents_when_layoutColumns_then_emptyResult",
+    "test_CAL3qm_given_8to20window_when_hourLabelsStep1_then_containsAllHours",
+    "test_CAL3qm_given_8to20window_when_hourLabelsStep2_then_evenHoursOnly"
+  ],
+  "tests_passed": 17,
+  "tests_failed": 0,
+  "commit_hash": "de16add12364e967168f12f161baf57ffc2e529d",
+  "error": null
+}

@@ -1,0 +1,23 @@
+{
+  "bead_id": "CAL-yw8",
+  "decision": "approve",
+  "scenario_compliance": {
+    "given_covered": true,
+    "when_implemented": true,
+    "then_tested": true,
+    "and_tested": true
+  },
+  "tests_passed": 156,
+  "tests_failed": 0,
+  "quality_issues": [],
+  "pushed": true,
+  "rejection_reasons": [],
+  "notes": {
+    "NavigationSplitView_on_iPad": "ContentView branches on horizontalSizeClass == .regular → NavigationSplitView, else NavigationStack",
+    "emptyState_maxWidth": "ConfigListView emptyStateView has .frame(maxWidth: 400)",
+    "EventRowView_minHeight": "EventRowView uses .frame(minHeight: 32) instead of fixed height",
+    "no_force_unwraps": true,
+    "OnboardingView_unmodified": true,
+    "widget_views_unmodified": true
+  }
+}

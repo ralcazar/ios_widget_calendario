@@ -1,1 +1,6 @@
+**APPROVED** — pushed to remote.
 
+- **173 tests passed**, 0 failures
+- **17 CAL-3qm tests** covering: yFraction, heightFraction, column layout, hour labels, default work hours
+- All 10 acceptance criteria verified in code
+- All quality checks passed (no force unwraps, CalendarURL.forDate(), cgColor fallback, GeometryReader, accessibilityIdentifiers)

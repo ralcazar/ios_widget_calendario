@@ -1,0 +1,26 @@
+{
+  "bead_id": "CAL-x1y",
+  "decision": "approve",
+  "scenario_compliance": {
+    "given_covered": true,
+    "when_implemented": true,
+    "then_tested": true,
+    "and_tested": true
+  },
+  "tests_passed": 4,
+  "tests_failed": 0,
+  "quality_issues": [],
+  "pushed": true,
+  "rejection_reasons": [],
+  "notes": {
+    "widget_tap": "EventRowView uses Link(destination: url) where url = EventFetcher.calendarURL(for: event.startDate) -> CalendarURL.forDate(date)",
+    "rules_preview_tap": "RulesPreviewView wraps EventPreviewRow in Button { UIApplication.shared.open(url) } using CalendarURL.forDate(item.event.startDate)",
+    "url_scheme": "calshow: with timeIntervalSinceReferenceDate timestamp",
+    "all_day": "Tested via test_CALx1y_given_allDayEvent_when_calendarURLGenerated_then_urlPointsToCorrectDate",
+    "accessibility": "previewRow_tap_N on RulesPreviewView rows; eventRow_<eventIdentifier> on widget rows",
+    "shared_location": "CalendarURL in Shared/SharedConstants.swift, accessible from both app and widget targets",
+    "no_force_unwraps": "Uses if let url = url pattern throughout",
+    "total_tests": 148,
+    "total_failures": 0
+  }
+}
