@@ -13,11 +13,18 @@ struct RulesPreviewView: View {
     var body: some View {
         Group {
             if accessDenied {
-                ContentUnavailableView(
-                    String(localized: "Acceso denegado"),
-                    systemImage: "calendar.badge.exclamationmark",
-                    description: Text(String(localized: "Acceso al calendario denegado"))
-                )
+                ContentUnavailableView {
+                    Label(String(localized: "Acceso denegado"), systemImage: "calendar.badge.exclamationmark")
+                } description: {
+                    Text(String(localized: "Acceso al calendario denegado"))
+                } actions: {
+                    Button(String(localized: "Ir a Ajustes")) {
+                        if let url = URL(string: UIApplication.openSettingsURLString) {
+                            UIApplication.shared.open(url)
+                        }
+                    }
+                    .accessibilityIdentifier("openSettingsButton")
+                }
                 .accessibilityIdentifier("accessDeniedView")
             } else if isLoading {
                 ProgressView()

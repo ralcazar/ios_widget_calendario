@@ -8,11 +8,6 @@ struct CalendarioApp: App {
         WindowGroup {
             ContentView()
                 .environment(permissionManager)
-                .task {
-                    if permissionManager.authorizationStatus == .notDetermined {
-                        await permissionManager.requestAccess()
-                    }
-                }
         }
     }
 }
